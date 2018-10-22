@@ -1,0 +1,21 @@
+.footer-wrap {
+  p {
+    font-size: 1.2rem;
+    color: #D7D7D7;
+  }
+
+  padding-left: 6.5% !important;
+
+  > div {
+    width: 29%;
+    margin: 15px 0px 0px 0px;
+  }
+
+  @media screen and (max-width: $mobile-breakpoint) {
+    padding-left: 5% !important;
+
+    > div {
+      width: 90%;
+    }
+  }
+}

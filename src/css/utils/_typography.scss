@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css?family=PT+Serif:400,700');
+
+// global typography
+html,body {
+  font-family: 'PT Serif', serif;
+  font-size: 62.5%;
+  font-weight: 400;
+
+  * {
+    font-family: 'PT Serif', serif;
+    font-size: 62.5%;
+    font-weight: 400;
+    color: inherit;
+  }
+
+  input {
+    font-family: 'PT Serif', serif;
+    font-size: 62.5%;
+    font-weight: 400;
+    color: inherit;
+  }
+}
+
+// override default link styles
+a {
+  font-weight: inherit;
+  font-size: inherit;
+  text-decoration: none;
+  &:focus { outline: 0; }
+}
+
+button:focus { outline: 0 }
+input {
+  font-size: inherit;
+  &:focus { outline: 0 }
+  &::-webkit-input-placeholder { color: inherit }
+  &::-moz-placeholder { color: inherit }
+  &:-ms-input-placeholder { color: inherit }
+  &:-moz-placeholder { color: inherit }
+}
+
+.purple { color: map-get($colors, purple); }
+.deep-blue { color: map-get($colors, deep-blue); }
+.white { color: map-get($colors, white); }
+
+// font size (desktop)
+h1 { font-size: 12.0rem; padding: 0px; margin: 0px; }
+h2 { font-size: 10.2rem; padding: 0px; margin: 0px; }
+h3 { font-size: 8.6rem; padding: 0px; margin: 0px; }
+h4 { font-size: 6.2rem; padding: 0px; margin: 0px; }
+h5 { font-size: 4.2rem; padding: 0px; margin: 0px; }
+h6 { font-size: 2.8rem; padding: 0px; margin: 0px; }
+p { font-size: 1.8rem; padding: 0px; margin: 0px; }
+.small { font-size: 1.4rem }
+
+// font size (mobile)
+@media screen and ( max-width: 768px ) {
+  h1 { font-size: 8.0rem; padding: 0px; margin: 0px; }
+  h2 { font-size: 7.0rem; padding: 0px; margin: 0px; }
+  h3 { font-size: 6.0rem; padding: 0px; margin: 0px; }
+  h4 { font-size: 5.0rem; padding: 0px; margin: 0px; }
+  h5 { font-size: 4.0rem; padding: 0px; margin: 0px; }
+  h6 { font-size: 2.4rem; padding: 0px; margin: 0px; }
+  p { font-size: 1.6rem; padding: 0px; margin: 0px; }
+  .small { font-size: 1.2rem }
+}
+
+// markdown
+.markdown-wrap {
+  text-align: justify;
+}
+.markdown-wrap > p {
+  font-size: 1.6rem;
+  margin-top: 15px;
+  text-align: justify;
+}
+.markdown-wrap > p:first-child {
+  margin-top: 0px;
+}

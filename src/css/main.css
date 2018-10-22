@@ -1,0 +1,267 @@
+@import url("https://fonts.googleapis.com/css?family=PT+Serif:400,700");
+html, body {
+  font-family: "PT Serif", serif;
+  font-size: 62.5%;
+  font-weight: 400;
+}
+html *, body * {
+  font-family: "PT Serif", serif;
+  font-size: 62.5%;
+  font-weight: 400;
+  color: inherit;
+}
+html input, body input {
+  font-family: "PT Serif", serif;
+  font-size: 62.5%;
+  font-weight: 400;
+  color: inherit;
+}
+
+a {
+  font-weight: inherit;
+  font-size: inherit;
+  text-decoration: none;
+}
+a:focus {
+  outline: 0;
+}
+
+button:focus {
+  outline: 0;
+}
+
+input {
+  font-size: inherit;
+}
+input:focus {
+  outline: 0;
+}
+input::-webkit-input-placeholder {
+  color: inherit;
+}
+input::-moz-placeholder {
+  color: inherit;
+}
+input:-ms-input-placeholder {
+  color: inherit;
+}
+input:-moz-placeholder {
+  color: inherit;
+}
+
+.white {
+  color: #FDFFFC;
+}
+
+h1 {
+  font-size: 12rem;
+  padding: 0px;
+  margin: 0px;
+}
+
+h2 {
+  font-size: 10.2rem;
+  padding: 0px;
+  margin: 0px;
+}
+
+h3 {
+  font-size: 8.6rem;
+  padding: 0px;
+  margin: 0px;
+}
+
+h4 {
+  font-size: 6.2rem;
+  padding: 0px;
+  margin: 0px;
+}
+
+h5 {
+  font-size: 4.2rem;
+  padding: 0px;
+  margin: 0px;
+}
+
+h6 {
+  font-size: 2.8rem;
+  padding: 0px;
+  margin: 0px;
+}
+
+p {
+  font-size: 1.8rem;
+  padding: 0px;
+  margin: 0px;
+}
+
+.small {
+  font-size: 1.4rem;
+}
+
+@media screen and (max-width: 768px) {
+  h1 {
+    font-size: 8rem;
+    padding: 0px;
+    margin: 0px;
+  }
+
+  h2 {
+    font-size: 7rem;
+    padding: 0px;
+    margin: 0px;
+  }
+
+  h3 {
+    font-size: 6rem;
+    padding: 0px;
+    margin: 0px;
+  }
+
+  h4 {
+    font-size: 5rem;
+    padding: 0px;
+    margin: 0px;
+  }
+
+  h5 {
+    font-size: 4rem;
+    padding: 0px;
+    margin: 0px;
+  }
+
+  h6 {
+    font-size: 2.4rem;
+    padding: 0px;
+    margin: 0px;
+  }
+
+  p {
+    font-size: 1.6rem;
+    padding: 0px;
+    margin: 0px;
+  }
+
+  .small {
+    font-size: 1.2rem;
+  }
+}
+.markdown-wrap {
+  text-align: justify;
+}
+
+.markdown-wrap > p {
+  font-size: 1.6rem;
+  margin-top: 15px;
+  text-align: justify;
+}
+
+.markdown-wrap > p:first-child {
+  margin-top: 0px;
+}
+
+.footer-wrap {
+  padding-left: 6.5% !important;
+}
+.footer-wrap p {
+  font-size: 1.2rem;
+  color: #D7D7D7;
+}
+.footer-wrap > div {
+  width: 29%;
+  margin: 15px 0px 0px 0px;
+}
+@media screen and (max-width: 768px) {
+  .footer-wrap {
+    padding-left: 5% !important;
+  }
+  .footer-wrap > div {
+    width: 90%;
+  }
+}
+
+#header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 500px;
+  background-image: url("../assets/images/port-washington-lighthouse.jpg");
+  background-position: left;
+  background-repeat: no-repeat;
+  background-size: cover;
+  -webkit-filter: grayscale(100%);
+  /* Safari 6.0 - 9.0 */
+  filter: grayscale(100%);
+}
+#header * {
+  width: 35%;
+  color: #fff;
+}
+#header p {
+  font-size: 1.6rem;
+  margin-bottom: 50px;
+  text-align: justify;
+}
+@media screen and (max-width: 768px) {
+  #header * {
+    width: 90%;
+  }
+}
+
+#page-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 50px 0px 50px 0px;
+}
+@media screen and (max-width: 768px) {
+  #page-wrap {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+#page {
+  width: 70%;
+}
+@media screen and (max-width: 768px) {
+  #page {
+    width: 90%;
+  }
+}
+
+#side-menu {
+  width: 20%;
+  padding: 0px 25px 0px 0px;
+}
+@media screen and (max-width: 768px) {
+  #side-menu {
+    padding: 0px 0px 50px 0px;
+    width: 90%;
+  }
+}
+
+.tab {
+  transition: opacity 150ms;
+}
+.tab img {
+  opacity: 0;
+}
+.tab:hover {
+  transition: opacity 150ms;
+  opacity: 0.8;
+}
+
+.active-tab div {
+  text-decoration: underline;
+}
+.active-tab div img {
+  opacity: 1;
+}
+
+html, body {
+  margin: 0;
+}
+
+/*# sourceMappingURL=main.css.map */

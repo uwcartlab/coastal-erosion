@@ -1,0 +1,29 @@
+this.holderErosion_mc.loadMovie("erosion.swf");
+
+sectionNames = new Array("introduction",
+						 "3d animation",
+						 "erosion factors",
+						 "    wave action",
+						 "    lake level",
+						 "    surface runoff",
+						 "    pore pressure",
+						 "    freeze/thaw",
+						 "    rain, rill & gully",
+						 "    wind",
+						 "stable slope angle",
+						 "building setbacks",
+						 "about"
+						 );
+_global.sectionCount = sectionNames.length;
+
+//draws the dynamic table of contents menu on the left side of screen
+for(i=0;i<sectionCount;i++){
+	menu_mc.menuItem_mc.duplicateMovieClip("menuItem_"+i, i);
+	currentItem = menu_mc["menuItem_"+i];
+	currentItem.labelName = sectionNames[i];
+	if(i != 0){
+		prevItem = menu_mc["menuItem_"+(i-1)];
+		currentItem._y = prevItem._y + prevItem._height;
+	}
+}
+menu_mc.menuItem_mc._visible = false;
