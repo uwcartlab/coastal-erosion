@@ -160,22 +160,28 @@ p {
   margin-top: 0px;
 }
 
-.footer-wrap {
+#footer-wrap {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 30px 0px 50px 0px;
+  background-color: #232323;
   padding-left: 6.5% !important;
 }
-.footer-wrap p {
+#footer-wrap p {
   font-size: 1.2rem;
   color: #D7D7D7;
 }
-.footer-wrap > div {
+#footer-wrap > div {
   width: 29%;
   margin: 15px 0px 0px 0px;
 }
 @media screen and (max-width: 768px) {
-  .footer-wrap {
+  #footer-wrap {
     padding-left: 5% !important;
   }
-  .footer-wrap > div {
+  #footer-wrap > div {
     width: 90%;
   }
 }
@@ -197,7 +203,7 @@ p {
 }
 #header * {
   width: 35%;
-  color: #fff;
+  color: #eeeeee;
 }
 #header p {
   font-size: 1.6rem;
