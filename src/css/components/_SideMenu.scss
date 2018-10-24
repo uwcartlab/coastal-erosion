@@ -1,9 +1,13 @@
 #side-menu {
-  width: 20%;
-  padding: 0px 25px 0px 0px;
+  display: flex;
+  justify-content: center;
+  width: 25%;
+
+  > div {
+    width: 80%;
+  }
 
   @media screen and (max-width: $mobile-breakpoint) {
-    padding: 0px 0px 50px 0px;
-    width: 90%;
+    width: 100%;
   }
 }

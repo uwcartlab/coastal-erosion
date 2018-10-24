@@ -1,6 +1,7 @@
 #footer-wrap {
   display: flex;
   align-items: flex-start;
+  justify-content: center;
   flex-wrap: wrap;
   width: 100%;
   padding: 30px 0px 50px 0px;
@@ -11,16 +12,12 @@
     color: #D7D7D7;
   }
 
-  padding-left: 6.5% !important;
-
   > div {
-    width: 29%;
+    width: 33%;
     margin: 15px 0px 0px 0px;
   }
 
   @media screen and (max-width: $mobile-breakpoint) {
-    padding-left: 5% !important;
-
     > div {
       width: 90%;
     }

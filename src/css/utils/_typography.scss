@@ -29,6 +29,14 @@ a {
   &:focus { outline: 0; }
 }
 
+// image captions
+.caption {
+  p {
+    font-size: 1.2rem !important;
+    color: #404040 !important;  
+  }
+}
+
 button:focus { outline: 0 }
 input {
   font-size: inherit;
@@ -68,12 +76,15 @@ p { font-size: 1.8rem; padding: 0px; margin: 0px; }
 // markdown
 .markdown-wrap {
   text-align: justify;
-}
-.markdown-wrap > p {
-  font-size: 1.6rem;
-  margin-top: 15px;
-  text-align: justify;
-}
-.markdown-wrap > p:first-child {
-  margin-top: 0px;
+
+  p {
+    font-size: 1.6rem;
+    margin-top: 15px;
+    text-align: justify;
+    &:first-child { margin-top: 0px; }
+  }
+
+  li {
+    font-size: 1.6rem;
+  }
 }

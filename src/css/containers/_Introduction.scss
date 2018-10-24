@@ -1,0 +1,17 @@
+#introduction {
+  display: flex;
+
+  .introduction-text-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  @media screen and (max-width: $mobile-breakpoint) {
+    flex-direction: column-reverse;
+
+    .introduction-text-wrap {
+      padding: 20px 15px 0px 15px;
+    }
+  }
+}

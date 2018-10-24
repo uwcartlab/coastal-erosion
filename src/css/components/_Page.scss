@@ -1,7 +1,7 @@
 #page-wrap {
   display: flex;
   justify-content: center;
-  padding: 50px 0px 50px 0px;
+  padding: 40px 0px 40px 0px;
 
   @media screen and (max-width: $mobile-breakpoint) {
     flex-direction: column;
@@ -10,9 +10,17 @@
 }
 
 #page {
-  width: 70%;
+  width: 75%;
+
+  > div {
+    width: 90%;
+  }
 
   @media screen and (max-width: $mobile-breakpoint) {
-    width: 90%;
+    padding-top: 40px;
+    width: 100%;
+    > div {
+      width: 100%;
+    }
   }
 }
