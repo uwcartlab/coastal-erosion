@@ -1,25 +1,42 @@
 #footer-wrap {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  flex-wrap: wrap;
   width: 100%;
   padding: 30px 0px 50px 0px;
   background-color: #232323;
 
-  p {
-    font-size: 1.2rem;
-    color: #D7D7D7;
+  > div {
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+    margin-left: 10%;
+
+    > div {
+      margin: 15px 0px 0px 0px;
+      width: 33%;
+
+      p {
+        font-size: 1.2rem;
+        color: #D7D7D7;
+        padding: 0px 20px 0px 20px;
+      }
+    }
   }
 
-  > div {
-    width: 33%;
-    margin: 15px 0px 0px 0px;
+  @media screen and (max-width: $tablet-breakpoint) {
+    > div {
+      width: 90%;
+      margin-left: 5%;
+
+      > div {
+        width: 50%;
+      }
+    }
   }
 
   @media screen and (max-width: $mobile-breakpoint) {
     > div {
-      width: 90%;
+      > div {
+        width: 100%;
+      }
     }
   }
 }

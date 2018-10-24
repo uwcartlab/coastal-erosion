@@ -33,7 +33,7 @@ a {
 .caption {
   p {
     font-size: 1.2rem !important;
-    color: #404040 !important;  
+    color: #404040 !important;
   }
 }
 
@@ -62,7 +62,7 @@ p { font-size: 1.8rem; padding: 0px; margin: 0px; }
 .small { font-size: 1.4rem }
 
 // font size (mobile)
-@media screen and ( max-width: 768px ) {
+@media screen and ( max-width: $tablet-breakpoint ) {
   h1 { font-size: 8.0rem; padding: 0px; margin: 0px; }
   h2 { font-size: 7.0rem; padding: 0px; margin: 0px; }
   h3 { font-size: 6.0rem; padding: 0px; margin: 0px; }

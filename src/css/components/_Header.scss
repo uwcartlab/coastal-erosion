@@ -24,6 +24,12 @@
     text-align: justify;
   }
 
+  @media screen and (max-width: $tablet-breakpoint) {
+    * {
+      width: 75%;
+    }
+  }
+
   @media screen and (max-width: $mobile-breakpoint) {
     * {
       width: 90%;

@@ -26,7 +26,7 @@ export default class CaptionedImage extends React.Component {
   render() {
     let {ww} = this.state
     let {img, imgW, imgR, caption, fullWidthOnMobile} = this.props
-    let isFullWidth = ww <= 768 && fullWidthOnMobile
+    let isFullWidth = ww <= 480 && fullWidthOnMobile
 
     return(
       <div className="captioned-image" style={{width: (isFullWidth) ? '100vw' : imgW}}>
@@ -43,6 +43,7 @@ export default class CaptionedImage extends React.Component {
           style={(isFullWidth)
             ? {
                 width: '90%',
+                marginTop: 10,
                 marginLeft: '5%',
                 paddingLeft: 0,
                 border: 'none'

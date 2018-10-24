@@ -16,7 +16,7 @@ class App extends React.Component {
 
   render() {
     return(
-      <Router onUpdate={() => console.log("blah")}>
+      <Router>
         <div>
           <Header />
 

@@ -3,7 +3,7 @@
   justify-content: center;
   padding: 40px 0px 40px 0px;
 
-  @media screen and (max-width: $mobile-breakpoint) {
+  @media screen and (max-width: $tablet-breakpoint) {
     flex-direction: column;
     align-items: center;
   }
@@ -12,15 +12,16 @@
 #page {
   width: 75%;
 
-  > div {
-    width: 90%;
+  > div { width: 90%; }
+
+  @media screen and (max-width: $tablet-breakpoint) {
+    width: 92%;
+    > div { width: 100%; }
   }
 
   @media screen and (max-width: $mobile-breakpoint) {
     padding-top: 40px;
     width: 100%;
-    > div {
-      width: 100%;
-    }
+    > div { width: 100%; }
   }
 }
