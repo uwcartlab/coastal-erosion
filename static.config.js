@@ -35,24 +35,24 @@ export default {
         path: '/',
         component: 'src/containers/Introduction',
         getData: async () => ({
-          text: await getContent('src/content/introduction/text.md')
+          content: await getContent('src/content/introduction')
         })
       },
       {
         path: '/40-years-of-erosion',
-        component: 'src/containers/Introduction'
+        component: 'src/containers/40YearsOfErosion'
       },
       {
         path: '/the-cycle-of-bluff-erosion',
-        component: 'src/containers/Introduction'
+        component: 'src/containers/TheCycleOfBluffErosion'
       },
       {
         path: '/3d-map-of-ozaukee-county',
-        component: 'src/containers/Introduction'
+        component: 'src/containers/3dMapOfOzaukeeCounty'
       },
       {
         path: '/3d-coastal-visualization',
-        component: 'src/containers/Introduction'
+        component: 'src/containers/3dCoastalVisualization'
       },
       {
         is404: true,

@@ -6,9 +6,11 @@ export default () => (
   <SiteData
     render={({tabs}) => (
       <div id="side-menu">
-        {
-          tabs.map((d) => <Tab key={Math.random()} {...d} />)
-        }
+        <div>
+          {
+            tabs.map((d) => <Tab key={Math.random()} {...d} />)
+          }
+        </div>
       </div>
     )}
   />
