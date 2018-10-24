@@ -30,6 +30,13 @@ function getContent(filepath) {
         .on('data', async (item) => {
           let pathBuffer = item.path.split('/')
           let filename = pathBuffer[pathBuffer.length - 1]
+
+          // this is the dir ref, not a file, so skip this to avoid err
+          if (!filename.includes('.')) {
+            return
+          }
+
+          console.log("ITEM PATH -->", item.path)
           let data = fs.readFileSync(item.path, 'utf8')
           let dataObj = matter(data)
           returnObj[dataObj.data.title] = dataObj.content

@@ -1,5 +1,8 @@
 # coastal-erosion
 
+Bugs
+- [ ] (On build) TypeError: Failed exporting HTML for URL / (src/containers/Introduction): Cannot read property 'text' of null
+
 To Do
 - [ ] Implement desktop (full side menu), tablet (minified side menu), and mobile (slide in side menu) sizing tiers
 - [ ] On mobile, implement footer at the bottom of each page for easy navigation to next/previous pages (OR, just create a sticky nav on bottom of screen instead of top)

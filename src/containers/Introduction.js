@@ -11,15 +11,14 @@ export default () => (
   <RouteData
     render={({content}) => (
       <div id="introduction">
-
-      <CaptionedImage
-        fullWidthOnMobile
-        noBorder
-        img={StudyAreaMap}
-        imgW={220}
-        imgR={966 / 466}
-        caption={content.captionStudyAreaMap}
-      />
+        <CaptionedImage
+          fullWidthOnMobile
+          noBorder
+          img={StudyAreaMap}
+          imgW={220}
+          imgR={966 / 466}
+          caption={content.captionStudyAreaMap}
+        />
 
         <div className="introduction-text-wrap">
           <ReactMarkdown
