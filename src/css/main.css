@@ -95,9 +95,13 @@ h6 {
 }
 
 p {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   padding: 0px;
   margin: 0px;
+}
+
+li {
+  font-size: 1.6rem;
 }
 
 .small {
@@ -142,9 +146,13 @@ p {
   }
 
   p {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     padding: 0px;
     margin: 0px;
+  }
+
+  li {
+    font-size: 1.5rem;
   }
 
   .small {
@@ -155,15 +163,11 @@ p {
   text-align: justify;
 }
 .markdown-wrap p {
-  font-size: 1.6rem;
   margin-top: 15px;
   text-align: justify;
 }
 .markdown-wrap p:first-child {
   margin-top: 0px;
-}
-.markdown-wrap li {
-  font-size: 1.6rem;
 }
 
 #introduction {
@@ -173,10 +177,14 @@ p {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-right: 50px;
 }
 @media screen and (max-width: 801px) {
   #introduction {
     margin-top: 40px;
+  }
+  #introduction .introduction-text-wrap {
+    padding-right: 30px;
   }
 }
 @media screen and (max-width: 480px) {
@@ -271,7 +279,7 @@ p {
 }
 
 #page {
-  width: 75%;
+  width: 80%;
 }
 #page > div {
   width: 90%;
@@ -297,7 +305,10 @@ p {
 #side-menu {
   display: flex;
   justify-content: center;
-  width: 25%;
+  width: 20%;
+}
+#side-menu * {
+  font-size: 1.4rem;
 }
 #side-menu > div {
   width: 80%;
