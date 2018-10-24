@@ -25,11 +25,11 @@ export default class CaptionedImage extends React.Component {
 
   render() {
     let {ww} = this.state
-    let {img, imgW, imgR, caption, fullWidthOnMobile} = this.props
+    let {img, imgW, imgR, caption, fullWidthOnMobile, style, noBorder} = this.props
     let isFullWidth = ww <= 480 && fullWidthOnMobile
 
     return(
-      <div className="captioned-image" style={{width: (isFullWidth) ? '100vw' : imgW}}>
+      <div className="captioned-image" style={Object.assign({}, {width: (isFullWidth) ? '100vw' : imgW}, style || {})}>
         <img
           src={img}
           style={{
@@ -53,7 +53,7 @@ export default class CaptionedImage extends React.Component {
                 marginTop: 10,
                 marginLeft: 0,
                 paddingLeft: '3%',
-                borderLeft: '1px solid #eee'
+                borderLeft: (noBorder) ? null : '1px solid #eee'
               }
           }
         >
