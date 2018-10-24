@@ -1,0 +1,42 @@
+#navbar {
+  width: 100%;
+  padding: 15px 0px 15px 0px;
+  background-color: #f7f7f7;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+
+  > div:first-child {
+    width: 20%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    p {
+      text-align: left;
+      margin-left: 20px;
+      font-size: 1.2rem;
+    }
+  }
+  > div:nth-child(2) {
+    width: 60%;
+    text-align: center;
+    p {
+      font-size: 1.6rem;
+    }
+  }
+  > div:nth-child(3) {
+    width: 20%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    p {
+      text-align: right;
+      margin-right: 20px;
+      font-size: 1.2rem;
+    }
+  }
+
+  @media screen and (min-width: $tablet-breakpoint) {
+    display: none;
+  }
+}

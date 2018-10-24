@@ -180,16 +180,13 @@ li {
   padding-left: 50px;
 }
 @media screen and (max-width: 801px) {
-  #introduction {
-    margin-top: 40px;
-  }
   #introduction .introduction-text-wrap {
     padding-left: 30px;
   }
 }
 @media screen and (max-width: 480px) {
   #introduction {
-    flex-direction: column-reverse;
+    flex-direction: column;
   }
   #introduction .introduction-text-wrap {
     padding: 20px 15px 0px 15px;
@@ -266,6 +263,49 @@ li {
   }
 }
 
+#navbar {
+  width: 100%;
+  padding: 15px 0px 15px 0px;
+  background-color: #f7f7f7;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+}
+#navbar > div:first-child {
+  width: 20%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+#navbar > div:first-child p {
+  text-align: left;
+  margin-left: 20px;
+  font-size: 1.2rem;
+}
+#navbar > div:nth-child(2) {
+  width: 60%;
+  text-align: center;
+}
+#navbar > div:nth-child(2) p {
+  font-size: 1.6rem;
+}
+#navbar > div:nth-child(3) {
+  width: 20%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+#navbar > div:nth-child(3) p {
+  text-align: right;
+  margin-right: 20px;
+  font-size: 1.2rem;
+}
+@media screen and (min-width: 801px) {
+  #navbar {
+    display: none;
+  }
+}
+
 #page-wrap {
   display: flex;
   justify-content: center;
@@ -318,11 +358,7 @@ li {
 }
 @media screen and (max-width: 801px) {
   #side-menu {
-    width: 100%;
-    border-right: none;
-  }
-  #side-menu > div {
-    width: 100%;
+    display: none;
   }
 }
 @media screen and (max-width: 480px) {

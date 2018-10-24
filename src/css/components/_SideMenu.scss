@@ -7,9 +7,11 @@
   border-right: 1px solid #eee;
 
   @media screen and (max-width: $tablet-breakpoint) {
-    width: 100%;
-    border-right: none;
-    > div { width: 100%; }
+    display: none;
+    // width: 100%;
+    // border-right: none;
+    // align-items: center;
+    // > div { width: 100%; }
   }
 
   @media screen and (max-width: $mobile-breakpoint) {
