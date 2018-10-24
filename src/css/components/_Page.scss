@@ -12,11 +12,17 @@
 #page {
   width: 80%;
 
-  > div { width: 90%; }
+  > div {
+    width: 90%;
+    margin-left: 5%;
+  }
 
   @media screen and (max-width: $tablet-breakpoint) {
     width: 92%;
-    > div { width: 100%; }
+    > div {
+      width: 100%;
+      margin-left: 0px;
+    }
   }
 
   @media screen and (max-width: $mobile-breakpoint) {

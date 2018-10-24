@@ -4,9 +4,11 @@
   width: 20%;
   * { font-size: 1.4rem ; }
   > div { width: 80%; }
+  border-right: 1px solid #eee;
 
   @media screen and (max-width: $tablet-breakpoint) {
     width: 100%;
+    border-right: none;
     > div { width: 100%; }
   }
 
