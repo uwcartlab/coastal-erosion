@@ -1,5 +1,5 @@
 import React from 'react'
-import { Router } from 'react-static'
+import { Router, Switch } from 'react-static'
 import Routes from 'react-static-routes'
 import { hot } from 'react-hot-loader'
 import './css/main.css'
@@ -24,7 +24,9 @@ class App extends React.Component {
           <div id="page-wrap">
             <SideMenu />
             <Page>
-              <Routes />
+              <Switch>
+                <Routes />
+              </Switch>
             </Page>
           </div>
           <Footer />

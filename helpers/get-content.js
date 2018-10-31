@@ -4,6 +4,7 @@ import klaw from 'klaw'
 
 function getContent(filepath) {
   let isFile = filepath.includes('.')
+  let returnObj = {}
 
   // return code for getting just one file
   if (isFile) {
@@ -11,7 +12,8 @@ function getContent(filepath) {
       if (fs.existsSync(filepath)) {
         let data = fs.readFileSync(filepath, 'utf8')
         let dataObj = matter(data)
-        resolve(dataObj.content)
+        process(dataObj)
+        resolve(returnObj)
       } else {
         resolve("")
       }
@@ -22,8 +24,6 @@ function getContent(filepath) {
 
   // return code for getting all files in a directory
   else {
-    let returnObj = {}
-
     let getContent = new Promise(async (resolve) => {
       if (fs.existsSync(filepath)) {
         klaw(filepath)
@@ -36,10 +36,10 @@ function getContent(filepath) {
             return
           }
 
-          console.log("ITEM PATH -->", item.path)
           let data = fs.readFileSync(item.path, 'utf8')
           let dataObj = matter(data)
-          returnObj[dataObj.data.title] = dataObj.content
+
+          process(dataObj)
         })
         .on('error', (e) => {
           console.log(e)
@@ -53,6 +53,11 @@ function getContent(filepath) {
     })
 
     return getContent
+  }
+
+  function process(dataObj) {
+    returnObj[dataObj.data.title] = dataObj.data
+    returnObj[dataObj.data.title].text = dataObj.content
   }
 }
 

@@ -35,7 +35,8 @@ export default {
         path: '/',
         component: 'src/containers/Introduction',
         getData: async () => ({
-          content: await getContent('src/content/introduction')
+          content: await getContent('src/content/introduction'),
+          slideshow: await getContent('src/content/introduction-slideshow')
         })
       },
       {

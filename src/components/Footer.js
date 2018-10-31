@@ -10,7 +10,7 @@ export default () => (
           {
             Object.keys(footerContent).map((k) => (
               <div>
-                <ReactMarkdown key={k} source={footerContent[k]} />
+                <ReactMarkdown key={k} source={footerContent[k].text} />
               </div>
             ))
           }

@@ -3,38 +3,51 @@ import { RouteData } from 'react-static'
 import ReactMarkdown from 'react-markdown'
 
 import CaptionedImage from '../components/CaptionedImage'
+import SlideShow from '../components/SlideShow'
 
 import StudyAreaMap from '../assets/images/study-area-map.png'
 import ConcordiaUniversity from '../assets/images/concordia-university-aerial.png'
 
 export default () => (
   <RouteData
-    render={({content}) => (
-      <div id="introduction">
-        <CaptionedImage
-          fullWidthOnMobile
-          noBorder
-          img={StudyAreaMap}
-          imgW={220}
-          imgR={966 / 466}
-          caption={content.captionStudyAreaMap}
-        />
+    render={({content, slideshow}) => {
+      let slides = Object
+        .keys(slideshow)
+        .filter((k) => k !== "undefined")
+        .map((k) => slideshow[k])
 
-        <div className="introduction-text-wrap">
-          <ReactMarkdown
-            className="markdown-wrap"
-            source={content.paragraph1}
+      return(
+        <div id="introduction">
+          <CaptionedImage
+            fullWidthOnMobile
+            noBorder
+            img={StudyAreaMap}
+            imgW={220}
+            imgR={966 / 466}
+            caption={content.captionStudyAreaMap.text}
           />
 
-          <CaptionedImage
-            img={ConcordiaUniversity}
-            imgW={280}
-            imgR={376 / 574}
-            caption={content.captionConcordiaUniversity}
-            style={{marginTop: 30}}
+          <div className="introduction-text-wrap">
+            <ReactMarkdown
+              className="markdown-wrap"
+              source={content.paragraph1.text}
+            />
+
+            <CaptionedImage
+              img={ConcordiaUniversity}
+              imgW={280}
+              imgR={376 / 574}
+              caption={content.captionConcordiaUniversity.text}
+              style={{marginTop: 30}}
+            />
+          </div>
+
+          <SlideShow
+            style={{marginTop: 15}}
+            slides={slides}
           />
         </div>
-      </div>
-    )}
+      )
+    }}
   />
 )
