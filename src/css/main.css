@@ -83,13 +83,13 @@ h4 {
 }
 
 h5 {
-  font-size: 4.2rem;
+  font-size: 2.8rem;
   padding: 0px;
   margin: 0px;
 }
 
 h6 {
-  font-size: 2.8rem;
+  font-size: 2rem;
   padding: 0px;
   margin: 0px;
 }
@@ -108,7 +108,7 @@ li {
   font-size: 1.4rem;
 }
 
-@media screen and (max-width: 801px) {
+@media screen and (max-width: 900px) {
   h1 {
     font-size: 8rem;
     padding: 0px;
@@ -170,6 +170,11 @@ li {
   margin-top: 0px;
 }
 
+strong {
+  font-size: inherit;
+  font-weight: 700;
+}
+
 #introduction {
   display: flex;
 }
@@ -177,9 +182,9 @@ li {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-left: 50px;
+  padding: 0px 40px 0px 40px;
 }
-@media screen and (max-width: 801px) {
+@media screen and (max-width: 900px) {
   #introduction .introduction-text-wrap {
     padding-left: 30px;
   }
@@ -187,6 +192,7 @@ li {
 @media screen and (max-width: 480px) {
   #introduction {
     flex-direction: column;
+    margin-bottom: -40px;
   }
   #introduction .introduction-text-wrap {
     padding: 20px 15px 0px 15px;
@@ -213,7 +219,7 @@ li {
   color: #D7D7D7;
   padding: 0px 20px 0px 20px;
 }
-@media screen and (max-width: 801px) {
+@media screen and (max-width: 900px) {
   #footer-wrap > div {
     width: 90%;
     margin-left: 5%;
@@ -252,7 +258,7 @@ li {
   margin-bottom: 50px;
   text-align: justify;
 }
-@media screen and (max-width: 801px) {
+@media screen and (max-width: 900px) {
   #header * {
     width: 75%;
   }
@@ -300,7 +306,7 @@ li {
   margin-right: 20px;
   font-size: 1.2rem;
 }
-@media screen and (min-width: 801px) {
+@media screen and (min-width: 900px) {
   #navbar {
     display: none;
   }
@@ -311,7 +317,7 @@ li {
   justify-content: center;
   padding: 40px 0px 40px 0px;
 }
-@media screen and (max-width: 801px) {
+@media screen and (max-width: 900px) {
   #page-wrap {
     flex-direction: column;
     align-items: center;
@@ -325,7 +331,7 @@ li {
   width: 90%;
   margin-left: 5%;
 }
-@media screen and (max-width: 801px) {
+@media screen and (max-width: 900px) {
   #page {
     width: 92%;
   }
@@ -356,7 +362,7 @@ li {
 #side-menu > div {
   width: 80%;
 }
-@media screen and (max-width: 801px) {
+@media screen and (max-width: 900px) {
   #side-menu {
     display: none;
   }
@@ -367,6 +373,82 @@ li {
   }
 }
 
+.slideshow .slide {
+  display: flex;
+  flex-direction: column;
+  width: 265px;
+  border: 1px solid #eee;
+  border-radius: 5px;
+  overflow: hidden;
+  display: none;
+}
+.slideshow .slide.active {
+  display: flex;
+}
+.slideshow .slide .img-wrap {
+  display: flex;
+  flex-direction: column;
+}
+.slideshow .slide .img-wrap .img {
+  overflow: hidden;
+}
+.slideshow .slide .img-wrap .img img {
+  height: auto;
+  width: 100%;
+}
+.slideshow .slide .img-wrap .controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #eee;
+  padding: 10px;
+}
+.slideshow .slide .img-wrap .controls > :last-child {
+  display: flex;
+}
+.slideshow .slide .img-wrap .controls > :last-child > :last-child {
+  padding-left: 10px;
+}
+.slideshow .slide .img-wrap .controls * {
+  cursor: pointer;
+  transition: 150ms;
+}
+.slideshow .slide .img-wrap .controls *:hover {
+  transition: 150ms;
+  opacity: 0.8;
+}
+.slideshow .slide .text-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 10px;
+}
+.slideshow .slide .text-wrap .caption-text * {
+  font-size: 1.4rem !important;
+}
+.slideshow .slide .text-wrap .definition-text {
+  margin-top: 10px;
+}
+.slideshow .slide .text-wrap .definition-text * {
+  font-size: 1.4rem !important;
+}
+.slideshow .slide .text-wrap .definition-text strong {
+  font-size: inherit;
+  font-weight: 700;
+}
+
+@media screen and (max-width: 480px) {
+  .slideshow .slide {
+    width: 100vw;
+    border-radius: 0;
+    border: none;
+  }
+  .slideshow .slide .text-wrap {
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #eee;
+  }
+}
 .tab {
   transition: opacity 150ms;
 }

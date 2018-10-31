@@ -1,0 +1,94 @@
+.slideshow {
+  .slide {
+    display: flex;
+    flex-direction: column;
+    width: 265px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    overflow: hidden;
+
+    // active class is toggled by <SlideShow />'s local state
+    display: none;
+    &.active { display: flex; }
+
+    .img-wrap {
+      display: flex;
+      flex-direction: column;
+
+      .img {
+        overflow: hidden;
+
+        img {
+          height: auto;
+          width: 100%;
+        }
+      }
+
+      .controls {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #eee;
+        padding: 10px;
+
+        > :last-child {
+          display: flex;
+          > :last-child {
+            padding-left: 10px;
+          }
+        }
+
+        * {
+          cursor: pointer;
+          transition: 150ms;
+          &:hover {
+            transition: 150ms;
+            opacity: 0.8;
+          }
+        }
+      }
+    }
+
+    .text-wrap {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 10px;
+
+      .caption-text {
+        * { font-size: 1.4rem !important; }
+      }
+
+      .definition-text {
+        margin-top: 10px;
+        * {
+          font-size: 1.4rem !important;
+        }
+        strong {
+          font-size: inherit;
+          font-weight: 700;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $tablet-breakpoint) {
+
+}
+
+@media screen and (max-width: $mobile-breakpoint) {
+  .slideshow {
+    .slide {
+      width: 100vw;
+      border-radius: 0;
+      border: none;
+
+      .text-wrap {
+        background-color: #f7f7f7;
+        border-bottom: 1px solid #eee;
+      }
+    }
+  }
+}
