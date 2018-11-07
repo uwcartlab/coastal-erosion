@@ -15,7 +15,7 @@ export default () => (
         .keys(slideshow)
         .filter((k) => k !== "undefined")
         .map((k) => slideshow[k])
-
+        
       return(
         <div id="introduction">
           <CaptionedImage

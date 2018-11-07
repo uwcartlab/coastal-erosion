@@ -45,7 +45,11 @@ export default {
       },
       {
         path: '/the-cycle-of-bluff-erosion',
-        component: 'src/containers/TheCycleOfBluffErosion'
+        component: 'src/containers/TheCycleOfBluffErosion',
+        getData: async () => ({
+          content: await getContent('src/content/the-cycle-of-bluff-erosion'),
+          exhibit: await getContent('src/content/the-cycle-of-bluff-erosion-exhibit')
+        })
       },
       {
         path: '/3d-map-of-ozaukee-county',
