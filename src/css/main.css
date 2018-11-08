@@ -234,7 +234,7 @@ strong {
   }
 }
 
-#header {
+#jumbotron {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -249,33 +249,34 @@ strong {
   /* Safari 6.0 - 9.0 */
   filter: grayscale(100%);
 }
-#header * {
+#jumbotron * {
   width: 35%;
   color: #eeeeee;
 }
-#header p {
+#jumbotron p {
   font-size: 1.6rem;
   margin-bottom: 50px;
   text-align: justify;
 }
 @media screen and (max-width: 900px) {
-  #header * {
+  #jumbotron * {
     width: 75%;
   }
 }
 @media screen and (max-width: 480px) {
-  #header * {
+  #jumbotron * {
     width: 90%;
   }
 }
 
 #navbar {
   width: 100%;
-  padding: 15px 0px 15px 0px;
+  height: 50px;
   background-color: #f7f7f7;
   border-bottom: 1px solid #eee;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 #navbar > div:first-child {
   width: 20%;
@@ -306,10 +307,10 @@ strong {
   margin-right: 20px;
   font-size: 1.2rem;
 }
-@media screen and (min-width: 900px) {
-  #navbar {
-    display: none;
-  }
+#navbar.fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
 #page-wrap {
