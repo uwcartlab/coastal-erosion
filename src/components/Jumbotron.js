@@ -1,7 +1,7 @@
 import React from 'react'
 
 export default () => (
-  <div id="header">
+  <div id="jumbotron">
     <h6>Coastal Erosion on the Great Lakes</h6>
     <br />
     <p>

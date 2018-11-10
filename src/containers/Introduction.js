@@ -15,9 +15,14 @@ export default () => (
         .keys(slideshow)
         .filter((k) => k !== "undefined")
         .map((k) => slideshow[k])
-        
+
       return(
         <div id="introduction">
+          <ReactMarkdown
+            className="markdown-wrap"
+            source={content.paragraph1.text}
+          />
+
           <CaptionedImage
             fullWidthOnMobile
             noBorder
@@ -27,20 +32,15 @@ export default () => (
             caption={content.captionStudyAreaMap.text}
           />
 
-          <div className="introduction-text-wrap">
-            <ReactMarkdown
-              className="markdown-wrap"
-              source={content.paragraph1.text}
-            />
-
-            <CaptionedImage
-              img={ConcordiaUniversity}
-              imgW={280}
-              imgR={376 / 574}
-              caption={content.captionConcordiaUniversity.text}
-              style={{marginTop: 30}}
-            />
-          </div>
+          { /*
+          <CaptionedImage
+            img={ConcordiaUniversity}
+            imgW={280}
+            imgR={376 / 574}
+            caption={content.captionConcordiaUniversity.text}
+            style={{marginTop: 30}}
+          />
+          */ }
 
           <SlideShow
             style={{marginTop: 15}}

@@ -3,9 +3,11 @@ import { SiteData, Link } from 'react-static'
 import Tab from './Tab'
 
 export default class extends React.Component {
-  render() {
-    console.log(this.props)
+  constructor(props) {
+    super(props)
+  }
 
+  render() {
     return(
       <SiteData
         render={({tabs}) => {
@@ -20,7 +22,10 @@ export default class extends React.Component {
             : tabs[tabs.indexOf(currRoute) + 1]
 
           return(
-            <div id="navbar">
+            <div
+              id="navbar"
+              className={(this.props.fixed) ? 'fixed' : ''}
+            >
               <div>
                 {
                   (prevRoute)
@@ -40,7 +45,6 @@ export default class extends React.Component {
                   }
                 </p>
               </div>
-
 
               <div>
                 {

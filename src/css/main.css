@@ -177,6 +177,10 @@ strong {
 
 #introduction {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 60%;
+  margin-left: 20%;
 }
 #introduction .introduction-text-wrap {
   display: flex;
@@ -327,10 +331,6 @@ strong {
 
 #page {
   width: 80%;
-}
-#page > div {
-  width: 90%;
-  margin-left: 5%;
 }
 @media screen and (max-width: 900px) {
   #page {

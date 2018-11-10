@@ -12,11 +12,6 @@
 #page {
   width: 80%;
 
-  > div {
-    width: 90%;
-    margin-left: 5%;
-  }
-
   @media screen and (max-width: $tablet-breakpoint) {
     width: 92%;
     > div {
