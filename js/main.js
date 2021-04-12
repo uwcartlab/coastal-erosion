@@ -1,5 +1,10 @@
 var map;
 
+/* TODO:
+*       Calculate setback
+*       Convert to pixel amounts based on zoom level and move data layer
+*/
+
 function createMap(){
     m = document.querySelectorAll('#map')[0];
     esri_sat = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
@@ -22,10 +27,10 @@ function createMap(){
 		},
 
 		onAdd: function () {
-			// create the control container with a particular class name
+			// create the control container with class setback
 			var container = L.DomUtil.create('div', 'setback-control-container');
 			
-			// create the calculator panel
+			// create the calculator panel and fill in the defaults from the old calc
             $(container).append('\
             <div id="ui-panel">\
                 <p><b>1.) Structure Life</b></p>\
@@ -68,46 +73,50 @@ function createMap(){
     loadData();
 }
 
-// After tinkering: data loads correctly but the projection is Wisconsin Transverse Mercator
-// TODO: reproject the original shapefiles to leaflet standard (WGS 84?) and then reconvert to geoJSON
+// This function loads the data from the WTM standard using a library.
+// For initial dev working with only Ozaukee
 function loadData(){
 
-    $.getJSON("data/oz-top.geojson",function(data){
-        var datalayer = L.geoJson(data ,{
+    proj4.defs("EPSG:3071","+proj=tmerc +lat_0=0 +lon_0=-90 +k=0.9996 +x_0=520000 +y_0=-4480000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs");
+
+    $.getJSON("data/projections/oz-top/oz-top.geojson",function(data){
+        var datalayer = L.Proj.geoJson(data ,{
         onEachFeature: function(feature, featureLayer) {
-            featureLayer.bindPopup(feature.properties.NAME_1);
+            featureLayer.bindPopup(feature.properties);
+        },
+        coordsToLatLng: function (coords) {
+            // flip lat and lon to match Leaflet
+            return new L.LatLng(coords[1], coords[0]);
         }
         }).addTo(map);
+        // Fit map to the data, can change to specific coordinates by uncommenting maxbounds at map init
         map.fitBounds(datalayer.getBounds());
         });
-
 }
 
+// This function calculates the setback based on user input
 function calcSetback(){
-    localReg = document.getElementById('local_reg').value;
+    // read in input and format correctly
+    localReg = parseInt(document.getElementById('local_reg').value);
+    height = parseInt(document.getElementById('bluff_height').value);
+    curr_angle = parseInt(document.getElementById('curr_bluff_angle').value);
+    stable_angle = parseInt(document.getElementById('stable_bluff_angle').value);
 
-    localReg = document.getElementById('bluff_height').value;
-    localReg = document.getElementById('curr_bluff_angle').value;
-    localReg = document.getElementById('stable_bluff_angle').value;
+    //TODO: calculate the stable angle setback(default example should return 74)
+    // See simple_bluff.jpg for the math
+    sas = 0;
+    document.getElementById('setback_angle').value = sas;
 
-    if(document.getElementById('setback_angle').value.length == 0){
-        //TODO: calculate the stable angle setback
-        document.getElementById('setback_angle').value = 0;
-    } else{
-        localReg = document.getElementById('setback_angle').value;
-    }
+    rec_rate = parseInt(document.getElementById('rec_rate').value);
+    //calculate the recession setback(default example should return 100)
+    rec_set = rec_rate*50;
+    document.getElementById('rec_setback').value = rec_set;
 
-    localReg = document.getElementById('rec_rate').value;
-    if(document.getElementById('rec_setback').value.length == 0){
-        //TODO: calculate the recession setback
-        document.getElementById('rec_setback').value = 0;
-    } else{
-        localReg = document.getElementById('rec_setback').value;
-    }
-
-    document.getElementById('setback_ft').value = 0;
+    //calculate the total setback in ft(example should be 199 [25 + 74 + 100])
+    document.getElementById('setback_ft').value = parseInt(localReg + sas + rec_set);
 }
 
+// This function resets the calculator to default values
 function resetCalc(){
     document.getElementById('local_reg').value = 25;
 
