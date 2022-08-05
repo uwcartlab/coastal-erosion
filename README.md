@@ -14,7 +14,7 @@
 ### Data Sources
 
 * _Shoreline, Bluff Crest, Bluff Toe:_ ???
-* _Grafton DEM:_ (Wisconsin SCO)[https://www.sco.wisc.edu/data/elevationlidar/]
+* _Grafton DEM (2010):_ (Wisconsin SCO)[https://www.sco.wisc.edu/data/elevationlidar/]
     * (Metadata)[https://bin.ssec.wisc.edu/pub/wisconsinview/lidar/Ozaukee/Metadata/1101025_Ozaukee_LiDAR_Processing_Report.pdf]
 * _Grafton Boundary:_ (Wisconsin SCO)[https://geodata.wisc.edu/catalog/11561EFB-011A-41C8-8536-A0C89FB67CF4]
 
