@@ -20,3 +20,13 @@
 .return:hover{
     cursor:pointer;
 }
+/*********CALCULATOR*********/
+#calculator{
+    position:absolute;
+    width:300px;
+    top:70px;
+    right:50px;
+    z-index:1000;
+    background:white;
+    border: 2px black solid;
+}
