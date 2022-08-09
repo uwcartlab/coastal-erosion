@@ -7,6 +7,12 @@
     var map, data, buffer;
 
     function setListeners(){
+        //reset inputs
+        document.querySelectorAll("input").forEach(function(elem){
+            console.log(elem)
+            //elem.reset();
+        })
+        //set calculator listener
         document.getElementById("calcSetback").addEventListener("click", function(){
             calcSetback();
         })
@@ -48,9 +54,11 @@
             stable_angle = parseInt(document.getElementById('stable_bluff_angle').value);
 
         //TODO: calculate the stable angle setback(default example should return 74)
+        //width = height/tan(curr_angle)
+        let width = height/Math.tan(curr_angle * (Math.PI/180)),
+            sas = (height/Math.tan(stable_angle * (Math.PI/180))) - width;
         // See simple_bluff.jpg for the math
-        let sas = 0;
-            document.getElementById('setback_angle').value = sas;
+        document.getElementById('setback_angle').value = sas;
 
         let rec_rate = parseInt(document.getElementById('rec_rate').value);
         //calculate the recession setback(default example should return 100)
@@ -73,9 +81,18 @@
                 //displace line based on calculaed conversion factor
                 latlng[0] = latlng[0] - (setback/cf);
             })
+
         })
+        console.log(bufferData)
+
         //add buffer line to map
-        buffer = L.geoJSON(bufferData).addTo(map);
+        buffer = L.geoJSON(bufferData, {
+            style:function(feature){
+                return {
+                    color:"red"
+                }
+            }
+        }).addTo(map);
     }
     //function clone data variable to store in new layer for buffer calculation
     function clone(Obj){
