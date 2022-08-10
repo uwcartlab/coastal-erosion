@@ -1,7 +1,10 @@
 /***********MAP*************/
 #map{
-    width:100vw;
-    height:100vh;
+    width:50vw;
+    height:calc(100vh - 55px);
+    position:absolute;
+    left:50%;
+    top:55px;
 }
 /***********FOOTER*************/
 .footer{
@@ -19,6 +22,29 @@
 }
 .return:hover{
     cursor:pointer;
+}
+/*********LOCAL REG/RECESSION CALCULATOR**********/
+#top-calculator{
+    width:50vw;
+    height:calc(50vh - 55px);
+    position:absolute;
+}
+
+/*********TRIANGLE INTERFACE**********/
+#triangle{
+    width:50vw;
+    height:50vh;
+    top: 50%;
+    position:absolute;
+    padding:0px 50px 10px;
+}
+.triangle_interface{
+    width:100%;
+    height:100%;
+}
+.line{
+    stroke-width:5px;
+    stroke:black;
 }
 /*********CALCULATOR*********/
 #calculator{

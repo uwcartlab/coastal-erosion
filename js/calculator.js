@@ -5,6 +5,10 @@
 (function(){
     
     var map, data, buffer;
+    //bluff parameters
+    var localReg, bluff_height = 100, curr_angle = 30, stable_angle = 22, bluff_width, rec_rate;
+    //bluff results
+    var sas, rec_set, setback;
 
     function setListeners(){
         //reset inputs
@@ -41,6 +45,158 @@
             })
     }
 
+    //function to create the triangle
+    function createTriangle(){
+        //create bluff scale
+        let scale = d3.scaleLinear()
+            .domain([0, 400])
+            .range([0, 200]);
+        
+        let reverseScale = d3.scaleLinear()
+            .domain([0, 200])
+            .range([0, 400]);
+        
+        let current = reverseScale(bluff_height/Math.tan(curr_angle * (Math.PI/180)));
+        console.log(current)
+        //create the triangle interface    
+        let svg = d3.select("#triangle")
+            .append("svg")
+            .attr("class","triangle_interface");
+        //get current height and width of the triangle interface, based on the viewport w/h
+        let height = svg.style("height"),
+            width = svg.style("width");
+            
+        //user-inputted triangle
+        let adj = svg.append("line")
+            .attr("class","line adj")
+            .attr("x1",0)
+            .attr("x2",current)
+            .attr("y1",height)
+            .attr("y2",height);  
+
+        let adj_label = svg.append("text")
+            .attr("class","label_adj")
+            .attr("x",parseInt(current)/2)
+            .attr("y",parseInt(height) - 10)
+            .style("text-anchor","middle")
+            .text(Math.round(scale(current)));
+
+        let opp = svg.append("line")
+            .attr("class","line opp")
+            .attr("x1",current)
+            .attr("x2",current)
+            .attr("y1",reverseScale(bluff_height))
+            .attr("y2",height)
+            .on("mousedown",function(){
+                //activate dragging of triangle border
+                svg.on("mousemove",function(){
+                    let posx = event.clientX - 50,
+                        posy = event.clientY;
+                    updatePos(posx, posy)
+                })
+                //final position on new line
+                svg.on("mouseup",function(){
+                    let posx = event.clientX - 50,
+                        posy = event.clientY;
+                    updatePos(posx, posy)
+                    //remove active listeners    
+                    svg.on("mouseup",null)
+                    svg.on("mousemove",null)
+                })
+
+                function updatePos(posx, posy){
+                    let h = posy - parseInt(height);
+                    console.log(h)
+                    //update bluff height value
+                    bluff_width = scale(posx/2);
+                    //set new position
+                    d3.select(".opp")
+                        .attr("x1",posx)
+                        .attr("y1",h)
+                        .attr("x2",posx);
+                    //LEFT OFF HERE
+                    bluff_height = parseInt(d3.select(".opp").attr("y2")) - parseInt(d3.select(".opp").attr("y1"));
+
+                    //update opposite label
+                    d3.select(".label_opp")
+                        .attr("x",parseInt(posx) + 20)
+                        .attr("y",function(){
+                            return h + ((parseInt(height) - h)/2);
+                        })
+                        .text(Math.round(bluff_height))
+                    //update adjacent
+                    d3.select(".adj")
+                        .attr("x2",posx);
+                    //update adjacent label
+                    d3.select(".label_adj")
+                        .attr("x",parseInt(posx)/2 + 20)
+                        .text(scale(posx/2))
+                    //update hypotenuese
+                    d3.select(".hyp")
+                        .attr("x2",posx)
+                        .attr("y2",h)
+                    //update angle
+                    curr_angle = Math.atan(bluff_height/bluff_width) * (180/Math.PI);
+
+                    d3.select(".label_angle")
+                        .attr("x",parseInt(posx)/2)
+                        .attr("y",parseInt(height) - 50)
+                        .text(curr_angle);
+                }
+            });  
+        
+        let opp_label = svg.append("text")
+            .attr("class","label_opp")
+            .attr("x",parseInt(current) + 20)
+            .attr("y",reverseScale(bluff_height))
+            .style("text-anchor","middle")
+            .text(bluff_height);
+        
+        let hyp2 = svg.append("line")
+            .attr("class","line hyp")
+            .attr("x1",0)
+            .attr("x2",current)
+            .attr("y1",height)
+            .attr("y2",reverseScale(bluff_height)); 
+        
+        let angle_label = svg.append("text")
+            .attr("class","label_angle")
+            .attr("x",parseInt(current)/2)
+            .attr("y",parseInt(height)-50)
+            .style("text-anchor","middle")
+            .text(curr_angle);
+
+        //calculated triangle
+
+         /*let adj = svg.append("line")
+           .attr("class","line adj")
+           .attr("x1",0)
+           .attr("x2",width)
+           .attr("y1",height)
+           .attr("y2",height);  
+
+        let opp = svg.append("line")
+           .attr("class","line opp")
+           .attr("x1",width)
+           .attr("x2",width)
+           .attr("y1",0)
+           .attr("y2",height);  
+       
+        let hyp = svg.append("line")
+           .attr("class","line hyp")
+           .attr("x1",0)
+           .attr("x2",width)
+           .attr("y1",height)
+           .attr("y2",0);  
+        
+        let diff = svg.append("line")
+           .attr("class","line hyp")
+           .attr("x1",current)
+           .attr("x2",width)
+           .attr("y1",0)
+           .attr("y2",0);  */
+    }
+
     // This function calculates the setback based on user input
     function calcSetback(){
         //remove buffer layer if already enabled
@@ -48,17 +204,14 @@
             map.removeLayer(buffer);
         }
         // read in input and format correctly
-        let localReg = parseInt(document.getElementById('local_reg').value),
-            height = parseInt(document.getElementById('bluff_height').value),
-            curr_angle = parseInt(document.getElementById('curr_bluff_angle').value),
-            stable_angle = parseInt(document.getElementById('stable_bluff_angle').value);
+        let localReg = parseInt(document.getElementById('local_reg').value);
 
         //TODO: calculate the stable angle setback(default example should return 74)
         //width = height/tan(curr_angle)
-        let width = height/Math.tan(curr_angle * (Math.PI/180)),
-            sas = (height/Math.tan(stable_angle * (Math.PI/180))) - width;
+        bluff_width = bluff_height/Math.tan(curr_angle * (Math.PI/180));
+            sas = (bluff_height/Math.tan(stable_angle * (Math.PI/180))) - bluff_width;
         // See simple_bluff.jpg for the math
-        document.getElementById('setback_angle').value = sas;
+        //document.getElementById('setback_angle').value = sas;
 
         let rec_rate = parseInt(document.getElementById('rec_rate').value);
         //calculate the recession setback(default example should return 100)
@@ -83,8 +236,6 @@
             })
 
         })
-        console.log(bufferData)
-
         //add buffer line to map
         buffer = L.geoJSON(bufferData, {
             style:function(feature){
@@ -126,6 +277,7 @@
     }
 
     document.addEventListener('DOMContentLoaded', function(){
+        createTriangle();
         createMap();
         setListeners();
     })

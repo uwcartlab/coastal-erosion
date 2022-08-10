@@ -17,7 +17,7 @@
         <top-navbar></top-navbar>
 
         <!--calculator interface-->
-        <div id="calculator">
+        <!--<div id="calculator">
             <p><b>1.) Structure Life</b></p>
                 <label>Local Regulation (ft)</label>
                 <input type="number" class="hightlight" id="local_reg" value="25">
@@ -38,9 +38,29 @@
                 <label id="setback_total">Total Setback Distance (ft)</label>
                 <input disabled type="number" id="setback_ft">
             <div id="buttons">
-                <button id="calcSetback">Calculate</button><!--<button onclick="resetCalc()">Reset</button>-->
+                <button id="calcSetback">Calculate</button><button>Reset</button>
+            </div>
+        </div>-->
+
+        <!--local regulation and recession rate calculation-->
+        <div id="top-calculator">
+            <p><b>1.) Structure Life</b></p>
+                <label>Local Regulation (ft)</label>
+                <input type="number" class="hightlight" id="local_reg" value="25">
+            <p><b>2.) Recession</b></p>
+                <label>Recession Rate (ft/yr)</label>
+                <input type="number" id="rec_rate" value="2">
+                <label>Recession Setback: 50yrs (ft)</label>
+                <input disabled type="number" class="hightlight" id="rec_setback">
+            <label id="setback_total">Total Setback Distance (ft)</label>
+                <input disabled type="number" id="setback_ft">
+            <div id="buttons">
+                <button id="calcSetback">Calculate</button><!--<button>Reset</button>-->
             </div>
         </div>
+
+        <!--triangle interface-->
+        <div id="triangle"></div>
 
         <!--map element-->
         <div id="map"></div>
