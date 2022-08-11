@@ -1,10 +1,13 @@
+/***********POSITIONING*************/
+.container{
+    height:100vh;
+}
+.row{
+    height:100%;
+}
 /***********MAP*************/
 #map{
-    width:50vw;
-    height:calc(100vh - 55px);
-    position:absolute;
-    left:50%;
-    top:55px;
+    height:100%;
 }
 /***********FOOTER*************/
 .footer{
@@ -25,16 +28,31 @@
 }
 /*********LOCAL REG/RECESSION CALCULATOR**********/
 #top-calculator{
-    width:50vw;
-    height:calc(50vh - 55px);
+    height:calc(30vh - 55px);
     position:absolute;
+    padding:15px;
+    z-index:10;
+}
+#bottom-calculator{
+    height:20vh;
+    position:absolute;
+    top:calc(80vh + 55px);
+    padding:15px;
+}
+input{
+    width:100px;
+}
+.calc-section > p{
+    margin-bottom:5px;
+}
+.calc-section{
+    margin-bottom:10px;
 }
 
 /*********TRIANGLE INTERFACE**********/
 #triangle{
-    width:50vw;
     height:50vh;
-    top: 50%;
+    top: calc(30vh + 55px);
     position:absolute;
     padding:0px 50px 10px;
 }
@@ -45,6 +63,10 @@
 .line{
     stroke-width:5px;
     stroke:black;
+}
+.opp:hover{
+    cursor:pointer;
+    stroke-width:10px !important;
 }
 /*********CALCULATOR*********/
 #calculator{

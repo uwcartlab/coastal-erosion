@@ -6,14 +6,14 @@
     
     var map, data, buffer;
     //bluff parameters
-    var localReg, bluff_height = 100, curr_angle = 30, stable_angle = 22, bluff_width, rec_rate;
+    var localReg, bluff_height = 100, curr_angle = 30, stable_angle, bluff_width, rec_rate;
     //bluff results
     var sas, rec_set, setback;
 
     function setListeners(){
-        //reset inputs
+        //reset inputs GET BACK TO
         document.querySelectorAll("input").forEach(function(elem){
-            console.log(elem)
+            //console.log(elem)
             //elem.reset();
         })
         //set calculator listener
@@ -46,53 +46,60 @@
     }
 
     //function to create the triangle
-    function createTriangle(){
-        //create bluff scale
-        let scale = d3.scaleLinear()
-            .domain([0, 400])
-            .range([0, 200]);
-        
-        let reverseScale = d3.scaleLinear()
-            .domain([0, 200])
-            .range([0, 400]);
-        
-        let current = reverseScale(bluff_height/Math.tan(curr_angle * (Math.PI/180)));
-        console.log(current)
+    function createTriangle(){     
         //create the triangle interface    
         let svg = d3.select("#triangle")
             .append("svg")
             .attr("class","triangle_interface");
         //get current height and width of the triangle interface, based on the viewport w/h
-        let height = svg.style("height"),
-            width = svg.style("width");
-            
-        //user-inputted triangle
+        let height = parseInt(svg.style("height"));
+        //create bluff scales
+        //scale for converting pixels to bluff height in ft.
+        let yscale = d3.scaleLinear()
+             .domain([0, height])
+             .range([200, 0]);
+        //scale for converting pixels to bluff width in ft.
+        let xscale = d3.scaleLinear()
+             .domain([0, height])
+             .range([0, 200]);
+        //scale for converting ft. to pixels
+        let reverseScale = d3.scaleLinear()
+             .domain([0, 200])
+             .range([0, height]);
+        //calculate current bluff width based on default height and angle
+        bluff_width = bluff_height/Math.tan(curr_angle * (Math.PI/180));
+        
+        //base triangle, includes opposite side, adjacent side, and hypotenuse (remember trigonometry?? lol)
+        //create adjacent side and label
         let adj = svg.append("line")
             .attr("class","line adj")
             .attr("x1",0)
-            .attr("x2",current)
+            .attr("x2",reverseScale(bluff_width))
             .attr("y1",height)
             .attr("y2",height);  
-
         let adj_label = svg.append("text")
             .attr("class","label_adj")
-            .attr("x",parseInt(current)/2)
-            .attr("y",parseInt(height) - 10)
+            .attr("x",reverseScale(bluff_width)/2)
+            .attr("y",height - 10)
             .style("text-anchor","middle")
-            .text(Math.round(scale(current)));
-
+            .text(Math.round(bluff_width));
+        //create opposite and activate listeners for dragging
         let opp = svg.append("line")
             .attr("class","line opp")
-            .attr("x1",current)
-            .attr("x2",current)
+            .attr("x1",reverseScale(bluff_width))
+            .attr("x2",reverseScale(bluff_width))
             .attr("y1",reverseScale(bluff_height))
             .attr("y2",height)
+            //event triggers when opposite side is selected
             .on("mousedown",function(){
                 //activate dragging of triangle border
                 svg.on("mousemove",function(){
                     let posx = event.clientX - 50,
                         posy = event.clientY;
                     updatePos(posx, posy)
+
+                    d3.select(".opp")
+                        .style("stroke-width","10px")
                 })
                 //final position on new line
                 svg.on("mouseup",function(){
@@ -102,67 +109,71 @@
                     //remove active listeners    
                     svg.on("mouseup",null)
                     svg.on("mousemove",null)
-                })
 
+                    d3.select(".opp")
+                        .style("stroke-width","5px")
+                })
+                //function to update position of triangle
                 function updatePos(posx, posy){
-                    let h = posy - parseInt(height);
-                    console.log(h)
-                    //update bluff height value
-                    bluff_width = scale(posx/2);
-                    //set new position
+                    let offset = parseInt(d3.select(".container").style("margin-left")) + parseInt(d3.select(".container").style("padding-left"));
+                    //subtract y position from height and padding (10) to get the position in relation to the svg 
+                    //WHAT IS CAUSING THE OFFSET VALUE???
+                    posy = posy - height + 65;
+                    posx = posx - offset;
+                    //set new position of opposite side
                     d3.select(".opp")
                         .attr("x1",posx)
-                        .attr("y1",h)
+                        .attr("y1",posy)
                         .attr("x2",posx);
-                    //LEFT OFF HERE
-                    bluff_height = parseInt(d3.select(".opp").attr("y2")) - parseInt(d3.select(".opp").attr("y1"));
-
+                    //get new bluff width and height
+                    bluff_height = yscale(posy);
+                    bluff_width = xscale(posx);
                     //update opposite label
                     d3.select(".label_opp")
                         .attr("x",parseInt(posx) + 20)
                         .attr("y",function(){
-                            return h + ((parseInt(height) - h)/2);
+                            return posy + ((height - posy)/2);
                         })
                         .text(Math.round(bluff_height))
-                    //update adjacent
+                    //update adjacent width
                     d3.select(".adj")
                         .attr("x2",posx);
                     //update adjacent label
                     d3.select(".label_adj")
                         .attr("x",parseInt(posx)/2 + 20)
-                        .text(scale(posx/2))
+                        .text(Math.round(bluff_width))
                     //update hypotenuese
                     d3.select(".hyp")
                         .attr("x2",posx)
-                        .attr("y2",h)
-                    //update angle
+                        .attr("y2",posy)
+                    //update angle based on new parameters
                     curr_angle = Math.atan(bluff_height/bluff_width) * (180/Math.PI);
-
+                    //update hypotenuse angle
                     d3.select(".label_angle")
                         .attr("x",parseInt(posx)/2)
                         .attr("y",parseInt(height) - 50)
-                        .text(curr_angle);
+                        .text(Math.round(curr_angle));
                 }
             });  
-        
+        //create opposite side label
         let opp_label = svg.append("text")
             .attr("class","label_opp")
-            .attr("x",parseInt(current) + 20)
-            .attr("y",reverseScale(bluff_height))
+            .attr("x",reverseScale(bluff_width) + 20)
+            .attr("y",height - (reverseScale(bluff_height)/2))
             .style("text-anchor","middle")
             .text(bluff_height);
-        
-        let hyp2 = svg.append("line")
+        //create hypotenuse
+        let hyp = svg.append("line")
             .attr("class","line hyp")
             .attr("x1",0)
-            .attr("x2",current)
+            .attr("x2",reverseScale(bluff_width))
             .attr("y1",height)
             .attr("y2",reverseScale(bluff_height)); 
-        
+        //add label for angle
         let angle_label = svg.append("text")
             .attr("class","label_angle")
-            .attr("x",parseInt(current)/2)
-            .attr("y",parseInt(height)-50)
+            .attr("x",reverseScale(bluff_width)/2)
+            .attr("y",height-50)
             .style("text-anchor","middle")
             .text(curr_angle);
 
@@ -204,7 +215,8 @@
             map.removeLayer(buffer);
         }
         // read in input and format correctly
-        let localReg = parseInt(document.getElementById('local_reg').value);
+        localReg = parseInt(document.getElementById('local_reg').value);
+        stable_angle = parseInt(document.getElementById('stable_bluff_angle').value);
 
         //TODO: calculate the stable angle setback(default example should return 74)
         //width = height/tan(curr_angle)
