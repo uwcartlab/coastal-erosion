@@ -16,10 +16,47 @@
             //console.log(elem)
             //elem.reset();
         })
+        //set listener to collapse each section of the calculator
+        document.querySelectorAll(".section-header").forEach(function(elem){
+            elem.addEventListener("click",function(){
+                //title of each header element stores the id of the associated section
+                document.querySelectorAll(".section-content").forEach(function(div){
+                    //if current section id is equal to the selected title, show the section
+                    if (elem.title == div.id){
+                        if (div.style.display == "none")
+                            div.style.display = "block";
+                    }
+                    //if current section id does not equal the selected title, hide it
+                    else{
+                        div.style.display = "none";
+                    }
+                })   
+            })
+        })
+        //set sas calculator listener
+        document.getElementById("calcSas").addEventListener("click", function(e){
+            updateDisplay(e);
+            calcSas();
+        })
+        //set recession calculator listener
+         document.getElementById("calcRec").addEventListener("click", function(e){
+            updateDisplay(e);
+            calcRec();
+        })
+        //set local regulation calculator listener
+        document.getElementById("calcReg").addEventListener("click", function(e){
+            updateDisplay(e);
+            calcReg();
+        })
         //set calculator listener
         document.getElementById("calcSetback").addEventListener("click", function(){
             calcSetback();
         })
+        //update display based on button selection
+        function updateDisplay(e){
+            document.querySelector("#step" + e.target.title).style.display = "none";
+            document.querySelector("#step" + (parseInt(e.target.title) + 1)).style.display = "block";
+        }
     }
     
     function createMap(){
@@ -118,7 +155,7 @@
                     let offset = parseInt(d3.select(".container").style("margin-left")) + parseInt(d3.select(".container").style("padding-left"));
                     //subtract y position from height and padding (10) to get the position in relation to the svg 
                     //WHAT IS CAUSING THE OFFSET VALUE???
-                    posy = posy - height + 65;
+                    posy = posy - (height/2);
                     posx = posx - offset;
                     //set new position of opposite side
                     d3.select(".opp")
@@ -207,6 +244,27 @@
            .attr("y1",0)
            .attr("y2",0);  */
     }
+    //calculate stable angle setback
+    function calcSas(){
+        stable_angle = document.getElementById('stable_bluff_angle').value;
+        //calculate bluff width based on current values
+        bluff_width = bluff_height/Math.tan(curr_angle * (Math.PI/180));
+        //calculate stable angle setback based on current values
+        sas = (bluff_height/Math.tan(stable_angle * (Math.PI/180))) - bluff_width;
+
+    }
+    //calculate recession rate
+    function calcRec(){
+        rec_rate = parseInt(document.getElementById('rec_rate').value);
+        //calculate the recession setback(default example should return 100)
+        rec_set = rec_rate * 50;
+
+        document.getElementById('rec_setback').value = rec_set;
+    }
+    //calculate local regulations
+    function calcReg(){
+        localReg = parseInt(document.getElementById('local_reg').value);
+    }
 
     // This function calculates the setback based on user input
     function calcSetback(){
@@ -214,21 +272,6 @@
         if (buffer){
             map.removeLayer(buffer);
         }
-        // read in input and format correctly
-        localReg = parseInt(document.getElementById('local_reg').value);
-        stable_angle = parseInt(document.getElementById('stable_bluff_angle').value);
-
-        //TODO: calculate the stable angle setback(default example should return 74)
-        //width = height/tan(curr_angle)
-        bluff_width = bluff_height/Math.tan(curr_angle * (Math.PI/180));
-            sas = (bluff_height/Math.tan(stable_angle * (Math.PI/180))) - bluff_width;
-        // See simple_bluff.jpg for the math
-        //document.getElementById('setback_angle').value = sas;
-
-        let rec_rate = parseInt(document.getElementById('rec_rate').value);
-        //calculate the recession setback(default example should return 100)
-        let rec_set = rec_rate*50;
-            document.getElementById('rec_setback').value = rec_set;
 
         //calculate the total setback in ft(example should be 199 [25 + 74 + 100])
         let setback = parseInt(localReg + sas + rec_set);

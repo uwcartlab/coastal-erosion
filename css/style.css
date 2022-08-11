@@ -27,18 +27,6 @@
     cursor:pointer;
 }
 /*********LOCAL REG/RECESSION CALCULATOR**********/
-#top-calculator{
-    height:calc(30vh - 55px);
-    position:absolute;
-    padding:15px;
-    z-index:10;
-}
-#bottom-calculator{
-    height:20vh;
-    position:absolute;
-    top:calc(80vh + 55px);
-    padding:15px;
-}
 input{
     width:100px;
 }
@@ -48,12 +36,19 @@ input{
 .calc-section{
     margin-bottom:10px;
 }
-
+.section-header{
+    font-size:20px;
+}
+.section-header:hover{
+    cursor:pointer;
+    color:gray;
+}
+.section-content{
+    transition:display 2s;
+}
 /*********TRIANGLE INTERFACE**********/
 #triangle{
     height:50vh;
-    top: calc(30vh + 55px);
-    position:absolute;
     padding:0px 50px 10px;
 }
 .triangle_interface{
