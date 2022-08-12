@@ -73,3 +73,9 @@ input{
     background:white;
     border: 2px black solid;
 }
+/*********COMPARE MAP*********/
+#compare-map{
+    position: absolute;
+    width: 600px;
+    height: 600px;
+}
