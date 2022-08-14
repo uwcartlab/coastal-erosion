@@ -74,8 +74,36 @@ input{
     border: 2px black solid;
 }
 /*********COMPARE MAP*********/
-#compare-map{
+#compare-map {
     position: absolute;
-    width: 600px;
-    height: 600px;
+    width: 800px;
+    height: 800px;
+    margin: 100px;
 }
+/*********COMPARE MAP LEGEND ELEMENTS*********/
+
+.legend-control-container {
+	width: 80px;
+	height: 200px;
+	font-style: normal;
+	background-color: #ffffffcc;
+	padding: 10px;
+	border-radius: 2px;
+}
+.year1Legend {
+    width: 50px;
+    height: 50px;
+}
+#leg1937 {
+    width: 50px;
+    height: 50px;
+}
+.year2Legend {
+    width: 50px;
+    height: 50px;
+}
+#leg2015 {
+    width: 50px;
+    height: 50px;
+}
+

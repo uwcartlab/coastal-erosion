@@ -2,18 +2,38 @@
 /* Created by the UW Cartgraphy Lab and Wisconsin Sea Grant, 
    Jake Steinberg */
 
-let map;
+let compareMap;
 
 function createMap(){
-    map = L.map('compare-map', {
-        center: [43.03, -87.92], 
-        zoom: 7
+    compareMap = L.map('compare-map', {
+        center: [43.235, -87.91], 
+        zoom: 17
     });
     
     //add the basemap layer
-    var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    let Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
         attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-    }).addTo(map);
+    }).addTo(compareMap);
+
+    //svgs for the legend elements
+    let legSvg1 = '<svg id="leg1937"><polyline points="20,20 40,40"style="fill:none;stroke:#998ec3;stroke-width:4" /></svg>'
+    legSvg1 += '<text id="year1Legend" x="100" y="100"><br>1937 shoreline<br></text>';
+    let legSvg2 = '<svg id="leg2015"><polyline points="20,20 40,40"style="fill:none;stroke:#f1a340;stroke-width:4" /></svg>'
+    legSvg2 += '<text id="year2Legend" x="100" y="100"><br>2015 shoreline<br></text>';
+
+    // create legend control holding svg legend and add to map
+    let legend = L.Control.extend({
+        options: {
+            position: "topright"
+        },
+        onAdd:function(){
+            var container = L.DomUtil.create('div','legend-control-container');
+            container.insertAdjacentHTML('beforeend',legSvg1);
+            container.insertAdjacentHTML('beforeend',legSvg2);
+            return container;
+        }
+    });
+    compareMap.addControl(new legend());
 
     getData();
 };
@@ -25,54 +45,61 @@ function getData(){
             return response.json();
         })
         .then(function(json){
-            var attributes = processData(json);
-            addData(json, attributes);
+            addData(json);
+        })
+    fetch("data/compare/racineShoreline.geojson")
+        .then(function(response){
+            return response.json();
+        })
+        .then(function(json){
+            addData(json);
+        })
+    fetch("data/compare/milwaukeeShoreline.geojson")
+        .then(function(response){
+            return response.json();
+        })
+        .then(function(json){
+            addData(json);
+        })
+    fetch("data/compare/ozaukeeShoreline.geojson")
+        .then(function(response){
+            return response.json();
+        })
+        .then(function(json){
+            addData(json);
         })
 };
 
-//build an attributes array from the data
-function processData(data){
-    //empty array to hold attributes
-    var attributes = [];
-
-    //properties of the first feature in the dataset
-    var properties = data.features[0].properties;
-
-    //push each attribute name into attributes array
-    for (var attribute in properties){
-        attributes.push(attribute);
-        };
-
-    return attributes;
-};
-
-function addData(data, attributes){
+function addData(data){
     //create a Leaflet GeoJSON layer and add it to the map
     L.geoJson(data, {
-        toLayer: function(feature, latlng){
-            return toLayer(feature, latlng, attributes);
+        style: function(feature){
+            return toLayer(feature);
         }
-    }).addTo(map);
+    }).addTo(compareMap);
 };
 
 //function to add only relevant years
-function pointToLayer(feature, latlng, attributes){
-    //assign the current attribute based on the first index of the attributes array
-    var attribute = attributes[0];
-
-    //create marker options
-    //sort data into two colors based on status
-    if (feature.properties[attributes[1]] === '1937' || '2015'){
-        var options = {
-            fillColor: "#ffb703",
-            color: "#000",
-            weight: 1,
-            opacity: 1,
-            fillOpacity: 0.7
-        }} else {
-        var options = {
+function toLayer(feature){
+    //sort data into two colors
+    if (feature.properties.Date_ === '1937'){
+        return {
+            color: '#998ec3',
+            weight: 4,
+            opacity: 1
+        }
+    } else if (feature.properties.Date_ === '2015'){
+        return {
+            color: '#f1a340',
+            weight: 4,
+            opacity: 1
+        }
+    //make nonrelevant years invisible. TODO: change cursor behavior
+    } else {
+        return {
+            color: '#000000',
             opacity: 0,
-            fillOpacity: 0
         }}
+    };
 
-document.addEventListener('DOMContentLoaded',createMap);
+document.addEventListener('DOMContentLoaded', createMap);
