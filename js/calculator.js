@@ -19,44 +19,52 @@
         //set listener to collapse each section of the calculator
         document.querySelectorAll(".section-header").forEach(function(elem){
             elem.addEventListener("click",function(){
-                //title of each header element stores the id of the associated section
-                document.querySelectorAll(".section-content").forEach(function(div){
-                    //if current section id is equal to the selected title, show the section
-                    if (elem.title == div.id){
-                        if (div.style.display == "none")
-                            div.style.display = "block";
-                    }
-                    //if current section id does not equal the selected title, hide it
-                    else{
-                        div.style.display = "none";
-                    }
-                })   
+                //jump to calculation section on click
+                window.location.href = '#' + elem.title;
             })
         })
         //set sas calculator listener
         document.getElementById("calcSas").addEventListener("click", function(e){
-            updateDisplay(e);
             calcSas();
         })
         //set recession calculator listener
-         document.getElementById("calcRec").addEventListener("click", function(e){
-            updateDisplay(e);
+        document.getElementById("calcRec").addEventListener("click", function(e){
             calcRec();
         })
         //set local regulation calculator listener
         document.getElementById("calcReg").addEventListener("click", function(e){
-            updateDisplay(e);
             calcReg();
         })
         //set calculator listener
-        document.getElementById("calcSetback").addEventListener("click", function(){
+        document.getElementById("calcSetback").addEventListener("click", function(e){
             calcSetback();
         })
         //update display based on button selection
-        function updateDisplay(e){
-            document.querySelector("#step" + e.target.title).style.display = "none";
-            document.querySelector("#step" + (parseInt(e.target.title) + 1)).style.display = "block";
-        }
+        document.querySelectorAll(".next").forEach(function(elem){
+            elem.addEventListener("click",function(){
+                window.location.href = '#step' + (parseInt(elem.title) + 1);
+            })
+        })
+        //position sidebar
+        let sidebarHeight = document.querySelector(".sidebar").clientHeight,
+            menuHeight = document.querySelector(".menu").clientHeight;
+
+        document.querySelector(".menu").style.marginTop = (sidebarHeight/2) - (menuHeight/2) + "px";
+
+        //bold menu titles
+        document.addEventListener("scroll",function(){
+            let scrollPos = window.pageYOffset;
+            document.querySelectorAll(".section-content").forEach(function(elem, i){
+                let scrollBottom = elem.offsetTop + (elem.clientHeight/2), scrollTop = elem.offsetTop - (elem.clientHeight/2);
+                if (scrollPos >= scrollTop && scrollPos <= scrollBottom){
+                    document.querySelector("#title" + (i+1)).style.fontWeight = "bold";
+                }
+                else{
+                    document.querySelector("#title" + (i+1)).style.fontWeight = "normal";
+                }
+            })
+        })
+
     }
     
     function createMap(){
@@ -252,6 +260,7 @@
         //calculate stable angle setback based on current values
         sas = (bluff_height/Math.tan(stable_angle * (Math.PI/180))) - bluff_width;
 
+        document.getElementById('stable_angle_setback').value = sas;
     }
     //calculate recession rate
     function calcRec(){

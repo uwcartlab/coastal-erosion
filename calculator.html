@@ -44,53 +44,70 @@
         <div class="container">
             <!--local regulation and recession rate calculation-->
             <div class="row">
-                <div class="sidebar col-6">
+                <div class="sidebar col-3">
+                    <div class="menu">
+                        <h2 class="section-header" id="title1" title="step1">1.) Stable Angle Setback</h2>
+                        <h2 class="section-header" id="title2" title="step2">2.) Recession</h2>
+                        <h2 class="section-header" id="title3" title="step3">3.) Structure Life</h2>
+                        <h2 class="section-header" id="title4" title="step4">4.) Total Setback</h2>
+                        <h2 class="section-header" id="title5" title="step5">5.) Map</h2>
+                    </div>
+                </div>
+
+                <div class="col-8 offset-3">
                     
                     <div class="calc-section">
-                        <h2 class="section-header" title="step1">1.) Stable Angle Setback</h2>
                         <div id="step1" class="section-content">
                             <label>Stable Bluff Angle (deg.)</label>
                                     <input type="number" class="hightlight" id="stable_bluff_angle" value="25">
                             <!--triangle interface-->
                             <div id="triangle"></div>
-                            <button id="calcSas" title="1">Calculate</button>
+                            <label>Stable Angle Setback</label>
+                                    <input disabled type="number" class="hightlight" id="stable_angle_setback">
+                            <button id="calcSas">Calculate</button>
+                            <button class="next" title="1">Next</button>
                         </div>
                     </div>
 
                     <div class="calc-section">
-                        <h2 class="section-header" title="step2">2.) Recession</h2>
-                        <div id="step2" class="section-content" style="display:none">
+                        <div id="step2" class="section-content">
                             <label>Recession Rate (ft/yr)</label>
                             <input type="number" id="rec_rate" value="2">
                             <br/>
                             <label>Recession Setback: 50yrs (ft)</label>
                             <input disabled type="number" class="hightlight" id="rec_setback">
-                            <button id="calcRec" title="2">Calculate</button>
+                            <button id="calcRec">Calculate</button>
+                            <button class="next" title="2">Next</button>
                         </div>
                     </div>
 
                     <div class="calc-section">
-                        <h2 class="section-header" title="step3">3.) Structure Life</h2>
-                        <div id="step3" class="section-content" style="display:none">
+                        <div id="step3" class="section-content">
                             <label>Local Regulation (ft)</label>
                             <input type="number" class="hightlight" id="local_reg" value="25">
-                            <button id="calcReg" title="3">Calculate</button>
+                            <button id="calcReg">Calculate</button>
+                            <button class="next" title="3">Next</button>
                         </div>
                     </div>
 
                     <div class="calc-section">
-                        <h2 class="section-header" title="step4">4.) Total Setback</h2>
-                        <div id="step4" class="section-content" style="display:none">
+                        <div id="step4" class="section-content">
                             <label id="setback_total">Total Setback Distance (ft)</label>
                             <input disabled type="number" id="setback_ft">
-                            <button id="calcSetback" title="4">Calculate</button><!--<button>Reset</button>-->
+                            <button id="calcSetback">Calculate</button><!--<button>Reset</button>-->
+                            <button class="next" title="4">Next</button>
+                        </div>
+                    </div>
+
+                    <div class="calc-section">
+                        <div id="step5" class="section-content">
+                            <!--map element-->
+                            <div id="map"></div>
                         </div>
                     </div>
 
                 </div>
 
-                <!--map element-->
-                <div id="map" class="col-6"></div>
             </div>
 
         </div>

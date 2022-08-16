@@ -1,13 +1,30 @@
 /***********POSITIONING*************/
 .container{
     height:100vh;
+    margin-left:10px;
 }
 .row{
     height:100%;
 }
+/***********SIDEBAR*************/
+.sidebar{
+    position:fixed;
+    height:100vh;
+    padding-left:10px;
+}
+.section-header{
+    font-size:20px;
+    font-weight:normal;
+}
+.section-header:hover{
+    cursor:pointer;
+    color:gray;
+}
 /***********MAP*************/
 #map{
     height:100%;
+    width:100%;
+    margin-left:0;
 }
 /***********FOOTER*************/
 .footer{
@@ -35,16 +52,15 @@ input{
 }
 .calc-section{
     margin-bottom:10px;
-}
-.section-header{
-    font-size:20px;
-}
-.section-header:hover{
-    cursor:pointer;
-    color:gray;
+    height:200vh;
+    display:block;
 }
 .section-content{
+    height:100vh;
     transition:display 2s;
+    position:sticky;
+    display:block;
+    top:0;
 }
 /*********TRIANGLE INTERFACE**********/
 #triangle{
