@@ -13,8 +13,7 @@
     function setListeners(){
         //reset inputs GET BACK TO
         document.querySelectorAll("input").forEach(function(elem){
-            //console.log(elem)
-            //elem.reset();
+            elem.value = elem.defaultValue;
         })
         //set listener to collapse each section of the calculator
         document.querySelectorAll(".section-header").forEach(function(elem){
@@ -50,6 +49,20 @@
             menuHeight = document.querySelector(".menu").clientHeight;
 
         document.querySelector(".menu").style.marginTop = (sidebarHeight/2) - (menuHeight/2) + "px";
+
+        //bluff material menu
+        document.querySelectorAll(".material").forEach(function(elem){
+            elem.addEventListener("click",function(){
+                document.querySelector("#material-button").innerHTML = elem.innerHTML;
+                if (elem.title){
+                    document.querySelector("#stable_bluff_angle").value = elem.title;
+                }
+            })
+        })
+        //stable bluff angle
+        document.querySelector("#stable_bluff_angle").addEventListener("input",function(){
+            document.querySelector("#material-button").innerHTML = "Custom";
+        })
 
         //bold menu titles
         document.addEventListener("scroll",function(){
@@ -160,11 +173,14 @@
                 })
                 //function to update position of triangle
                 function updatePos(posx, posy){
-                    let offset = parseInt(d3.select(".container").style("margin-left")) + parseInt(d3.select(".container").style("padding-left"));
+                    let offsetx = parseInt(document.querySelector(".sidebar").clientWidth) - 10,
+                        offsety = window.pageYOffset > document.querySelector("#triangle").offsetTop ? window.pageYOffset: document.querySelector("#triangle").offsetTop - window.pageYOffset;
+                    //FINISH
+                        console.log(offsety)
                     //subtract y position from height and padding (10) to get the position in relation to the svg 
                     //WHAT IS CAUSING THE OFFSET VALUE???
-                    posy = posy - (height/2);
-                    posx = posx - offset;
+                    posy = posy - offsety;
+                    posx = posx - offsetx;
                     //set new position of opposite side
                     d3.select(".opp")
                         .attr("x1",posx)
@@ -254,7 +270,8 @@
     }
     //calculate stable angle setback
     function calcSas(){
-        stable_angle = document.getElementById('stable_bluff_angle').value;
+        
+        stable_angle = parseInt(document.getElementById('stable_bluff_angle').value);
         //calculate bluff width based on current values
         bluff_width = bluff_height/Math.tan(curr_angle * (Math.PI/180));
         //calculate stable angle setback based on current values

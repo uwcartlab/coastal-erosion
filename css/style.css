@@ -52,15 +52,21 @@ input{
 }
 .calc-section{
     margin-bottom:10px;
+    margin-top:20px;
     height:200vh;
     display:block;
 }
 .section-content{
     height:100vh;
     transition:display 2s;
-    position:sticky;
     display:block;
     top:0;
+}
+.section-content > h2{
+    margin-bottom:25px;
+}
+#stable-dropdown > *{
+    display:inline;
 }
 /*********TRIANGLE INTERFACE**********/
 #triangle{

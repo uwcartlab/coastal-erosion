@@ -46,7 +46,7 @@
             <div class="row">
                 <div class="sidebar col-3">
                     <div class="menu">
-                        <h2 class="section-header" id="title1" title="step1">1.) Stable Angle Setback</h2>
+                        <h2 class="section-header" id="title1" title="step1" style="font-weight:bold;">1.) Stable Angle Setback</h2>
                         <h2 class="section-header" id="title2" title="step2">2.) Recession</h2>
                         <h2 class="section-header" id="title3" title="step3">3.) Structure Life</h2>
                         <h2 class="section-header" id="title4" title="step4">4.) Total Setback</h2>
@@ -58,12 +58,30 @@
                     
                     <div class="calc-section">
                         <div id="step1" class="section-content">
-                            <label>Stable Bluff Angle (deg.)</label>
-                                    <input type="number" class="hightlight" id="stable_bluff_angle" value="25">
+                            <h2>What is a <b>stable slope</b>?</h2>
+                            <p>The stability of a slope is based on bluff <b>height</b> and <b>material</b>.</p>
+                            <p>Bluff <b>height</b> can be categorized as <b>high</b> (over 20m) or <b>low</b> (under 20m).</p>
+                            <p>Bluffs can be comprised of <b>sandy soils, cohesive soils, or bedrock</b>. Bluffs can be <b>simple</b>, and comprise only a single material, or <b>complex</b>, comprising multiple materials. </p>
+                            <p>Different materials in different places have different <b>stable angles</b>.</p>
+                            <div id="stable-dropdown">
+                                <label>Stable Bluff Angle (deg.):</label>
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="material-button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Lake Michigan — Cohesive Soil
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="material-button">
+                                        <li><a class="dropdown-item material" title="22" href="#michigan">Lake Michigan — Cohesive Soil</a></li>
+                                        <li><a class="dropdown-item material" title="14" href="#superior">Lake Superior — Cohesive Soil</a></li>
+                                        <li><a class="dropdown-item material" title="30" href="#sandy">Sandy Soil</a></li>
+                                        <li><a class="dropdown-item material" href="#custom">Custom</a></li>
+                                    </ul>
+                                </div>
+                                <input type="number" id="stable_bluff_angle" value="22">
+                            </div>
                             <!--triangle interface-->
                             <div id="triangle"></div>
                             <label>Stable Angle Setback</label>
-                                    <input disabled type="number" class="hightlight" id="stable_angle_setback">
+                                    <input disabled type="number" id="stable_angle_setback">
                             <button id="calcSas">Calculate</button>
                             <button class="next" title="1">Next</button>
                         </div>
@@ -75,7 +93,7 @@
                             <input type="number" id="rec_rate" value="2">
                             <br/>
                             <label>Recession Setback: 50yrs (ft)</label>
-                            <input disabled type="number" class="hightlight" id="rec_setback">
+                            <input disabled type="number" id="rec_setback">
                             <button id="calcRec">Calculate</button>
                             <button class="next" title="2">Next</button>
                         </div>
@@ -116,6 +134,7 @@
         <bottom-footer></bottom-footer>
 
         <!--scripts-->
+        <script type="text/javascript" src="lib/popper.min.js"></script>
         <script type="text/javascript" src="lib/bootstrap.min.js"></script>
         <script type="text/javascript" src="lib/leaflet/leaflet.js"></script>
         <script type="text/javascript" src="lib/d3.min.js"></script>
