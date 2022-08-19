@@ -46,18 +46,37 @@
             <div class="row">
                 <div class="sidebar col-3">
                     <div class="menu">
-                        <h2 class="section-header" id="title1" title="step1" style="font-weight:bold;">1.) Stable Angle Setback</h2>
-                        <h2 class="section-header" id="title2" title="step2">2.) Recession</h2>
-                        <h2 class="section-header" id="title3" title="step3">3.) Structure Life</h2>
-                        <h2 class="section-header" id="title4" title="step4">4.) Total Setback</h2>
-                        <h2 class="section-header" id="title5" title="step5">5.) Map</h2>
+                        <h2 class="section-header" id="title1" title="step1" style="font-weight:bold;">1.) Introduction</h2>
+                        <h2 class="section-header" id="title2" title="step2">2.) Stable Angle Setback</h2>
+                        <h2 class="section-header" id="title3" title="step3">3.) Recession</h2>
+                        <h2 class="section-header" id="title4" title="step4">4.) Structure Life</h2>
+                        <h2 class="section-header" id="title5" title="step5">5.) Total Setback</h2>
                     </div>
                 </div>
 
-                <div class="col-8 offset-3">
+                <div class="col-6 offset-3">
+                    
+                    <div class="calc-section row">
+                        <div id="step1" class="section-content">
+                            <h2><b>Construction Setback</b></h2>
+                            <p>Constructions on the lakeshore must consider the effects of erosion and overall bluff stability. 
+                                A well-constructed building might have a useful life of 70 to 100 years. A new home too close may have to be moved to save the structure. 
+                            </p>
+                            <p><b>Total Setback Distance</b> is calculated from the top (or head) of the bluff, and is a factor of:
+                                <ul>
+                                    <li>Stable Slope Angle Distance</li>
+                                    <li>Toe Recession Rate</li>
+                                    <li>Local Regulation</li>
+                                </ul>
+                            </p>
+                            <p>This calculator tool walks through the setback calculation process based on the lakeshore of the Town of Grafton, Wisconsin.</p>
+                            <p class="caption"><i>Right: Bluff head in the town of Grafton Wisconsin. </i></p>
+                            <button class="next" title="1">Let's get started!</button>
+                        </div>
+                    </div>
                     
                     <div class="calc-section">
-                        <div id="step1" class="section-content">
+                        <div id="step2" class="section-content">
                             <h2>What is a <b>stable slope</b>?</h2>
                             <p>The stability of a slope is based on bluff <b>height</b> and <b>material</b>.</p>
                             <p>Bluff <b>height</b> can be categorized as <b>high</b> (over 20m) or <b>low</b> (under 20m).</p>
@@ -83,48 +102,60 @@
                             <label>Stable Angle Setback</label>
                                     <input disabled type="number" id="stable_angle_setback">
                             <button id="calcSas">Calculate</button>
-                            <button class="next" title="1">Next</button>
-                        </div>
-                    </div>
-
-                    <div class="calc-section">
-                        <div id="step2" class="section-content">
-                            <label>Recession Rate (ft/yr)</label>
-                            <input type="number" id="rec_rate" value="2">
-                            <br/>
-                            <label>Recession Setback: 50yrs (ft)</label>
-                            <input disabled type="number" id="rec_setback">
-                            <button id="calcRec">Calculate</button>
+                            <div class="caption-container">
+                                <p class="caption"><i>Right: Bluff head in the town of Grafton Wisconsin. </i></p>
+                            </div>
                             <button class="next" title="2">Next</button>
                         </div>
                     </div>
 
                     <div class="calc-section">
                         <div id="step3" class="section-content">
-                            <label>Local Regulation (ft)</label>
-                            <input type="number" class="hightlight" id="local_reg" value="25">
-                            <button id="calcReg">Calculate</button>
+                            <h2><b>Recession Rate</b></h2>
+                            <label>Recession Rate (ft/yr)</label>
+                            <input type="number" id="rec_rate" value="2">
+                            <br/>
+                            <label>Recession Setback: 50yrs (ft)</label>
+                            <input disabled type="number" id="rec_setback">
+                            <button id="calcRec">Calculate</button>
+                            <div class="caption-container">
+                                <p class="caption"><i>Right: Bluff head in the town of Grafton Wisconsin. </i></p>
+                            </div>
                             <button class="next" title="3">Next</button>
                         </div>
                     </div>
 
                     <div class="calc-section">
                         <div id="step4" class="section-content">
-                            <label id="setback_total">Total Setback Distance (ft)</label>
-                            <input disabled type="number" id="setback_ft">
-                            <button id="calcSetback">Calculate</button><!--<button>Reset</button>-->
+                            <h2><b>Local Regulations</b></h2>
+                            <label>Local Regulation (ft)</label>
+                            <input type="number" class="hightlight" id="local_reg" value="25">
+                            <!--<button id="calcReg">Calculate</button>-->
+                            <div class="caption-container">
+                                <p class="caption"><i>Right: Bluff head in the town of Grafton Wisconsin. </i></p>
+                            </div>
                             <button class="next" title="4">Next</button>
                         </div>
                     </div>
 
-                    <div class="calc-section">
+                    <div class="calc-section" style="height:100vh">
                         <div id="step5" class="section-content">
-                            <!--map element-->
-                            <div id="map"></div>
+                            <h2><b>Total Setback</b></h2>
+                            <label id="setback_total">Total Setback Distance (ft)</label>
+                            <input disabled type="number" id="setback_ft">
+                            <button id="calcSetback">Calculate</button><!--<button>Reset</button>-->
+                            <div class="caption-container">
+                                <p class="caption"><i>Right: Bluff head in the town of Grafton Wisconsin. </i></p>
+                            </div>
                         </div>
                     </div>
 
                 </div>
+
+                <div class="col-3">
+                    <div id="map"></div>
+                </div>
+                
 
             </div>
 

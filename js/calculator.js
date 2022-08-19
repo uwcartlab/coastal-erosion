@@ -4,9 +4,9 @@
 
 (function(){
     
-    var map, data, buffer;
+    var map, data, sas_line, rec_line, reg_line, setback_line;
     //bluff parameters
-    var localReg, bluff_height = 100, curr_angle = 30, stable_angle, bluff_width, rec_rate;
+    var local_reg, bluff_height = 100, curr_angle = 30, stable_angle, bluff_width, rec_rate;
     //bluff results
     var sas, rec_set, setback;
 
@@ -31,9 +31,9 @@
             calcRec();
         })
         //set local regulation calculator listener
-        document.getElementById("calcReg").addEventListener("click", function(e){
+        /*document.getElementById("calcReg").addEventListener("click", function(e){
             calcReg();
-        })
+        })*/
         //set calculator listener
         document.getElementById("calcSetback").addEventListener("click", function(e){
             calcSetback();
@@ -41,7 +41,7 @@
         //update display based on button selection
         document.querySelectorAll(".next").forEach(function(elem){
             elem.addEventListener("click",function(){
-                window.location.href = '#step' + (parseInt(elem.title) + 1);
+                document.getElementById('step' + (parseInt(elem.title) + 1)).scrollIntoView();
             })
         })
         //position sidebar
@@ -82,7 +82,7 @@
     
     function createMap(){
         //map variable
-        map = L.map('map').setView([43.3202, -87.9256], 13);
+        map = L.map('map').setView([43.3102, -87.8056], 13);
         //openstreetmap basemap
         var basemap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
             attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
@@ -278,6 +278,12 @@
         sas = (bluff_height/Math.tan(stable_angle * (Math.PI/180))) - bluff_width;
 
         document.getElementById('stable_angle_setback').value = sas;
+        //remove old line if already drawn
+        if (sas_line)
+            map.removeLayer(sas_line);
+        //draw line
+        sas_line = addSetbackLine(sas, "orange").addTo(map);
+        addSetbackLegend("orange", "Stable Angle Setback")
     }
     //calculate recession rate
     function calcRec(){
@@ -286,47 +292,67 @@
         rec_set = rec_rate * 50;
 
         document.getElementById('rec_setback').value = rec_set;
+
+        //remove old line if already drawn
+        if (rec_line)
+            map.removeLayer(rec_line);
+        //draw line
+        rec_line = addSetbackLine(rec_set + sas, "green").addTo(map);
+        addSetbackLegend("green", "Stable Angle Setback & Recession Setback")
     }
     //calculate local regulations
     function calcReg(){
-        localReg = parseInt(document.getElementById('local_reg').value);
+        local_reg = parseInt(document.getElementById('local_reg').value);
     }
 
     // This function calculates the setback based on user input
     function calcSetback(){
-        //remove buffer layer if already enabled
-        if (buffer){
-            map.removeLayer(buffer);
-        }
-
+        //get local regulation
+        local_reg = parseInt(document.getElementById('local_reg').value);
         //calculate the total setback in ft(example should be 199 [25 + 74 + 100])
-        let setback = parseInt(localReg + sas + rec_set);
+        let setback = parseInt(local_reg + sas + rec_set);
         document.getElementById('setback_ft').value = setback;
+        //remove old line if already drawn
+        if (setback_line)
+            map.removeLayer(setback_line);
+        //draw line
+        setback_line = addSetbackLine(setback, "red").addTo(map);
+        addSetbackLegend("red", "Total Setback")
 
-        //create temp variable to store buffer data
-        let bufferData = clone(data);
-
-        //create buffer line
-        bufferData.features[0].geometry.coordinates.forEach(function(coord){
+    }
+    //function to add a line to the map
+    function addSetbackLine(buffer, color){
+        //create temp variable to store setback_line data
+        let line_data = clone(data);
+        //create a setback line
+        line_data.features[0].geometry.coordinates.forEach(function(coord){
             //convert setback distance into degrees 
             coord.forEach(function(latlng){
                 //conversion factor for 1 mile, 69.172 = length of a degree of longitude at equator
                 let cf = (Math.cos(latlng[1]) * 69.172) * 5280;                  
                 //displace line based on calculaed conversion factor
-                latlng[0] = latlng[0] - (setback/cf);
+                latlng[0] = latlng[0] - (buffer/cf);
             })
-
         })
-        //add buffer line to map
-        buffer = L.geoJSON(bufferData, {
+        //add setback_line line to map
+        let line = L.geoJSON(line_data, {
             style:function(feature){
                 return {
-                    color:"red"
+                    color:color
                 }
             }
-        }).addTo(map);
+        });
+        return line;
     }
-    //function clone data variable to store in new layer for buffer calculation
+    //function to create line legend
+    function addSetbackLegend(color, caption){
+        let legend = '<div class="line-caption"><svg height="10" width="100"><line x1="0" y1="5" x2="100" y2="5" style="stroke:' + color + ';stroke-width:4" /></svg>';
+        legend += '<p>' + caption + '</p></div>'
+        document.querySelectorAll(".caption").forEach(function(elem){
+            elem.insertAdjacentHTML("afterend",legend);
+        })
+    }
+    //function clone data variable to store in new layer for setback_line calculation
     function clone(Obj){
         //cloned object
         let buf; 
