@@ -3,9 +3,23 @@ body{
     font-family:"UniversLT", sans-serif;
     font-size:18px;
 }
+button{
+    background:white;
+    border: 2px solid black;
+    box-shadow: 2px 2px;
+    padding:8px;
+    font-weight:bold;
+    font-size:18px;
+    line-height:18px;
+}
+button:hover{
+    background:lightgray;
+}
 /***********POSITIONING*************/
 .container{
     height:100vh;
+}
+.calculator-container{
     margin-left:10px;
 }
 .row{
@@ -28,11 +42,18 @@ body{
 /***********MAP*************/
 #map{
     height:calc(100vh - 55px);
-    width:100%;
     margin-left:0;
-    position: fixed !important;
+    position: fixed;
     margin-top:55px;
     display:block;
+}
+/***********CALCULATOR LEGEND********/
+.leaflet-legend{
+    background:rgba(255,255,255,0.8);
+    padding:15px;
+    border:2px round white;
+    font-size:18px;
+    font-family:"UniversLT", sans-serif;
 }
 /***********FOOTER*************/
 .footer{
