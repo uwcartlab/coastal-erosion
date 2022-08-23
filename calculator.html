@@ -69,10 +69,13 @@
                                     <li>Local Regulation</li>
                                 </ul>
                             </p>
-                            <p><b>How to use this tool:</b></p>
-                            <p>This calculator tool walks through the setback calculation process based on the lakeshore of the Town of Grafton, Wisconsin.</p>
-                            <p class="caption"><i>Right: Bluff head in the town of Grafton Wisconsin. </i></p>
-                            <button class="next" title="1">Let's get started!</button>
+                            <p>This calculator walks through a step-by-step setback calculation process based on the lakeshore of the Town of Grafton, Wisconsin. The map on the right depicts the top of the bluff in Grafton.</p>
+                            <!--<p><b>How to use this tool:</b></p>
+                            <p>This calculator walks through a steb-by-step setback calculation process based on the lakeshore of the Town of Grafton, Wisconsin. The map on the right depicts the top of the bluff in Grafton.</p>
+                            <p><input type="number" value="10"> Experiment with different numbers for each factor.</p>
+                            <p><button>Calculate</button> Use these buttons to compute the setback of the factor.</p>
+                            <p><img class="tutorial-img" src="img/calculator-tutorial.png"> After each calculation, see how the map has changed.</p>-->
+                            <button class="next" title="1" style="margin-top:25px;">Let's get started!</button>
                         </div>
                     </div>
                     
@@ -80,13 +83,13 @@
                         <div id="step2" class="section-content">
                             <h2>What is a <b>stable slope</b>?</h2>
                             <p>The stability of a slope is based on bluff <b>height</b> and <b>material</b>.</p>
-                            <p>Bluff <b>height</b> can be categorized as <b>high</b> (over 20m) or <b>low</b> (under 20m).</p>
+                            <p>Bluff <b>height</b> can be categorized as <b>high</b> (over 20m) or <b>low</b> (under 20m). Bluff heights are difficult to calculate, but in Grafton, bluffs generally vary from X to X.</p>
                             <p>Bluffs can be comprised of <b>sandy soils, cohesive soils, or bedrock</b>. Bluffs can be <b>simple</b>, and comprise only a single material, or <b>complex</b>, comprising multiple materials. </p>
                             <p>Different materials in different places have different <b>stable angles</b>.</p>
                             <div id="stable-dropdown">
                                 <label>Stable Bluff Angle (deg.):</label>
                                 <div class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="material-button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <button class="dropdown-toggle" type="button" id="material-button" data-bs-toggle="dropdown" aria-expanded="false">
                                         Lake Michigan — Cohesive Soil
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="material-button">
@@ -103,9 +106,6 @@
                             <label>Stable Angle Setback</label>
                                     <input disabled type="number" id="stable_angle_setback">
                             <button id="calcSas">Calculate</button>
-                            <div class="caption-container">
-                                <p class="caption"><i>Right: Bluff head in the town of Grafton Wisconsin. </i></p>
-                            </div>
                             <button class="next" title="2">Next</button>
                         </div>
                     </div>
@@ -119,9 +119,6 @@
                             <label>Recession Setback: 50yrs (ft)</label>
                             <input disabled type="number" id="rec_setback">
                             <button id="calcRec">Calculate</button>
-                            <div class="caption-container">
-                                <p class="caption"><i>Right: Bluff head in the town of Grafton Wisconsin. </i></p>
-                            </div>
                             <button class="next" title="3">Next</button>
                         </div>
                     </div>
@@ -132,9 +129,6 @@
                             <label>Local Regulation (ft)</label>
                             <input type="number" class="hightlight" id="local_reg" value="25">
                             <!--<button id="calcReg">Calculate</button>-->
-                            <div class="caption-container">
-                                <p class="caption"><i>Right: Bluff head in the town of Grafton Wisconsin. </i></p>
-                            </div>
                             <button class="next" title="4">Next</button>
                         </div>
                     </div>
@@ -145,9 +139,6 @@
                             <label id="setback_total">Total Setback Distance (ft)</label>
                             <input disabled type="number" id="setback_ft">
                             <button id="calcSetback">Calculate</button><!--<button>Reset</button>-->
-                            <div class="caption-container">
-                                <p class="caption"><i>Right: Bluff head in the town of Grafton Wisconsin. </i></p>
-                            </div>
                         </div>
                     </div>
 

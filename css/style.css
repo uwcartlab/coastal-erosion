@@ -99,7 +99,7 @@ input{
     display:inline;
 }
 .caption{
-    margin-top:15px;
+    margin-top:100px;
 }
 .line-caption > p{
     display:inline;
@@ -107,6 +107,13 @@ input{
 }
 .caption-container{
     padding-bottom:50px;
+}
+.tutorial-img{
+    width:100px;
+}
+.next{
+    display:block;
+    margin-top:25px;
 }
 /*********TRIANGLE INTERFACE**********/
 #triangle{
