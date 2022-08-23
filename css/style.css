@@ -18,12 +18,9 @@ button:hover{
 /***********POSITIONING*************/
 .container{
     height:100vh;
-<<<<<<< Updated upstream
 }
 .calculator-container{
     margin-left:10px;
-=======
->>>>>>> Stashed changes
 }
 .row{
     height:100%;
