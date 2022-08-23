@@ -4,7 +4,7 @@
 
 (function(){
     
-    var map, data, sas_line, rec_line, reg_line, setback_line;
+    var map, legendContainer, data, sas_line, rec_line, reg_line, setback_line;
     //bluff parameters
     var local_reg, bluff_height = 100, curr_angle = 30, stable_angle, bluff_width, rec_rate;
     //bluff results
@@ -346,11 +346,25 @@
     }
     //function to create line legend
     function addSetbackLegend(color, caption){
-        let legend = '<div class="line-caption"><svg height="10" width="100"><line x1="0" y1="5" x2="100" y2="5" style="stroke:' + color + ';stroke-width:4" /></svg>';
-        legend += '<p>' + caption + '</p></div>'
-        document.querySelectorAll(".caption").forEach(function(elem){
-            elem.insertAdjacentHTML("afterend",legend);
-        })
+        if (!legendContainer){
+            //create location control
+            legendContainer = L.Control.extend({
+                options:{
+                    position:"bottomright"
+                },
+                onAdd: function () {
+                    // create the control container with a particular class name
+                    var container = L.DomUtil.create('div', 'leaflet-legend');
+                    return container;
+                }
+            });
+
+            map.addControl(new legendContainer());
+
+            let legend = '<div class="line-caption"><svg height="10" width="100"><line x1="0" y1="5" x2="100" y2="5" style="stroke:' + color + ';stroke-width:4" /></svg>';
+            legend += '<p>' + caption + '</p></div>'
+            document.querySelector(".leaflet-legend").insertAdjacentHTML("afterend",legend);
+        }
     }
     //function clone data variable to store in new layer for setback_line calculation
     function clone(Obj){
