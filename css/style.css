@@ -18,9 +18,12 @@ button:hover{
 /***********POSITIONING*************/
 .container{
     height:100vh;
+<<<<<<< Updated upstream
 }
 .calculator-container{
     margin-left:10px;
+=======
+>>>>>>> Stashed changes
 }
 .row{
     height:100%;
@@ -136,11 +139,14 @@ input{
     border: 2px black solid;
 }
 /*********COMPARE MAP*********/
+.compare {
+    margin-top: 60px;
+}
+
 #compare-map {
-    position: absolute;
-    width: 800px;
-    height: 800px;
-    margin: 100px;
+    width: 100%;
+    height:  calc(100% - 60px);
+    position: relative;
 }
 /*********COMPARE MAP LEGEND ELEMENTS*********/
 

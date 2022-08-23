@@ -7,18 +7,33 @@ let compareMap;
 function createMap(){
     compareMap = L.map('compare-map', {
         center: [43.235, -87.91], 
-        zoom: 17
+        maxBounds: [
+            [43.7, -88.17],
+            [42.35, -87.09]
+        ],
+        zoom: 17,
+        minZoom: 11,
+        maxZoom: 18
     });
     
     //add the basemap layer
     let Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-        attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+        attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
+        opacity: 0.8
     }).addTo(compareMap);
 
+    
+    var CartoDB_VoyagerOnlyLabels = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png', {
+	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+	subdomains: 'abcd',
+	maxZoom: 20
+    }).addTo(compareMap);
+
+
     //svgs for the legend elements
-    let legSvg1 = '<svg id="leg1937"><polyline points="20,20 40,40"style="fill:none;stroke:#998ec3;stroke-width:4" /></svg>'
+    let legSvg1 = '<svg id="leg1937"><polyline points="20,20 50,50"style="fill:none;stroke:#FE2E2E;stroke-width:4;stroke-dasharray:5,10;stroke-linecap:round;stroke-opacity:0.8"/></svg>'
     legSvg1 += '<text id="year1Legend" x="100" y="100"><br>1937 shoreline<br></text>';
-    let legSvg2 = '<svg id="leg2015"><polyline points="20,20 40,40"style="fill:none;stroke:#f1a340;stroke-width:4" /></svg>'
+    let legSvg2 = '<svg id="leg2015"><polyline points="20,20 50,50"style="fill:none;stroke:#610B0B;stroke-width:4;stroke-dasharray:5,10;stroke-linecap:round;stroke-opacity:0.8"" /></svg>'
     legSvg2 += '<text id="year2Legend" x="100" y="100"><br>2015 shoreline<br></text>';
 
     // create legend control holding svg legend and add to map
@@ -84,15 +99,17 @@ function toLayer(feature){
     //sort data into two colors
     if (feature.properties.Date_ === '1937'){
         return {
-            color: '#998ec3',
-            weight: 4,
-            opacity: 1
+            color: '#FE2E2E',
+            weight: 5,
+            opacity: 0.7,
+            dashArray: "5 10"
         }
     } else if (feature.properties.Date_ === '2015'){
         return {
-            color: '#f1a340',
-            weight: 4,
-            opacity: 1
+            color: '#610B0B',
+            weight: 5,
+            opacity: 0.7,
+            dashArray: "5 10"
         }
     //make nonrelevant years invisible. TODO: change cursor behavior
     } else {
