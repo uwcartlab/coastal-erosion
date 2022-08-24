@@ -179,3 +179,13 @@ input{
     height: 50px;
 }
 
+/*********COMPARE MAP POP UPS*********/
+
+.popUpContent {
+    width: 300px
+}
+
+#poimg {
+    width: 100%;
+    height: 100%;
+}

@@ -51,6 +51,7 @@ function createMap(){
     compareMap.addControl(new legend());
 
     getData();
+    createPopUps();
 };
 
 //function to retrieve the data and place it on the map
@@ -117,6 +118,23 @@ function toLayer(feature){
             color: '#000000',
             opacity: 0,
         }}
-    };
+};
+
+function createPopUps(){
+
+    fetch('data/popUps.geojson')
+        .then(res => res.json())
+        .then(function(data){
+            L.geoJson(data, {
+                pointToLayer: function(feature, latlng){
+                    let marker = L.marker(latlng);
+                    marker.bindPopup("<div class= popUpContent><img id ='poimg' src=" + feature.properties.image + 
+                    "><br><p class>" +feature.properties.text + "</p><div>");
+                    return marker;
+                }
+            }).addTo(compareMap);
+        })
+
+};
 
 document.addEventListener('DOMContentLoaded', createMap);
