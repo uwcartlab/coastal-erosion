@@ -15,12 +15,45 @@ button{
 button:hover{
     background:lightgray;
 }
-/***********POSITIONING*************/
-.container{
-    height:100vh;
+/***********HOME PAGE**************/
+#intro-container{
+    margin-left: 0 !important;
 }
+#intro-background{
+    margin-top:60px;    
+    background-image: url(../img/OZA_2258.jpg);
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover;
+    height:100vh;
+    width:100vw;
+}
+#intro-title{
+    font-weight:bold;
+    font-size:80px;
+    text-align:center;
+}
+#intro-scroll{
+    text-align:center;
+    margin-top:200px;
+    font-size:30px;
+}
+#intro-text{
+    margin-top:100px;
+}
+.intro{
+    padding:10px;
+    color:white;
+    /*background:rgba(255,255,255,0.8);*/
+}
+#card-row{
+    margin-top:50px;
+    margin-bottom:50px;
+}
+/***********POSITIONING*************/
 .calculator-container{
     margin-left:10px;
+    height:100vh;
 }
 .row{
     height:100%;
@@ -132,6 +165,26 @@ input{
     cursor:pointer;
     stroke-width:10px !important;
 }
+.triangle-intro-container{
+    position:absolute;
+}
+.triangle-intro{
+    width:200px;
+    background:white;
+    border:2px solid black;
+    font-weight:bold;
+    box-shadow: 2px 2px;
+    z-index:10000;
+    padding:10px;
+}
+.triangle-intro-after {
+    width: 0; 
+    height: 0; 
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 15px solid #000;
+    margin-left: calc(50% - 7px);
+}
 /*********CALCULATOR*********/
 #calculator{
     position:absolute;
@@ -145,6 +198,7 @@ input{
 /*********COMPARE MAP*********/
 .compare {
     margin-top: 60px;
+    height:100vh;
 }
 
 #compare-map {

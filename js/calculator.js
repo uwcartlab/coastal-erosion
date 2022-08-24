@@ -126,6 +126,7 @@
 
     //function to create the triangle
     function createTriangle(){     
+        
         //create the triangle interface    
         let svg = d3.select("#triangle")
             .append("svg")
@@ -147,8 +148,6 @@
              .range([0, height]);
         //calculate current bluff width based on default height and angle
         bluff_width = bluff_height/Math.tan(curr_angle * (Math.PI/180));
-        
-        //base triangle, includes opposite side, adjacent side, and hypotenuse (remember trigonometry?? lol)
         //create adjacent side and label
         let adj = svg.append("line")
             .attr("class","line adj")
@@ -161,7 +160,7 @@
             .attr("x",reverseScale(bluff_width)/2)
             .attr("y",height - 10)
             .style("text-anchor","middle")
-            .text(Math.round(bluff_width));
+            .text("Width: " + Math.round(bluff_width) + " ft.");
         //create opposite and activate listeners for dragging
         let opp = svg.append("line")
             .attr("class","line opp")
@@ -171,6 +170,8 @@
             .attr("y2",height)
             //event triggers when opposite side is selected
             .on("mousedown",function(){
+                //remove affordance
+                document.querySelector(".triangle-intro-container").style.display = "none";
                 //activate dragging of triangle border
                 svg.on("mousemove",function(){
                     let posx = event.clientX - 50,
@@ -197,9 +198,7 @@
                     let offsetx = parseInt(document.querySelector(".sidebar").clientWidth) - 10,
                         offsety = window.pageYOffset > document.querySelector("#triangle").offsetTop ? window.pageYOffset: document.querySelector("#triangle").offsetTop - window.pageYOffset;
                     //FINISH
-                        console.log(offsety)
                     //subtract y position from height and padding (10) to get the position in relation to the svg 
-                    //WHAT IS CAUSING THE OFFSET VALUE???
                     posy = posy - offsety;
                     posx = posx - offsetx;
                     //set new position of opposite side
@@ -210,20 +209,25 @@
                     //get new bluff width and height
                     bluff_height = yscale(posy);
                     bluff_width = xscale(posx);
-                    //update opposite label
+                    //update opposite labels
+                    d3.select(".label_height")
+                        .attr("x",parseInt(posx) + 35)
+                        .attr("y",function(){
+                            return posy + ((height - posy)/2 - 20);
+                        })
                     d3.select(".label_opp")
-                        .attr("x",parseInt(posx) + 20)
+                        .attr("x",parseInt(posx) + 30)
                         .attr("y",function(){
                             return posy + ((height - posy)/2);
                         })
-                        .text(Math.round(bluff_height))
+                        .text(Math.round(bluff_height) + " ft.")
                     //update adjacent width
                     d3.select(".adj")
                         .attr("x2",posx);
                     //update adjacent label
                     d3.select(".label_adj")
                         .attr("x",parseInt(posx)/2 + 20)
-                        .text(Math.round(bluff_width))
+                        .text("Width: " + Math.round(bluff_width) + " ft.")
                     //update hypotenuese
                     d3.select(".hyp")
                         .attr("x2",posx)
@@ -232,18 +236,23 @@
                     curr_angle = Math.atan(bluff_height/bluff_width) * (180/Math.PI);
                     //update hypotenuse angle
                     d3.select(".label_angle")
-                        .attr("x",parseInt(posx)/2)
-                        .attr("y",parseInt(height) - 50)
-                        .text(Math.round(curr_angle));
+                        .attr("transform","translate(" + reverseScale(bluff_width)/2 + "," + (posy + (height - posy)/2 - 20) +") rotate(-" + curr_angle + ")")
+                        .text("Angle: " + Math.round(curr_angle) + " deg.");
                 }
             });  
-        //create opposite side label
+        //create opposite side labels
+        let height_label = svg.append("text")
+            .attr("class","label_height")
+            .attr("x",reverseScale(bluff_width) + 35)
+            .attr("y",height - (reverseScale(bluff_height)/2) - 20)
+            .style("text-anchor","middle")
+            .text("Height:");
         let opp_label = svg.append("text")
             .attr("class","label_opp")
-            .attr("x",reverseScale(bluff_width) + 20)
+            .attr("x",reverseScale(bluff_width) + 30)
             .attr("y",height - (reverseScale(bluff_height)/2))
             .style("text-anchor","middle")
-            .text(bluff_height);
+            .text(bluff_height + " ft.");
         //create hypotenuse
         let hyp = svg.append("line")
             .attr("class","line hyp")
@@ -254,10 +263,9 @@
         //add label for angle
         let angle_label = svg.append("text")
             .attr("class","label_angle")
-            .attr("x",reverseScale(bluff_width)/2)
-            .attr("y",height-50)
-            .style("text-anchor","middle")
-            .text(curr_angle);
+            .attr("transform","translate(" + reverseScale(bluff_width)/2 + "," + (reverseScale(bluff_height) + (height - reverseScale(bluff_height))/2 - 20) +") rotate(-" + curr_angle + ")")
+            .style("text-anchor","start")
+            .text("Angle: " + curr_angle + " deg.");
 
         //calculated triangle
 
@@ -288,6 +296,10 @@
            .attr("x2",width)
            .attr("y1",0)
            .attr("y2",0);  */
+
+        //move the visual affordance for the interface
+        document.querySelector(".triangle-intro-container").style.top = document.querySelector("#triangle").offsetTop + (parseInt(document.querySelector(".label_opp").attributes.y.value)*0.2) + "px";
+        document.querySelector(".triangle-intro-container").style.left = document.querySelector("#triangle").offsetLeft + (parseInt(document.querySelector(".label_opp").attributes.x.value)*0.75) + "px";
     }
     //calculate stable angle setback
     function calcSas(){
