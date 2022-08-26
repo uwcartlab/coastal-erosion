@@ -4,9 +4,9 @@
 
 (function(){
     
-    var map, data, sas_line, rec_line, reg_line, setback_line;
+    var map, toe_data, crest_data, sas_line, rec_line, reg_line, setback_line;
     //bluff parameters
-    var local_reg, bluff_height = 100, curr_angle = 30, stable_angle, bluff_width, rec_rate;
+    var local_reg, bluff_height = 100, curr_angle = 30, stable_angle, bluff_width, rec_rate, rec_years;
     //bluff results
     var sas, rec_set, setback;
 
@@ -31,13 +31,13 @@
             calcRec();
         })
         //set local regulation calculator listener
-        /*document.getElementById("calcReg").addEventListener("click", function(e){
+        document.getElementById("calcReg").addEventListener("click", function(e){
             calcReg();
-        })*/
-        //set calculator listener
-        document.getElementById("calcSetback").addEventListener("click", function(e){
-            calcSetback();
         })
+        //set calculator listener
+        /*document.getElementById("calcSetback").addEventListener("click", function(e){
+            calcSetback();
+        })*/
         //update display based on button selection
         document.querySelectorAll(".next").forEach(function(elem){
             elem.addEventListener("click",function(){
@@ -87,6 +87,7 @@
         }).setView([43.3102, -87.8956], 13);
         //openstreetmap basemap
         var basemap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+            opacity:0.7,
             attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
         }).addTo(map);
         //add bluff crest data
@@ -100,8 +101,8 @@
                 // create the control container with a particular class name
                 var container = L.DomUtil.create('div', 'leaflet-legend');
 
-                let legend = '<div class="line-caption"><svg height="10" width="30"><line x1="0" y1="5" x2="100" y2="5" style="stroke:blue;stroke-width:4" /></svg>';
-                legend += '<p>Bluff Top</p></div>';
+                let legend = '<div class="line-caption"><svg height="10" width="30"><rect width="35" height="8" style="stroke:#ffff99;fill:#ffff99;fill-opacity:0.6;stroke-width:2" /></svg>';
+                legend += '<p>Bluff Area</p></div>';
 
                 container.insertAdjacentHTML("beforeend",legend)
 
@@ -113,14 +114,46 @@
     }
 
     function addData(){
-        let crest;
+        let toe, crest;
+        //dash fill pattern
+        var stripes = new L.StripePattern({
+            weight:2,
+            spaceWeight:6,
+            color:"#ffff99",
+            opacity:0.5,
+            spaceColor:"#ffff99",
+            spaceOpacity:0.25,
+            angle:-30
+        }); stripes.addTo(map);
         
-        fetch("data/Grafton_BluffCrest.geojson")
+        fetch("data/bluff_area.geojson")
             .then(res => res.json())
             .then(function(res){
-                crest = L.geoJSON(res).addTo(map);
-
-                data = res;
+                L.geoJSON(res,{
+                    style:function(feature){
+                        return {
+                            color:"#ffff99",
+                            weight:2,
+                            opacity:0.7,
+                            fillOpacity:1,
+                            fillPattern: stripes
+                        }
+                    }
+                }).addTo(map);
+        })
+        
+        fetch("data/OZ_BluffToe.geojson")
+            .then(res => res.json())
+            .then(function(res){
+                toe = L.geoJSON(res);
+                toe_data = res;
+            })
+        
+        fetch("data/OZ_BluffCrest.geojson")
+            .then(res => res.json())
+            .then(function(res){
+                crest = L.geoJSON(res);
+                crest_data = res;
             })
     }
 
@@ -315,14 +348,15 @@
         if (sas_line)
             map.removeLayer(sas_line);
         //draw line
-        sas_line = addSetbackLine(sas, "orange").addTo(map);
-        addSetbackLegend("orange", "SAS","legend-sas")
+        sas_line = addSetbackLine(sas, "orange","toe").addTo(map);
+        addSetbackLegend("orange", "Stable Slope Setback","legend-sas")
     }
     //calculate recession rate
     function calcRec(){
         rec_rate = parseInt(document.getElementById('rec_rate').value);
+        rec_years = parseInt(document.getElementById('rec_years').value);
         //calculate the recession setback(default example should return 100)
-        rec_set = rec_rate * 50;
+        rec_set = rec_rate * rec_years;
 
         document.getElementById('rec_setback').value = rec_set;
 
@@ -330,12 +364,14 @@
         if (rec_line)
             map.removeLayer(rec_line);
         //draw line
-        rec_line = addSetbackLine(rec_set + sas, "green").addTo(map);
-        addSetbackLegend("green", "SAS & Recession","legend-rec")
+        rec_line = addSetbackLine(rec_set, "green","crest").addTo(map);
+        addSetbackLegend("green", "Recession Setback","legend-rec")
     }
     //calculate local regulations
     function calcReg(){
         local_reg = parseInt(document.getElementById('local_reg').value);
+        reg_line = addSetbackLine(local_reg, "purple","crest").addTo(map);
+        addSetbackLegend("purple", "Local Regulation", "legend_reg")
     }
 
     // This function calculates the setback based on user input
@@ -354,9 +390,15 @@
 
     }
     //function to add a line to the map
-    function addSetbackLine(buffer, color){
+    function addSetbackLine(buffer, color, type){
         //create temp variable to store setback_line data
-        let line_data = clone(data);
+        let line_data;
+        if (type == "toe")
+            line_data = clone(toe_data);
+        else
+            line_data = clone(crest_data);
+        
+        console.log(line_data)
         //create a setback line
         line_data.features[0].geometry.coordinates.forEach(function(coord){
             //convert setback distance into degrees 
