@@ -7,9 +7,14 @@ class BottomFooter extends HTMLElement {
     connectedCallback() {
       this.innerHTML = `
             <div class="footer">
-                <a class="return">Return to Top</a>
+                <img src="img/sg_logo.png">
+                <img src="img/UWCL_logo_gray.png">
             </div>
         `;
+      
+      /*this.addEventListener("click",function(){
+        window.scrollTo(0,0);
+      })*/
     }
 }
   

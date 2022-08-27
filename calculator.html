@@ -66,6 +66,7 @@
                     <div class="calc-section row">
                         <div id="step1" class="section-content">
                             <h2><b>Construction Setback</b></h2>
+                            <hr>
                             <p>Buildings on the lakeshore must consider the effects of erosion on the bluffs. Bluffs are dynamic features, and must be treated as such.
                                 A well-constructed building might have a useful life of 70 to 100 years. A new home built too close to the bluff may have to be moved to save the structure, or demolished. 
                             </p>
@@ -77,7 +78,7 @@
                                     <li>Local Regulation</li>
                                 </ul>
                             </p>
-                            <p><b class="disclaimer">Disclaimer: Results from this calculator should not form the basis for any decision making. Rather, this tool is intended to show general comparison between different methods.</b></p>
+                            <p><b class="disclaimer">Disclaimer: Results from this calculator should not form the basis for any decision making. Rather, this tool is intended to show general comparison between different calculation methods.</b></p>
                             <!--<p><b>How to use this tool:</b></p>
                             <p>This calculator walks through a steb-by-step setback calculation process based on the lakeshore of the Town of Grafton, Wisconsin. The map on the right depicts the top of the bluff in Grafton.</p>
                             <p><input type="number" value="10"> Experiment with different numbers for each factor.</p>
@@ -90,6 +91,7 @@
                     <div class="calc-section">
                         <div id="step2" class="section-content">
                             <h2><b>Stable Slope Angle</b></h2>
+                            <hr>
                             <p>In the Town of Grafton, calculation of setback is based on the <b>height</b>, <b>angle</b>, and <b>material</b> of the bluff, compared to its <b>stable angle.</b></p>
                             <p>Stable bluff angles are the angle of slope in which a major slough or collapse is unable to occur. In Grafton, bluffs generally have a stable angle of 22 degrees, but different bluff materials in different places result in different stable angles.</p>
                             <p>Bluff <b>height</b> can be categorized as <b>high</b> (over 70ft) or <b>low</b> (under 70ft). Bluff heights are difficult to calculate, but in Grafton, bluffs generally vary from X to X.</p>
@@ -123,6 +125,7 @@
                     <div class="calc-section">
                         <div id="step3" class="section-content">
                             <h2><b>Structure Life</b></h2>
+                            <hr>
                             <p>On the Wisconsin shore of Lake Michigan, bluffs erode, on average, 2-3 feet per year. This <b>recession rate</b> is far from constant.
                                 There could be many years of relative stability followed by a large destabalizing event.
                             </p>
@@ -149,6 +152,7 @@
                     <div class="calc-section">
                         <div id="step4" class="section-content">
                             <h2><b>Local Regulations</b></h2>
+                            <hr>
                             <p>While construction setback in the Town of Grafton is calculated based on the stable slope angle, in nearby Mequon, setback is a flat value of 75 feet, calculated from the bluff crest.
                                 Other municipalities have may similar "flat values". 
                             </p>
@@ -156,7 +160,6 @@
                             <label>Local Regulation (ft)</label>
                             <input disabled type="number" class="hightlight" id="local_reg" value="75">
                             <button id="calcReg">Calculate</button>
-                            <button class="next" title="4">Next</button>
                         </div>
                     </div>
 
@@ -180,6 +183,7 @@
         <script type="text/javascript" src="lib/leaflet.pattern.js"></script>
         <script type="text/javascript" src="lib/d3.min.js"></script>
         <script type="text/javascript" src="js/components/header.js"></script>
+        <script type="text/javascript" src="js/components/footer.js"></script>
         <script type="text/javascript" src="js/calculator.js"></script>
 
     </body>

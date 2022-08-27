@@ -1,12 +1,12 @@
 /***********OVERALL STYLING**********/
 body{
-    font-family:"UniversLT", sans-serif;
-    font-size:18px;
+    font-family:"Tahoma", sans-serif;
+    font-size:20px;
 }
 button{
     background:white;
     border: 2px solid black;
-    box-shadow: 2px 2px;
+    box-shadow: 2px 2px #f16141;
     padding:8px;
     font-weight:bold;
     font-size:18px;
@@ -16,7 +16,14 @@ button:hover{
     background:lightgray;
 }
 .disclaimer{
-    color:red;
+    color:#f16141;
+}
+p, ul, input, label{
+    font-family:"Garamond", serif;
+}
+hr{
+    color:#f16141;
+    height:2px;
 }
 /***********HOME PAGE**************/
 #intro-container{
@@ -52,11 +59,27 @@ button:hover{
 #card-row{
     margin-top:50px;
     margin-bottom:50px;
+    width:100vw;
+    background:#737373;
+    padding:15px;
+    padding-top:30px;
+}
+.toc{
+    width: 100%;
+    background: #737373;
+    color: white;
+    margin-bottom:30px;
+}
+.link-image{
+    width:100%;
+}
+#wi-overview{
+    width:400px;
+    margin-top:100px;
 }
 /***********POSITIONING*************/
 .calculator-container{
     margin-left:10px;
-    height:100vh;
 }
 .row{
     height:100%;
@@ -79,8 +102,8 @@ button:hover{
 #map{
     height:calc(100vh - 55px);
     margin-left:0;
-    position: fixed;
-    margin-top:55px;
+    position: sticky !important;
+    top:55px;
     display:block;
 }
 /***********CALCULATOR LEGEND********/
@@ -92,6 +115,32 @@ button:hover{
     font-size:18px;
     font-family:"UniversLT", sans-serif;
 }
+/***********NAVBAR*************/
+.nav-item{
+    font-family:"Tahoma", sans-serif;
+}
+.navbar{
+    background:white;
+    border-bottom:5px #f16141 solid;
+    padding:0;
+}
+.navbar > .container-fluid{
+    padding:0;
+}
+.navbar-brand{
+    color:white;
+    background:#f16141;
+    padding: 15px;
+}
+.nav-link{
+    color:#737373;
+}
+.nav-link:hover{
+    color:black;    
+}
+.navbar-brand:hover{
+    color:lightgray;
+}
 /***********FOOTER*************/
 .footer{
     height:100px;
@@ -99,6 +148,7 @@ button:hover{
     display:block;
     background:#f8f9fa;
     text-align:center;
+    padding-top:20px;
 }
 .return{
     position:relative;
@@ -118,7 +168,7 @@ input{
 }
 .calc-section{
     margin-bottom:10px;
-    margin-top: 75px;
+    margin-top: 85px;
     height:200vh;
     display:block;
 }
@@ -129,7 +179,7 @@ input{
     top:0;
     scroll-margin: 75px;
 }
-.section-content > h2{
+.section-content > h2, #comparison-text > h2{
     margin-bottom:25px;
 }
 #stable-dropdown > *{
@@ -198,6 +248,10 @@ input{
     z-index:1000;
     background:white;
     border: 2px black solid;
+}
+/*********COMPARISON PAGE*********/
+#comparison-text{
+    margin:15px 0;
 }
 /*********COMPARE MAP*********/
 .compare {
