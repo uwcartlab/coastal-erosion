@@ -244,12 +244,12 @@
                     bluff_width = xscale(posx);
                     //update opposite labels
                     d3.select(".label_height")
-                        .attr("x",parseInt(posx) + 35)
+                        .attr("x",parseInt(posx) + 45)
                         .attr("y",function(){
                             return posy + ((height - posy)/2 - 20);
                         })
                     d3.select(".label_opp")
-                        .attr("x",parseInt(posx) + 30)
+                        .attr("x",parseInt(posx) + 40)
                         .attr("y",function(){
                             return posy + ((height - posy)/2);
                         })
@@ -276,13 +276,13 @@
         //create opposite side labels
         let height_label = svg.append("text")
             .attr("class","label_height")
-            .attr("x",reverseScale(bluff_width) + 35)
+            .attr("x",reverseScale(bluff_width) + 45)
             .attr("y",height - (reverseScale(bluff_height)/2) - 20)
             .style("text-anchor","middle")
             .text("Height:");
         let opp_label = svg.append("text")
             .attr("class","label_opp")
-            .attr("x",reverseScale(bluff_width) + 30)
+            .attr("x",reverseScale(bluff_width) + 40)
             .attr("y",height - (reverseScale(bluff_height)/2))
             .style("text-anchor","middle")
             .text(bluff_height + " ft.");
