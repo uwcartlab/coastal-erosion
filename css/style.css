@@ -1,4 +1,6 @@
-/***********OVERALL STYLING**********/
+/****************************/
+/*****OVERALL SITE STYLING***/
+/****************************/
 body{
     font-family:"Tahoma", sans-serif;
     font-size:20px;
@@ -24,96 +26,6 @@ p, ul, input, label{
 hr{
     color:#f16141;
     height:2px;
-}
-/***********HOME PAGE**************/
-#intro-container{
-    margin-left: 0 !important;
-}
-#intro-background{
-    margin-top:60px;    
-    background-image: url(../img/OZA_2258.jpg);
-    background-position: center; /* Center the image */
-    background-repeat: no-repeat; /* Do not repeat the image */
-    background-size: cover;
-    height:100vh;
-    width:100vw;
-}
-#intro-title{
-    font-weight:bold;
-    font-size:80px;
-    text-align:center;
-}
-#intro-scroll{
-    text-align:center;
-    margin-top:200px;
-    font-size:30px;
-}
-#intro-text{
-    margin-top:100px;
-}
-.intro{
-    padding:10px;
-    color:white;
-    /*background:rgba(255,255,255,0.8);*/
-}
-#card-row{
-    margin-top:50px;
-    margin-bottom:50px;
-    width:100vw;
-    background:#737373;
-    padding:15px;
-    padding-top:30px;
-}
-.toc{
-    width: 100%;
-    background: #737373;
-    color: white;
-    margin-bottom:30px;
-}
-.link-image{
-    width:100%;
-}
-#wi-overview{
-    width:400px;
-    margin-top:100px;
-}
-/***********POSITIONING*************/
-.calculator-container{
-    margin-left:10px;
-}
-.row{
-    height:100%;
-}
-/***********SIDEBAR*************/
-.sidebar{
-    position:fixed;
-    height:100vh;
-    padding-left:10px;
-}
-.section-header{
-    font-size:20px;
-    font-weight:normal;
-}
-.section-header:hover{
-    cursor:pointer;
-    color:gray;
-}
-/***********MAP*************/
-#map{
-    height:calc(100vh - 55px);
-    margin-left:0;
-    position: sticky !important;
-    top:55px;
-    display:block;
-}
-/***********CALCULATOR LEGEND********/
-.leaflet-legend{
-    background:rgba(255,255,255,0.7);
-    border:2px solid white;
-    padding:15px;
-    border:2px round white;
-    font-size:18px;
-    font-family:"UniversLT", sans-serif;
 }
 /***********NAVBAR*************/
 .nav-item{
@@ -159,6 +71,101 @@ hr{
 .return:hover{
     cursor:pointer;
 }
+/***********BOOTSTRAP*************/
+.site-container{
+    margin-left:10px;
+}
+.row{
+    height:100%;
+}
+.section-header{
+    font-size:20px;
+    font-weight:normal;
+}
+.section-header:hover{
+    cursor:pointer;
+    color:gray;
+}
+/***********SIDEBAR*************/
+.sidebar{
+    position:fixed;
+    height:100vh;
+    padding-left:10px;
+}
+/****************************/
+/********HOME PAGE***********/
+/****************************/
+#intro-container{
+    margin-left: 0 !important;
+}
+#intro-background{
+    margin-top:60px;    
+    background-image: url(../img/OZA_2258.jpg);
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover;
+    height:100vh;
+    width:100vw;
+}
+#intro-title{
+    font-weight:bold;
+    font-size:80px;
+    text-align:center;
+}
+#intro-scroll{
+    text-align:center;
+    margin-top:200px;
+    font-size:30px;
+}
+#intro-text{
+    margin-top:100px;
+}
+.intro{
+    padding:10px;
+    color:white;
+}
+#card-row{
+    margin-top:50px;
+    margin-bottom:50px;
+    width:100vw;
+    background:#737373;
+    padding:15px;
+    padding-top:30px;
+}
+.toc{
+    width: 100%;
+    background: #737373;
+    color: white;
+    margin-bottom:30px;
+}
+.link-image{
+    width:100%;
+}
+#wi-overview{
+    width:400px;
+    margin-top:100px;
+}
+/****************************/
+/*****CALCULATOR PAGE********/
+/****************************/
+/***********CALCULATOR MAP*************/
+#calc-map{
+    height:calc(100vh - 55px);
+    margin-left:0;
+    position: sticky !important;
+    top:55px;
+    display:block;
+}
+/***********CALCULATOR LEGEND********/
+.leaflet-legend{
+    background:rgba(255,255,255,0.7);
+    border:2px solid white;
+    padding:15px;
+    border:2px round white;
+    font-size:18px;
+    font-family:"UniversLT", sans-serif;
+}
+
 /*********CALCULATOR INTERFACE**********/
 input{
     width:100px;
@@ -207,7 +214,7 @@ input{
     height:50vh;
     padding:0px 50px 10px;
 }
-.triangle_interface{
+.triangle-interface{
     width:100%;
     height:100%;
 }
@@ -239,17 +246,9 @@ input{
     border-top: 15px solid #000;
     margin-left: calc(50% - 7px);
 }
-/*********CALCULATOR*********/
-#calculator{
-    position:absolute;
-    width:300px;
-    top:70px;
-    right:50px;
-    z-index:1000;
-    background:white;
-    border: 2px black solid;
-}
-/*********COMPARISON PAGE*********/
+/****************************/
+/****MAP COMPARISON PAGE*****/
+/****************************/
 #comparison-text{
     margin:15px 0;
 }
@@ -258,14 +257,12 @@ input{
     margin-top: 60px;
     height:100vh;
 }
-
 #compare-map {
     width: 100%;
     height:  calc(100% - 60px);
     position: relative;
 }
 /*********COMPARE MAP LEGEND ELEMENTS*********/
-
 .legend-control-container {
 	width: 80px;
 	height: 200px;
@@ -274,30 +271,27 @@ input{
 	padding: 10px;
 	border-radius: 2px;
 }
-.year1Legend {
+.year1-legend {
     width: 50px;
     height: 50px;
 }
-#leg1937 {
+#leg-1937 {
     width: 50px;
     height: 50px;
 }
-.year2Legend {
+.year2-legend {
     width: 50px;
     height: 50px;
 }
-#leg2015 {
+#leg-2015 {
     width: 50px;
     height: 50px;
 }
-
 /*********COMPARE MAP POP UPS*********/
-
-.popUpContent {
+.popup-content {
     width: 300px
 }
-
-#poimg {
+#popup-img {
     width: 100%;
     height: 100%;
 }

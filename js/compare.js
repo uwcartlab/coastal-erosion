@@ -31,10 +31,10 @@ function createMap(){
 
 
     //svgs for the legend elements
-    let legSvg1 = '<svg id="leg1937"><polyline points="20,20 50,50"style="fill:none;stroke:#FE2E2E;stroke-width:4;stroke-dasharray:5,10;stroke-linecap:round;stroke-opacity:0.8"/></svg>'
-    legSvg1 += '<text id="year1Legend" x="100" y="100"><br>1937 shoreline<br></text>';
-    let legSvg2 = '<svg id="leg2015"><polyline points="20,20 50,50"style="fill:none;stroke:#610B0B;stroke-width:4;stroke-dasharray:5,10;stroke-linecap:round;stroke-opacity:0.8"" /></svg>'
-    legSvg2 += '<text id="year2Legend" x="100" y="100"><br>2015 shoreline<br></text>';
+    let legSvg1 = '<svg id="leg-1937"><polyline points="20,20 50,50"style="fill:none;stroke:#FE2E2E;stroke-width:4;stroke-dasharray:5,10;stroke-linecap:round;stroke-opacity:0.8"/></svg>'
+    legSvg1 += '<text id="year1-legend" x="100" y="100"><br>1937 shoreline<br></text>';
+    let legSvg2 = '<svg id="leg-2015"><polyline points="20,20 50,50"style="fill:none;stroke:#610B0B;stroke-width:4;stroke-dasharray:5,10;stroke-linecap:round;stroke-opacity:0.8"" /></svg>'
+    legSvg2 += '<text id="year2-legend" x="100" y="100"><br>2015 shoreline<br></text>';
 
     // create legend control holding svg legend and add to map
     let legend = L.Control.extend({
@@ -128,7 +128,7 @@ function createPopUps(){
             L.geoJson(data, {
                 pointToLayer: function(feature, latlng){
                     let marker = L.marker(latlng);
-                    marker.bindPopup("<div class= popUpContent><img id ='poimg' src=" + feature.properties.image + 
+                    marker.bindPopup("<div class= popup-content><img id ='popup-img' src=" + feature.properties.image + 
                     "><br><p class>" +feature.properties.text + "</p><div>");
                     return marker;
                 }

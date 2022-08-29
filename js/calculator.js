@@ -82,7 +82,7 @@
     
     function createMap(){
         //map variable
-        map = L.map('map',{  
+        map = L.map('calc-map',{  
             attributionControl: false,
         }).setView([43.3102, -87.8956], 13);
         //openstreetmap basemap
@@ -163,7 +163,7 @@
         //create the triangle interface    
         let svg = d3.select("#triangle")
             .append("svg")
-            .attr("class","triangle_interface");
+            .attr("class","triangle-interface");
         //get current height and width of the triangle interface, based on the viewport w/h
         let height = parseInt(svg.style("height"));
         //create bluff scales
@@ -462,7 +462,7 @@
 
     document.addEventListener('DOMContentLoaded', function(){
         //adjust map width
-        document.querySelector("#map").style.width = document.querySelector(".map-container").clientWidth + "px";
+        document.querySelector("#calc-map").style.width = document.querySelector(".map-container").clientWidth + "px";
 
         createTriangle();
         createMap();
@@ -471,7 +471,7 @@
 
     window.addEventListener('resize', function(){
         //adjust map width
-        document.querySelector("#map").style.width = document.querySelector(".map-container").clientWidth + "px";
+        document.querySelector("#calc-map").style.width = document.querySelector(".map-container").clientWidth + "px";
     })
 
 })()
