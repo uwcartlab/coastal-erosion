@@ -4,11 +4,11 @@
 
 (function(){
     
-    var map, toe_data, crest_data, sas_line, rec_line, reg_line, setback_line;
+    var map, toeData, crestData, sasLine, recLine, regLine;
     //bluff parameters
-    var local_reg, bluff_height = 100, curr_angle = 30, stable_angle, bluff_width, rec_rate, rec_years;
+    var localReg, bluffHeight = 100, currAngle = 30, stableAngle, bluffWidth, recRate, recYears;
     //bluff results
-    var sas, rec_set, setback;
+    var sas, recSet;
 
     function setListeners(){
         //reset inputs GET BACK TO
@@ -23,21 +23,17 @@
             })
         })
         //set sas calculator listener
-        document.getElementById("calcSas").addEventListener("click", function(e){
+        document.getElementById("calc-sas").addEventListener("click", function(e){
             calcSas();
         })
         //set recession calculator listener
-        document.getElementById("calcRec").addEventListener("click", function(e){
+        document.getElementById("calc-rec").addEventListener("click", function(e){
             calcRec();
         })
         //set local regulation calculator listener
-        document.getElementById("calcReg").addEventListener("click", function(e){
+        document.getElementById("calc-reg").addEventListener("click", function(e){
             calcReg();
         })
-        //set calculator listener
-        /*document.getElementById("calcSetback").addEventListener("click", function(e){
-            calcSetback();
-        })*/
         //update display based on button selection
         document.querySelectorAll(".next").forEach(function(elem){
             elem.addEventListener("click",function(){
@@ -55,12 +51,12 @@
             elem.addEventListener("click",function(){
                 document.querySelector("#material-button").innerHTML = elem.innerHTML;
                 if (elem.title){
-                    document.querySelector("#stable_bluff_angle").value = elem.title;
+                    document.querySelector("#stable-bluff-angle").value = elem.title;
                 }
             })
         })
         //stable bluff angle
-        document.querySelector("#stable_bluff_angle").addEventListener("input",function(){
+        document.querySelector("#stable-bluff-angle").addEventListener("input",function(){
             document.querySelector("#material-button").innerHTML = "Custom";
         })
 
@@ -146,14 +142,14 @@
             .then(res => res.json())
             .then(function(res){
                 toe = L.geoJSON(res);
-                toe_data = res;
+                toeData = res;
             })
         
         fetch("data/OZ_BluffCrest.geojson")
             .then(res => res.json())
             .then(function(res){
                 crest = L.geoJSON(res);
-                crest_data = res;
+                crestData = res;
             })
     }
 
@@ -180,26 +176,26 @@
              .domain([0, 200])
              .range([0, height]);
         //calculate current bluff width based on default height and angle
-        bluff_width = bluff_height/Math.tan(curr_angle * (Math.PI/180));
+        bluffWidth = bluffHeight/Math.tan(currAngle * (Math.PI/180));
         //create adjacent side and label
         let adj = svg.append("line")
             .attr("class","line adj")
             .attr("x1",0)
-            .attr("x2",reverseScale(bluff_width))
+            .attr("x2",reverseScale(bluffWidth))
             .attr("y1",height)
             .attr("y2",height);  
-        let adj_label = svg.append("text")
-            .attr("class","label_adj")
-            .attr("x",reverseScale(bluff_width)/2)
+        let adjLabel = svg.append("text")
+            .attr("class","label-adj")
+            .attr("x",reverseScale(bluffWidth)/2)
             .attr("y",height - 10)
             .style("text-anchor","middle")
-            .text("Width: " + Math.round(bluff_width) + " ft.");
+            .text("Width: " + Math.round(bluffWidth) + " ft.");
         //create opposite and activate listeners for dragging
         let opp = svg.append("line")
             .attr("class","line opp")
-            .attr("x1",reverseScale(bluff_width))
-            .attr("x2",reverseScale(bluff_width))
-            .attr("y1",reverseScale(bluff_height))
+            .attr("x1",reverseScale(bluffWidth))
+            .attr("x2",reverseScale(bluffWidth))
+            .attr("y1",reverseScale(bluffHeight))
             .attr("y2",height)
             //event triggers when opposite side is selected
             .on("mousedown",function(){
@@ -240,65 +236,65 @@
                         .attr("y1",posy)
                         .attr("x2",posx);
                     //get new bluff width and height
-                    bluff_height = yscale(posy);
-                    bluff_width = xscale(posx);
+                    bluffHeight = yscale(posy);
+                    bluffWidth = xscale(posx);
                     //update opposite labels
-                    d3.select(".label_height")
+                    d3.select(".label-height")
                         .attr("x",parseInt(posx) + 45)
                         .attr("y",function(){
                             return posy + ((height - posy)/2 - 20);
                         })
-                    d3.select(".label_opp")
+                    d3.select(".label-opp")
                         .attr("x",parseInt(posx) + 40)
                         .attr("y",function(){
                             return posy + ((height - posy)/2);
                         })
-                        .text(Math.round(bluff_height) + " ft.")
+                        .text(Math.round(bluffHeight) + " ft.")
                     //update adjacent width
                     d3.select(".adj")
                         .attr("x2",posx);
                     //update adjacent label
-                    d3.select(".label_adj")
+                    d3.select(".label-adj")
                         .attr("x",parseInt(posx)/2 + 20)
-                        .text("Width: " + Math.round(bluff_width) + " ft.")
+                        .text("Width: " + Math.round(bluffWidth) + " ft.")
                     //update hypotenuese
                     d3.select(".hyp")
                         .attr("x2",posx)
                         .attr("y2",posy)
                     //update angle based on new parameters
-                    curr_angle = Math.atan(bluff_height/bluff_width) * (180/Math.PI);
+                    currAngle = Math.atan(bluffHeight/bluffWidth) * (180/Math.PI);
                     //update hypotenuse angle
-                    d3.select(".label_angle")
-                        .attr("transform","translate(" + reverseScale(bluff_width)/2 + "," + (posy + (height - posy)/2 - 20) +") rotate(-" + curr_angle + ")")
-                        .text("Angle: " + Math.round(curr_angle) + " deg.");
+                    d3.select(".label-angle")
+                        .attr("transform","translate(" + reverseScale(bluffWidth)/2 + "," + (posy + (height - posy)/2 - 20) +") rotate(-" + currAngle + ")")
+                        .text("Angle: " + Math.round(currAngle) + " deg.");
                 }
             });  
         //create opposite side labels
-        let height_label = svg.append("text")
-            .attr("class","label_height")
-            .attr("x",reverseScale(bluff_width) + 45)
-            .attr("y",height - (reverseScale(bluff_height)/2) - 20)
+        let heightLabel = svg.append("text")
+            .attr("class","label-height")
+            .attr("x",reverseScale(bluffWidth) + 45)
+            .attr("y",height - (reverseScale(bluffHeight)/2) - 20)
             .style("text-anchor","middle")
             .text("Height:");
-        let opp_label = svg.append("text")
-            .attr("class","label_opp")
-            .attr("x",reverseScale(bluff_width) + 40)
-            .attr("y",height - (reverseScale(bluff_height)/2))
+        let oppLabel = svg.append("text")
+            .attr("class","label-opp")
+            .attr("x",reverseScale(bluffWidth) + 40)
+            .attr("y",height - (reverseScale(bluffHeight)/2))
             .style("text-anchor","middle")
-            .text(bluff_height + " ft.");
+            .text(bluffHeight + " ft.");
         //create hypotenuse
         let hyp = svg.append("line")
             .attr("class","line hyp")
             .attr("x1",0)
-            .attr("x2",reverseScale(bluff_width))
+            .attr("x2",reverseScale(bluffWidth))
             .attr("y1",height)
-            .attr("y2",reverseScale(bluff_height)); 
+            .attr("y2",reverseScale(bluffHeight)); 
         //add label for angle
-        let angle_label = svg.append("text")
-            .attr("class","label_angle")
-            .attr("transform","translate(" + reverseScale(bluff_width)/2 + "," + (reverseScale(bluff_height) + (height - reverseScale(bluff_height))/2 - 20) +") rotate(-" + curr_angle + ")")
+        let angleLabel = svg.append("text")
+            .attr("class","label-angle")
+            .attr("transform","translate(" + reverseScale(bluffWidth)/2 + "," + (reverseScale(bluffHeight) + (height - reverseScale(bluffHeight))/2 - 20) +") rotate(-" + currAngle + ")")
             .style("text-anchor","start")
-            .text("Angle: " + curr_angle + " deg.");
+            .text("Angle: " + currAngle + " deg.");
 
         //calculated triangle
 
@@ -331,76 +327,59 @@
            .attr("y2",0);  */
 
         //move the visual affordance for the interface
-        document.querySelector(".triangle-intro-container").style.top = document.querySelector("#triangle").offsetTop + (parseInt(document.querySelector(".label_opp").attributes.y.value)*0.2) + "px";
-        document.querySelector(".triangle-intro-container").style.left = document.querySelector("#triangle").offsetLeft + (parseInt(document.querySelector(".label_opp").attributes.x.value)*0.75) + "px";
+        document.querySelector(".triangle-intro-container").style.top = document.querySelector("#triangle").offsetTop + (parseInt(document.querySelector(".label-opp").attributes.y.value)*0.2) + "px";
+        document.querySelector(".triangle-intro-container").style.left = document.querySelector("#triangle").offsetLeft + (parseInt(document.querySelector(".label-opp").attributes.x.value)*0.75) + "px";
     }
     //calculate stable angle setback
     function calcSas(){
         
-        stable_angle = parseInt(document.getElementById('stable_bluff_angle').value);
+        stableAngle = parseInt(document.getElementById('stable-bluff-angle').value);
         //calculate bluff width based on current values
-        bluff_width = bluff_height/Math.tan(curr_angle * (Math.PI/180));
+        bluffWidth = bluffHeight/Math.tan(currAngle * (Math.PI/180));
         //calculate stable angle setback based on current values
-        sas = (bluff_height/Math.tan(stable_angle * (Math.PI/180))) - bluff_width;
+        sas = (bluffHeight/Math.tan(stableAngle * (Math.PI/180))) - bluffWidth;
 
-        document.getElementById('stable_angle_setback').value = sas;
+        document.getElementById('stable-angle-setback').value = sas;
         //remove old line if already drawn
-        if (sas_line)
-            map.removeLayer(sas_line);
+        if (sasLine)
+            map.removeLayer(sasLine);
         //draw line
-        sas_line = addSetbackLine(sas, "orange","toe").addTo(map);
+        sasLine = addSetbackLine(sas, "orange","toe").addTo(map);
         addSetbackLegend("orange", "Stable Slope Setback","legend-sas")
     }
     //calculate recession rate
     function calcRec(){
-        rec_rate = parseInt(document.getElementById('rec_rate').value);
-        rec_years = parseInt(document.getElementById('rec_years').value);
+        recRate = parseInt(document.getElementById('rec-rate').value);
+        recYears = parseInt(document.getElementById('rec-years').value);
         //calculate the recession setback(default example should return 100)
-        rec_set = rec_rate * rec_years;
+        recSet = recRate * recYears;
 
-        document.getElementById('rec_setback').value = rec_set;
+        document.getElementById('rec-setback').value = recSet;
 
         //remove old line if already drawn
-        if (rec_line)
-            map.removeLayer(rec_line);
+        if (recLine)
+            map.removeLayer(recLine);
         //draw line
-        rec_line = addSetbackLine(rec_set, "green","crest").addTo(map);
+        recLine = addSetbackLine(recSet, "green","crest").addTo(map);
         addSetbackLegend("green", "Recession Setback","legend-rec")
     }
     //calculate local regulations
     function calcReg(){
-        local_reg = parseInt(document.getElementById('local_reg').value);
-        reg_line = addSetbackLine(local_reg, "purple","crest").addTo(map);
-        addSetbackLegend("purple", "Local Regulation", "legend_reg")
-    }
-
-    // This function calculates the setback based on user input
-    function calcSetback(){
-        //get local regulation
-        local_reg = parseInt(document.getElementById('local_reg').value);
-        //calculate the total setback in ft(example should be 199 [25 + 74 + 100])
-        let setback = parseInt(local_reg + sas + rec_set);
-        document.getElementById('setback_ft').value = setback;
-        //remove old line if already drawn
-        if (setback_line)
-            map.removeLayer(setback_line);
-        //draw line
-        setback_line = addSetbackLine(setback, "red").addTo(map);
-        addSetbackLegend("red", "Total Setback", "legend_tot")
-
+        localReg = parseInt(document.getElementById('local-reg').value);
+        regLine = addSetbackLine(localReg, "purple","crest").addTo(map);
+        addSetbackLegend("purple", "Local Regulation", "legend-reg")
     }
     //function to add a line to the map
     function addSetbackLine(buffer, color, type){
-        //create temp variable to store setback_line data
-        let line_data;
+        //create temp variable to store setbackLine data
+        let lineData;
         if (type == "toe")
-            line_data = clone(toe_data);
+            lineData = clone(toeData);
         else
-            line_data = clone(crest_data);
+            lineData = clone(crestData);
         
-        console.log(line_data)
         //create a setback line
-        line_data.features[0].geometry.coordinates.forEach(function(coord){
+        lineData.features[0].geometry.coordinates.forEach(function(coord){
             //convert setback distance into degrees 
             coord.forEach(function(latlng){
                 //conversion factor for 1 mile, 69.172 = length of a degree of longitude at equator
@@ -409,8 +388,8 @@
                 latlng[0] = latlng[0] - (buffer/cf);
             })
         })
-        //add setback_line line to map
-        let line = L.geoJSON(line_data, {
+        //add setbackLine line to map
+        let line = L.geoJSON(lineData, {
             style:function(feature){
                 return {
                     color:color
@@ -420,16 +399,16 @@
         return line;
     }
     //function to create line legend
-    function addSetbackLegend(color, caption, class_name){            
-        if (document.querySelector("." + class_name)){
-            document.querySelector("." + class_name).remove();
+    function addSetbackLegend(color, caption, className){            
+        if (document.querySelector("." + className)){
+            document.querySelector("." + className).remove();
         }
         
-        let legend = '<div class="line-caption ' + class_name +'"><svg height="10" width="30"><line x1="0" y1="5" x2="100" y2="5" style="stroke:' + color + ';stroke-width:4" /></svg>';
+        let legend = '<div class="line-caption ' + className +'"><svg height="10" width="30"><line x1="0" y1="5" x2="100" y2="5" style="stroke:' + color + ';stroke-width:4" /></svg>';
         legend += '<p>' + caption + '</p></div>'
         document.querySelector(".leaflet-legend").insertAdjacentHTML("beforeend",legend);
     }
-    //function clone data variable to store in new layer for setback_line calculation
+    //function clone data variable to store in new layer for setbackLine calculation
     function clone(Obj){
         //cloned object
         let buf; 
