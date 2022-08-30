@@ -24,6 +24,7 @@
         })
         //bold menu titles
         document.addEventListener("scroll",function(){
+            vertPos();
             let scrollPos = window.pageYOffset;
             document.querySelectorAll(".section-content").forEach(function(elem, i){
                 let scrollBottom = elem.offsetTop + (elem.clientHeight), scrollTop = elem.offsetTop - (elem.clientHeight/2);
@@ -35,9 +36,11 @@
                 }
             })
         })
+        
     }
     
     document.addEventListener('DOMContentLoaded', function(){
         setListeners();
+        vertPos();
     })
 })()
