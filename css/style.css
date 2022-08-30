@@ -254,7 +254,6 @@ input{
 /*********COMPARE MAP*********/
 .compare {
     margin-top: 60px;
-    height:100vh;
 }
 #compare-map {
     height:calc(100vh - 60px);
@@ -262,21 +261,6 @@ input{
     position: sticky !important;
     top:60px;
     display:block;
-}
-
-#house-carousel {
-    width: 80%;
-    margin-left: 50px;
-}
-
-#groin-image {
-    width: 80%;
-    margin-left: 50px;
-}
-
-#kenosha-image {
-    width: 80%;
-    margin-left: 50px;
 }
 
 .carousel-control-prev, .carousel-control-next, #slide {
@@ -359,6 +343,17 @@ datalist {
     margin-bottom:5px;
     width:60px;
     position:relative;
+}
+.compare-img-container{
+    width:80%;
+    display:block;
+    margin:auto;
+}
+.compare-img{
+    width:100%
+}
+.see-on-map{
+    margin-top:15px;
 }
 /****************************/
 /****EROSION PROCESSES PAGE*****/

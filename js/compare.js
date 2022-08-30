@@ -51,11 +51,12 @@ function createMap(){
     getData();
     createPopUps();
     createTimeline();
+    setListeners();
 };
 
 //function to create the timeline control
 function createTimeline(){
-    let years = [1937, 1955, 1963, 1970, 1975, 1980, 1990, 1995, 2000, 2005, 2010, 2015],
+    let years = [1937, 1956, 1970, 1980, 1995, 2005, 2015],
         length = years.length -1;
     // create legend control holding svg legend and add to map
     let timeline = L.Control.extend({
@@ -207,5 +208,16 @@ function createPopUps(){
         })
 
 };
+
+function setListeners(){
+    document.querySelectorAll(".see-on-map").forEach(function(elem){
+        let lon = parseFloat(elem.getAttribute("data-lon")),
+            lat = parseFloat(elem.getAttribute("data-lat"));
+        console.log([lat,lon])
+        elem.addEventListener("click",function(){
+            compareMap.flyTo([lat,lon]);
+        })
+    })
+}
 
 document.addEventListener('DOMContentLoaded', createMap);
