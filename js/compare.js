@@ -32,8 +32,8 @@ function createMap(){
 
 
     //svgs for the legend elements
-    let legSvg1 = '<svg id="leg-1937"><polyline points="20,20 50,50"style="fill:none;stroke:#FE2E2E;stroke-width:4;stroke-dasharray:5,10;stroke-linecap:round;stroke-opacity:0.8"/></svg>'
-    legSvg1 += '<text id="year1-legend" x="100" y="100"><br>1937 shoreline<br></text>';
+    let legSvg1 = '<svg id="leg-1937"><polyline points="10,10 40,40"style="fill:none;stroke:#FE2E2E;stroke-width:4;stroke-dasharray:5,10;stroke-linecap:round;stroke-opacity:0.8"/></svg>'
+    legSvg1 += '<p id="year1-legend">1937 shoreline</p>';
 
     // create legend control holding svg legend and add to map
     let legend = L.Control.extend({
