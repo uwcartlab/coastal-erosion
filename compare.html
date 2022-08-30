@@ -21,9 +21,10 @@
 
     <div class="container compare">
         <div class="row shore-row">
-            <div class="col">
+            <div id="compare-content" class="col">
                 <div id="comparison-text">
                     <h2><b>Shoreline Comparison</b></h2>
+                    <hr>
                     <p>The coastline of Lake Michigan is dynamic. Living along the coast requires that we understand <a
                             href="./processes.html">how natural forces erode the shoreline</a> over time.
                         The interactive map to the right allows you to compare the shoreline today to various points
@@ -39,6 +40,7 @@
                     <img class="compare-img" id="groin-image" src="img/MIL_00366.JPG" alt="...">
                     <button data-lat="42.956649" data-lon="-87.845026" class="see-on-map">See on Map</button>
                 </div>
+                <hr>
                 <div id="comparison-text">
                     <p>This effect can also happen at a large scale. Coastal engineering to protect the urban areas of
                         Milwaukee, Racine and Kenosha have significantly accelerated
@@ -49,6 +51,7 @@
                     <img class="compare-img" id="kenosha-image" src="img/KEN_00265.JPG" alt="...">
                     <button data-lat="42.956649" data-lon="-87.845026" class="see-on-map">See on Map</button>
                 </div>
+                <hr>
                 <div id="comparison-text">
                     <p>The consequences of erosion on Lake Michgain's bluffs can be more dramatic—and more dangerous.
                         Years and even decades can pass without any major visible change, and then in one large event,
@@ -58,14 +61,14 @@
                 </div>
                 <div class="col compare-img-container">
                     <div id="house-carousel" class="compare-img carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-indicators">
-                            <button type="button" data-bs-target="#carousel-example-indicators" data-bs-slide-to="0"
+                        <!--<div class="carousel-indicators">
+                            <button type="button" data-bs-target="#house-carousel" data-bs-slide-to="0"
                                 class="active" id="slide" aria-current="true" aria-label="Slide 1"></button>
-                            <button type="button" data-bs-target="#carousel-example-indicators" data-bs-slide-to="1"
+                            <button type="button" data-bs-target="#house-carousel" data-bs-slide-to="1"
                                 id="slide" aria-label="Slide 2"></button>
-                            <button type="button" data-bs-target="#carousel-example-indicators" data-bs-slide-to="2"
+                            <button type="button" data-bs-target="#house-carousel" data-bs-slide-to="2"
                                 id="slide" aria-label="Slide 3"></button>
-                        </div>
+                        </div>-->
                         <div class="carousel-inner">
                             <div class="carousel-item active">
                                 <img src="img/OZAUKEE_0129.JPG" class="d-block w-100" alt="...">
@@ -78,7 +81,7 @@
                                 <img src="img/OZA_2258_2.jpg" class="d-block w-100" alt="...">
                                 <div class="carousel-caption d-none d-md-block">
                                     <h5>2021</h5>
-                                    <p>A sudden slump moves the bluff crest under the house.</p>
+                                    <p>A sudden slump moves the bluff crest.</p>
                                 </div>
                             </div>
                             <div class="carousel-item">
@@ -89,12 +92,12 @@
                                 </div>
                             </div>
                         </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel-example-indicators"
+                        <button class="carousel-control-prev" type="button" data-bs-target="#house-carousel"
                             data-bs-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Previous</span>
                         </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carousel-example-indicators"
+                        <button class="carousel-control-next" type="button" data-bs-target="#house-carousel"
                             data-bs-slide="next">
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Next</span>

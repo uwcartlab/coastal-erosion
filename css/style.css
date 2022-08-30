@@ -253,7 +253,7 @@ input{
 }
 /*********COMPARE MAP*********/
 .compare {
-    margin-top: 60px;
+    margin-top: 85px;
 }
 #compare-map {
     height:calc(100vh - 60px);
@@ -262,18 +262,21 @@ input{
     top:60px;
     display:block;
 }
-
+#compare-content{
+    margin-bottom:100px;
+}
 .carousel-control-prev, .carousel-control-next, #slide {
     box-shadow: none !important;
 }
 
 /*********COMPARE MAP LEGEND ELEMENTS*********/
 .legend-control-container {
-	width: 80px;
-	font-style: normal;
-    background:rgba(255,255,255,0.7);
+	font-weight:bold;
+    background:rgba(255,255,255,0.8);
 	padding: 10px;
 	border-radius: 2px;
+    font-size:18px;
+    font-family: "Garamond", serif;
 }
 .year1-legend {
     width: 50px;
@@ -348,12 +351,30 @@ datalist {
     width:80%;
     display:block;
     margin:auto;
+    margin-bottom:100px;
 }
 .compare-img{
     width:100%
 }
 .see-on-map{
     margin-top:15px;
+}
+.carousel-caption{
+    background:rgba(255,255,255,0.7);
+    padding:5px;
+    padding-bottom:5px;
+    width:100%;
+    left:0;
+    bottom:0;
+    color:black;
+    font-family:"Tahoma", sans-serif;
+}
+.carousel-caption > h5{
+    font-family:"Tahoma", sans-serif;
+    font-weight:bold;
+}
+.carousel-caption > p{
+    margin-bottom:0;
 }
 /****************************/
 /****EROSION PROCESSES PAGE*****/
