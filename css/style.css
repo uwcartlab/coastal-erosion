@@ -265,9 +265,8 @@ input{
 /*********COMPARE MAP LEGEND ELEMENTS*********/
 .legend-control-container {
 	width: 80px;
-	height: 200px;
 	font-style: normal;
-	background-color: #ffffffcc;
+    background:rgba(255,255,255,0.7);
 	padding: 10px;
 	border-radius: 2px;
 }
@@ -294,4 +293,49 @@ input{
 #popup-img {
     width: 100%;
     height: 100%;
+}
+/**********TIMELINE************/
+.slider{
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    background:black;
+    height:5px;
+    border:1px black solid;
+}
+.slider::-webkit-slider-thumb, .slider::-moz-range-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    width: 10px; /* Set a specific slider handle width */
+    height: 25px; /* Slider handle height */
+    background: white; /* Green background */
+    border:2px #f16141 solid;
+    cursor: pointer; /* Cursor on hover */
+} 
+.timeline-control-container{
+    padding:20px;
+    margin-bottom:50px;
+    background:rgba(255,255,255,0.8);
+}
+#timeline{
+    width:300px;
+    margin-left:10px;
+    margin-right:10px;
+}
+datalist {
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+}
+.selected{
+    visibility:visible;
+    background:white;
+    border: 2px solid black;
+    box-shadow: 2px 2px #f16141;
+    padding:8px;
+    font-weight:bold;
+    font-size:18px;
+    line-height:18px;
+    margin-bottom:5px;
+    width:60px;
+    position:relative;
 }
