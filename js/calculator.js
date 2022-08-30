@@ -4,11 +4,24 @@
 
 (function(){
     
-    var map, toeData, crestData, sasLine, recLine, regLine;
-    //bluff parameters
-    var localReg, bluffHeight = 100, currAngle = 30, stableAngle, bluffWidth, recRate, recYears;
-    //bluff results
-    var sas, recSet;
+    var map, //map container
+        toeData, //bluff toe data
+        crestData, //bluff crest data
+        sasLine, //stable angle slope setback line
+        recLine, //recession setback line
+        regLine; //local regulation setback line
+    //stable angle setback    
+    var bluffHeight = 100, 
+        currAngle = 30, 
+        stableAngle, 
+        bluffWidth,
+        sas;
+    //recession rate setback
+    var recRate, 
+        recYears,
+        recSet;
+    //local regulation setback
+    var localReg;
 
     function setListeners(){
         //reset inputs GET BACK TO
