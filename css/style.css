@@ -257,13 +257,30 @@ input{
     height:100vh;
 }
 #compare-map {
-    width: 100%;
-    height:  calc(100% - 60px);
-    position: relative;
+    height:calc(100vh - 60px);
+    margin-left:0;
+    position: sticky !important;
+    top:60px;
+    display:block;
 }
 
 #house-carousel {
     width: 80%;
+    margin-left: 50px;
+}
+
+#groin-image {
+    width: 80%;
+    margin-left: 50px;
+}
+
+#kenosha-image {
+    width: 80%;
+    margin-left: 50px;
+}
+
+.carousel-control-prev, .carousel-control-next, #slide {
+    box-shadow: none !important;
 }
 
 /*********COMPARE MAP LEGEND ELEMENTS*********/

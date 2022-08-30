@@ -198,8 +198,9 @@ function createPopUps(){
             L.geoJson(data, {
                 pointToLayer: function(feature, latlng){
                     let marker = L.marker(latlng);
-                    marker.bindPopup("<div class= popup-content><img id ='popup-img' src=" + feature.properties.image + 
-                    "><br><p class>" +feature.properties.text + "</p><div>");
+                    //code for pop ups - removed after moving images to html body
+                    /*marker.bindPopup("<div class= popup-content><img id ='popup-img' src=" + feature.properties.image + 
+                    "><br><p class>" +feature.properties.text + "</p><div>");*/
                     return marker;
                 }
             }).addTo(compareMap);
