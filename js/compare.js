@@ -213,9 +213,9 @@ function setListeners(){
     document.querySelectorAll(".see-on-map").forEach(function(elem){
         let lon = parseFloat(elem.getAttribute("data-lon")),
             lat = parseFloat(elem.getAttribute("data-lat"));
-        console.log([lat,lon])
+            zoom = parseFloat(elem.getAttribute("data-zoom"));
         elem.addEventListener("click",function(){
-            compareMap.flyTo([lat,lon]);
+            compareMap.flyTo([lat,lon], zoom);
         })
     })
 }
