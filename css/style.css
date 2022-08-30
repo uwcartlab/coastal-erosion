@@ -261,6 +261,11 @@ input{
     height:  calc(100% - 60px);
     position: relative;
 }
+
+#house-carousel {
+    width: 80%;
+}
+
 /*********COMPARE MAP LEGEND ELEMENTS*********/
 .legend-control-container {
 	width: 80px;
