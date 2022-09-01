@@ -3,11 +3,6 @@
    Gareth Baldrica-Franklin, Jake Steinberg */
 (function(){
     function setListeners(){
-        //position sidebar
-        let sidebarHeight = document.querySelector(".sidebar").clientHeight,
-            menuHeight = document.querySelector(".menu").clientHeight;
-
-        document.querySelector(".menu").style.marginTop = (sidebarHeight/2) - (menuHeight/2) + "px";
 
         //set listener to collapse each section of the calculator
         document.querySelectorAll(".section-header").forEach(function(elem){
@@ -34,11 +29,29 @@
                     document.querySelector("#title" + (i+1)).style.fontWeight = "normal";
                 }
             })
-        })
-        
+        })       
+    }
+    function positions(){
+        //position sidebar
+        let sidebarHeight = document.querySelector(".sidebar").clientHeight,
+            menuHeight = document.querySelector(".menu").clientHeight;
+            
+        document.querySelector(".menu").style.marginTop = (sidebarHeight/2) - (menuHeight/2) + "px";
+
+        let w = window.innerWidth;
+        //center image captions
+        if (w > 768){
+            document.querySelectorAll(".process-caption").forEach(function(elem){
+                elem.style.marginLeft = window.getComputedStyle(elem.previousElementSibling).marginLeft;
+            }) 
+        }
     }
 
     document.addEventListener('DOMContentLoaded', function(){
         setListeners();
+        positions();
+    })
+    window.addEventListener('resize', function(){
+        positions();
     })
 })()

@@ -14,6 +14,7 @@ function createMap(){
         zoom: 17,
         minZoom: 11,
         maxZoom: 18,
+        scrollWheelZoom:false,
         attributionControl:false
     });
     

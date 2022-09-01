@@ -1,8 +1,31 @@
 /****************************/
+/*****FONTS***/
+/****************************/
+@font-face {
+    font-family: JosefinSans;
+    src: url(JosefinSans-VariableFont_wght.ttf);
+}
+@font-face {
+    font-family: Garamond;
+    src: url(CormorantGaramond-Regular.ttf);
+    font-style:normal;
+}
+@font-face {
+    font-family: Garamond;
+    src: url(CormorantGaramond-Bold.ttf);
+    font-weight:bold;
+}
+@font-face {
+    font-family: Garamond;
+    src: url(CormorantGaramond-Italic.ttf);
+    font-style:italic;
+}
+
+/****************************/
 /*****OVERALL SITE STYLING***/
 /****************************/
 body{
-    font-family:"Tahoma", sans-serif;
+    font-family:JosefinSans;
     font-size:20px;
 }
 button{
@@ -21,7 +44,7 @@ button:hover{
     color:#f16141;
 }
 p, ul, input, label{
-    font-family:"Garamond", serif;
+    font-family:Garamond;
 }
 hr{
     color:#f16141;
@@ -29,7 +52,7 @@ hr{
 }
 /***********NAVBAR*************/
 .nav-item{
-    font-family:"Tahoma", sans-serif;
+    font-family:JosefinSans;
 }
 .navbar{
     background:white;
@@ -72,10 +95,6 @@ hr{
     cursor:pointer;
 }
 /***********BOOTSTRAP*************/
-.site-container{
-    margin-left:10px;
-}
-
 .section-header{
     font-size:20px;
     font-weight:normal;
@@ -84,12 +103,7 @@ hr{
     cursor:pointer;
     color:gray;
 }
-/***********SIDEBAR*************/
-.sidebar{
-    position:fixed;
-    height:100vh;
-    padding-left:10px;
-}
+
 /****************************/
 /********HOME PAGE***********/
 /****************************/
@@ -105,22 +119,16 @@ hr{
     height:100vh;
     width:100vw;
 }
-
-@font-face {
-    font-family: 'Josefin Sans';
-    src: url("lib/JosefinSans-VariableFont_wght.ttf") format(ttf);
-}
-
 #intro-title{
     font-weight:bold;
-    font-size:80px;
     text-align:center;
-    font-family: Josefin Sans, sans-serif !important;
+    font-family: JosefinSans, sans-serif;
+    text-shadow:2px 2px #f16141;
 }
 #intro-scroll{
     text-align:center;
-    margin-top:200px;
-    font-size:30px;
+    font-family: JosefinSans, sans-serif;
+    text-shadow:2px 2px #f16141;
 }
 #intro-text{
     margin-top:100px;
@@ -258,17 +266,18 @@ input{
 .shore-row{
     height:100%;
 }
+.img-caption{
+    font-weight:bold;
+    font-size:16px;
+    margin: auto;
+    margin-bottom:15px !important;
+    display:block;
+}
 /*********COMPARE MAP*********/
 .compare {
     margin-top: 85px;
 }
-#compare-map {
-    height:calc(100vh - 60px);
-    margin-left:0;
-    position: sticky !important;
-    top:60px;
-    display:block;
-}
+
 #compare-content{
     margin-bottom:100px;
 }
@@ -283,7 +292,7 @@ input{
 	padding: 10px;
 	border-radius: 2px;
     font-size:18px;
-    font-family: "Garamond", serif;
+    font-family: Garamond;
     width:200px;
 }
 #year1-legend {
@@ -326,7 +335,7 @@ input{
     background:rgba(255,255,255,0.8);
 }
 #timeline{
-    width:300px;
+    max-width:300px;
     margin-left:10px;
     margin-right:10px;
 }
@@ -348,17 +357,9 @@ datalist {
     width:60px;
     position:relative;
 }
-.compare-img-container{
-    width:80%;
-    display:block;
-    margin:auto;
-    margin-bottom:100px;
-}
+
 .compare-img{
     width:100%
-}
-.see-on-map{
-    margin-top:15px;
 }
 .carousel-caption{
     background:rgba(255,255,255,0.7);
@@ -368,10 +369,10 @@ datalist {
     left:0;
     bottom:0;
     color:black;
-    font-family:"Tahoma", sans-serif;
+    font-family:JosefinSans;
 }
 .carousel-caption > h5{
-    font-family:"Tahoma", sans-serif;
+    font-family:JosefinSans;
     font-weight:bold;
 }
 .carousel-caption > p{
@@ -380,9 +381,6 @@ datalist {
 /****************************/
 /****EROSION PROCESSES PAGE*****/
 /****************************/
-.process-img{
-    width:100%;
-}
 .process-text{
     position:relative;
 }
@@ -399,7 +397,7 @@ datalist {
 /****PROCESSES GRAPHIC****/
 #g-erosion-graphic-box ,
 #g-erosion-graphic-box .g-artboard {
-    /*margin:0 auto;*/
+    margin:0 auto;
 }
 #g-erosion-graphic-box p {
     margin:0;
@@ -412,6 +410,7 @@ datalist {
     top:0;
     display:block;
     width:100% !important;
+    opacity:0.8;
 }
 #g-erosion-graphic-box .g-aiSymbol {
     position: absolute;
@@ -423,12 +422,13 @@ datalist {
     overflow:hidden;
 }
 #g-erosion-graphic-Artboard_1 p {
-    font-family:tahoma,Verdana,Segoe,sans-serif;
+    font-family:JosefinSans;
+    font-weight:bold;
     line-height:14px;
     height:auto;
     opacity:1;
     letter-spacing:0em;
-    font-size:12px;
+    font-size:18px;
     text-align:left;
     color:rgb(0,0,0);
     text-transform:none;
@@ -438,6 +438,102 @@ datalist {
     font-style:normal;
     position:static;
 }
+#g-erosion-graphic-Artboard_1 a{
+    text-decoration:none;
+    color:black;
+}
 #g-erosion-graphic-Artboard_1 .g-pstyle0 {
     height:14px;
+}
+.arrow{
+    font-size:40px;
+    line-height:0px;
+    display: inline-block;
+    vertical-align: sub;
+}
+.bottom-arrow{
+    font-size:40px;
+    line-height:0px;
+    display: inline-block;
+    vertical-align: bottom;
+}
+/**************/
+@media only screen and (max-width: 768px) {
+    /***********SIDEBAR*************/
+    .sidebar{
+        display:none;
+    }
+    .map-container{
+        margin-left:0 !important;
+        padding-left:0 !important;
+    }
+    .process-img{
+        margin:auto;
+        display:block;
+        max-width:100%;
+    }
+    #compare-map {
+        height:calc(100vh - 60px);
+        display:block;
+    }
+    .see-on-map{
+        display:none;
+    }
+    .compare-img-container{
+        width:100%;
+        margin-bottom:50px;
+    }
+    .nav-item{
+        margin-left:15px;
+    }
+    .navbar-toggler{
+        margin-right:15px;
+        border:2px black solid;
+    }
+    #intro-title{
+        font-size:50px;
+    }
+    #intro-scroll{
+        margin-top:50px;
+        font-size:20px;
+    }
+}
+@media only screen and (min-width: 768px) {
+    /***********SIDEBAR*************/
+    .sidebar{
+        position:fixed;
+        height:100vh;
+        padding-left:10px;
+    }
+    .site-container{
+        margin-left:10px;
+    }
+    .process-img{
+        margin:auto;
+        display:block;
+        max-width:50%;
+    }
+    #compare-map {
+        height:calc(100vh - 60px);
+        margin-left:0;
+        position: sticky !important;
+        top:60px;
+        display:block;
+    }
+    .compare-img-container{
+        width:80%;
+        display:block;
+        margin:auto;
+        margin-bottom:100px;
+    }
+    .slider{
+        width:300px;
+    }
+    #intro-title{
+        font-size:80px;
+    }
+    #intro-scroll{
+        margin-top:200px;
+        font-size:30px;
+    }
 }

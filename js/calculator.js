@@ -93,6 +93,7 @@
         //map variable
         map = L.map('calc-map',{  
             attributionControl: false,
+            scrollWheelZoom:false
         }).setView([43.3102, -87.8956], 13);
         //openstreetmap basemap
         var basemap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
