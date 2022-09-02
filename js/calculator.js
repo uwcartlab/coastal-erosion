@@ -128,7 +128,7 @@
     }
     //get bluff clrest data for setback line calculations
     function addCrest(){
-        fetch("data/OZ_BluffCrest.geojson")
+        fetch("data/Oz_BluffCrest.geojson")
             .then(res => res.json())
             .then(function(res){
                 crest = L.geoJSON(res);
@@ -137,7 +137,7 @@
     }
     //get bluff toe data for setback line calculations
     function addToe(){
-        fetch("data/OZ_BluffToe.geojson")
+        fetch("data/Oz__BluffToe.geojson")
             .then(res => res.json())
             .then(function(res){
                 toe = L.geoJSON(res);

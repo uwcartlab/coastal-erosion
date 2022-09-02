@@ -124,7 +124,7 @@
 
     //function to retrieve the data and place it on the map
     function getData(){
-        fetch("data/compare/totalShoreline.geojson")
+        fetch("./data/compare/totalShoreline.geojson")
             .then(function(response){
                 return response.json();
             })
@@ -156,7 +156,7 @@
     };
     //function to create popup indicators
     function createPopUps(){
-        fetch('data/popUps.geojson')
+        fetch('./data/popUps.geojson')
             .then(res => res.json())
             .then(function(data){
                 L.geoJson(data, {
