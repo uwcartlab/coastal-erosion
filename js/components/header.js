@@ -1,4 +1,4 @@
-//navigation bar 
+//navigation bar component
 class TopHeader extends HTMLElement {
     constructor() {
       super();

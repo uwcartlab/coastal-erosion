@@ -1,4 +1,4 @@
-//navigation bar 
+//footer component 
 class BottomFooter extends HTMLElement {
     constructor() {
       super();
@@ -11,10 +11,6 @@ class BottomFooter extends HTMLElement {
                 <img src="img/UWCL_logo_gray.png">
             </div>
         `;
-      
-      /*this.addEventListener("click",function(){
-        window.scrollTo(0,0);
-      })*/
     }
 }
   

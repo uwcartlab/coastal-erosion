@@ -1,114 +1,133 @@
+<!----------------------------------
+    WISCONSIN COASTAL EROSION VIEWER
+    Created through partership between the UW Cartography Lab and Wisconsin Sea Grant
+    Code written by Gareth Baldrica-Franklin and Jake Steinberg
+------------------------------------>
+<!--SHORELINE COMPARISON-->
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title></title>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title></title>
 
-    <!--stylesheets-->
-    <link rel="stylesheet" href="lib/bootstrap.min.css">
-    <link rel="stylesheet" href="lib/leaflet/leaflet.css">
-    <link rel="stylesheet" href="css/style.css">
+        <!--stylesheets-->
+        <link rel="stylesheet" href="lib/bootstrap.min.css">
+        <link rel="stylesheet" href="lib/leaflet/leaflet.css">
+        <link rel="stylesheet" href="css/style.css">
 
-</head>
+    </head>
 
-<body>
-    <!--navigation bar-->
-    <top-navbar></top-navbar>
+    <body>
+        <!--navigation bar-->
+        <top-navbar></top-navbar>
 
-    <!--site content goes here!-->
-
-    <div class="container compare">
-        <div class="row shore-row">
-            <div id="compare-content" class="col-md-6 col-12">
-                <div id="comparison-text">
-                    <h2><b>Shoreline Comparison</b></h2>
-                    <hr>
-                    <p>The coastline of Lake Michigan is dynamic. Living along the coast requires that we understand <a
-                            href="./processes.html">how natural forces erode the shoreline</a> over time.
-                        The interactive map to the right allows you to compare the shoreline today to various points
-                        between 1937 and 2015.</p>
-                    <p>Erosion is a constant and ultimately inevitable process. Attempts to slow erosion in one place
-                        accelerate it elsewhere. For example, Milwaukee County's
-                        Sheridan Park has been protected by erosion-slowing features called "groins." However, that
-                        protection has caused the area south of the park to erode at
-                        a faster rate.
-                    </p>
-                </div>
-                <div class="col compare-img-container">
-                    <img class="compare-img" id="groin-image" src="img/MIL_00366.JPG" alt="...">
-                    <p class="img-caption">Bluffs at Sheridan Park, south of Milwaukee.</p>
-                    <button data-lat="42.956649" data-lon="-87.845026" data-zoom="17" class="see-on-map">See on Map</button>
-                </div>
-                <hr>
-                <div id="comparison-text">
-                    <p>This effect can also happen at a large scale. Coastal engineering to protect the urban areas of
-                        Milwaukee, Racine and Kenosha have significantly accelerated
-                        erosion of southern Kenosha County's shoreline.
-                    </p>
-                </div>
-                <div class="col compare-img-container">
-                    <img class="compare-img" id="kenosha-image" src="img/KEN_00265.JPG" alt="...">
-                    <p class="img-caption">Buff reinforcement on a house in southern Kenosha.</p>
-                    <button data-lat="42.531643" data-lon="-87.813358" data-zoom="17" class="see-on-map">See on Map</button>
-                </div>
-                <hr>
-                <div id="comparison-text">
-                    <p>The consequences of erosion on Lake Michgain's bluffs can be more dramatic—and more dangerous.
-                        Years and even decades can pass without any major visible change, and then in one large event,
-                        a section of blufftop 50-feet deep and 100-feet wide can fall into the lake. <a
-                            href="./calculator.html">Calculating an
-                            appropiate setback</a> is imperative for anyone seeking to build on the bluffs.</p>
-                </div>
-                <div class="col compare-img-container">
-                    <div id="house-carousel" class="compare-img carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="img/OZAUKEE_0129.JPG" class="d-block w-100" alt="...">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h5>2019</h5>
-                                    <p>A bluffside house in Ozaukee County.</p>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <img src="img/OZA_2258_2.jpg" class="d-block w-100" alt="...">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h5>2021</h5>
-                                    <p>A sudden slump moves the bluff crest.</p>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <img src="img/OZA_00311_2.jpg" class="d-block w-100" alt="...">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h5>2022</h5>
-                                    <p>The house is vacated and removed.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#house-carousel"
-                            data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#house-carousel"
-                            data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
+        <!--shoreline comparison page body-->
+        <div class="container compare">
+            <!--shoreline comparison introduction-->
+            <div class="row shore-row">
+                <div id="compare-content" class="col-md-6 col-12">
+                    <div id="comparison-text">
+                        <h2><b>Shoreline Comparison</b></h2>
+                        <hr>
+                        <p>
+                            The coastline of Lake Michigan is dynamic. Living along the coast requires that we understand <a
+                                href="./processes.html">how natural forces erode the shoreline</a> over time.
+                            The interactive map to the right allows you to compare the shoreline today to various points
+                            between 1937 and 2015.
+                        </p>
+                        <p>
+                            Erosion is a constant and ultimately inevitable process. Attempts to slow erosion in one place
+                            accelerate it elsewhere. For example, Milwaukee County's
+                            Sheridan Park has been protected by erosion-slowing features called "groins." However, that
+                            protection has caused the area south of the park to erode at
+                            a faster rate.
+                        </p>
                     </div>
-                    <p class="img-caption">Impact of bluff erosion on a house in Ozaukee County.</p>
-                    <button data-lat="43.280506" data-lon="-87.903611" data-zoom="17" class="see-on-map">See on Map</button>
+                    <!--image and map button link for Sheridan Park-->
+                    <div class="col compare-img-container">
+                        <img class="compare-img" id="groin-image" src="img/MIL_00366.JPG" alt="...">
+                        <p class="img-caption">Bluffs at Sheridan Park, south of Milwaukee.</p>
+                        <button data-lat="42.956649" data-lon="-87.845026" data-zoom="17" class="see-on-map">See on Map</button>
+                    </div>
+                    <hr>
+                    <!--description of coastal engineering in southern Kenosha-->
+                    <div id="comparison-text">
+                        <p>This effect can also happen at a large scale. Coastal engineering to protect the urban areas of
+                            Milwaukee, Racine and Kenosha have significantly accelerated
+                            erosion of southern Kenosha County's shoreline.
+                        </p>
+                    </div>
+                    <!--image and map button link for Kenosha-->
+                    <div class="col compare-img-container">
+                        <img class="compare-img" id="kenosha-image" src="img/KEN_00265.JPG" alt="...">
+                        <p class="img-caption">Buff reinforcement on a house in southern Kenosha.</p>
+                        <button data-lat="42.531643" data-lon="-87.813358" data-zoom="17" class="see-on-map">See on Map</button>
+                    </div>
+                    <hr>
+                    <!--description of bluff failure-->
+                    <div id="comparison-text">
+                        <p>The consequences of erosion on Lake Michgain's bluffs can be more dramatic—and more dangerous.
+                            Years and even decades can pass without any major visible change, and then in one large event,
+                            a section of blufftop 50-feet deep and 100-feet wide can fall into the lake. <a
+                                href="./calculator.html">Calculating an
+                                appropiate setback</a> is imperative for anyone seeking to build on the bluffs.</p>
+                    </div>
+                    <!--timeline carousel of bluff collapse-->
+                    <div class="col compare-img-container">
+                        <div id="house-carousel" class="compare-img carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                <!--carousel cards-->
+                                <div class="carousel-item active">
+                                    <img src="img/OZAUKEE_0129.JPG" class="d-block w-100" alt="...">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5>2019</h5>
+                                        <p>A bluffside house in Ozaukee County.</p>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="img/OZA_2258_2.jpg" class="d-block w-100" alt="...">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5>2021</h5>
+                                        <p>A sudden slump moves the bluff crest.</p>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="img/OZA_00311_2.jpg" class="d-block w-100" alt="...">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5>2022</h5>
+                                        <p>The house is vacated and removed.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--carousel previous buttons-->
+                            <button class="carousel-control-prev" type="button" data-bs-target="#house-carousel"
+                                data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <!--carousel next buttons-->
+                            <button class="carousel-control-next" type="button" data-bs-target="#house-carousel"
+                                data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                        <!--image and map button link for the carousel-->
+                        <p class="img-caption">Impact of bluff erosion on a house in Ozaukee County.</p>
+                        <button data-lat="43.280506" data-lon="-87.903611" data-zoom="17" class="see-on-map">See on Map</button>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-6 col-12">
-                <!--map element-->
-                <div id="compare-map"></div>
+                <!--calculator map sidebar-->
+                <div class="col-md-6 col-12">
+                    <!--map element-->
+                    <div id="compare-map"></div>
+                </div>
             </div>
         </div>
-    </div>
 
-        <!--navigation bar-->
+        <!--footer-->
         <bottom-footer></bottom-footer>
 
         <!--scripts-->
@@ -118,6 +137,6 @@
         <script type="text/javascript" src="js/components/header.js"></script>
         <script type="text/javascript" src="js/components/footer.js"></script>
         <script type="text/javascript" src="js/compare.js"></script>
-</body>
+    </body>
 
 </html>

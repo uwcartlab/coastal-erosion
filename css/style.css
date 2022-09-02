@@ -3,21 +3,21 @@
 /****************************/
 @font-face {
     font-family: JosefinSans;
-    src: url(JosefinSans-VariableFont_wght.ttf);
+    src: url(fonts/JosefinSans-VariableFont_wght.ttf);
 }
 @font-face {
     font-family: Garamond;
-    src: url(CormorantGaramond-Regular.ttf);
+    src: url(fonts/CormorantGaramond-Regular.ttf);
     font-style:normal;
 }
 @font-face {
     font-family: Garamond;
-    src: url(CormorantGaramond-Bold.ttf);
+    src: url(fonts/CormorantGaramond-Bold.ttf);
     font-weight:bold;
 }
 @font-face {
     font-family: Garamond;
-    src: url(CormorantGaramond-Italic.ttf);
+    src: url(fonts/CormorantGaramond-Italic.ttf);
     font-style:italic;
 }
 
@@ -349,7 +349,7 @@ datalist {
     background:white;
     border: 2px solid black;
     box-shadow: 2px 2px #f16141;
-    padding:8px;
+    padding:2px 8px 8px 12px;
     font-weight:bold;
     font-size:18px;
     line-height:18px;
@@ -457,9 +457,10 @@ datalist {
     display: inline-block;
     vertical-align: bottom;
 }
-/**************/
+/****************************/
+/*****RESPONSIVE DESIGN******/
+/****************************/
 @media only screen and (max-width: 768px) {
-    /***********SIDEBAR*************/
     .sidebar{
         display:none;
     }
@@ -499,7 +500,6 @@ datalist {
     }
 }
 @media only screen and (min-width: 768px) {
-    /***********SIDEBAR*************/
     .sidebar{
         position:fixed;
         height:100vh;

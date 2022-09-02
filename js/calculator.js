@@ -24,16 +24,9 @@
     var localReg;
 
     function setListeners(){
-        //reset inputs GET BACK TO
+        //reset inputs
         document.querySelectorAll("input").forEach(function(elem){
             elem.value = elem.defaultValue;
-        })
-        //set listener to collapse each section of the calculator
-        document.querySelectorAll(".section-header").forEach(function(elem){
-            elem.addEventListener("click",function(){
-                //jump to calculation section on click
-                window.location.href = '#' + elem.title;
-            })
         })
         //set sas calculator listener
         document.getElementById("calc-sas").addEventListener("click", function(e){
@@ -47,18 +40,6 @@
         document.getElementById("calc-reg").addEventListener("click", function(e){
             calcReg();
         })
-        //update display based on button selection
-        document.querySelectorAll(".next").forEach(function(elem){
-            elem.addEventListener("click",function(){
-                document.getElementById('step' + (parseInt(elem.title) + 1)).scrollIntoView();
-            })
-        })
-        //position sidebar
-        let sidebarHeight = document.querySelector(".sidebar").clientHeight,
-            menuHeight = document.querySelector(".menu").clientHeight;
-
-        document.querySelector(".menu").style.marginTop = (sidebarHeight/2) - (menuHeight/2) + "px";
-
         //bluff material menu
         document.querySelectorAll(".material").forEach(function(elem){
             elem.addEventListener("click",function(){
@@ -72,21 +53,6 @@
         document.querySelector("#stable-bluff-angle").addEventListener("input",function(){
             document.querySelector("#material-button").innerHTML = "Custom";
         })
-
-        //bold menu titles
-        document.addEventListener("scroll",function(){
-            let scrollPos = window.pageYOffset;
-            document.querySelectorAll(".section-content").forEach(function(elem, i){
-                let scrollBottom = elem.offsetTop + (elem.clientHeight/2), scrollTop = elem.offsetTop - (elem.clientHeight/2);
-                if (scrollPos >= scrollTop && scrollPos <= scrollBottom){
-                    document.querySelector("#title" + (i+1)).style.fontWeight = "bold";
-                }
-                else{
-                    document.querySelector("#title" + (i+1)).style.fontWeight = "normal";
-                }
-            })
-        })
-
     }
     
     function createMap(){
@@ -96,13 +62,19 @@
             scrollWheelZoom:false
         }).setView([43.3102, -87.8956], 13);
         //openstreetmap basemap
-        var basemap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-            opacity:0.7,
-            attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+        let imagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+            attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
+            opacity: 0.8
+        }).addTo(map);
+        //labels
+        var labels = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+            subdomains: 'abcd',
+            maxZoom: 20
         }).addTo(map);
         //add bluff crest data
         addData();
-        //create location control
+        //create legend control
         let legendContainer = L.Control.extend({
             options:{
                 position:"bottomright"
@@ -119,7 +91,7 @@
                 return container;
             }
         });
-
+        //add legend control to make
         map.addControl(new legendContainer());
     }
 
@@ -135,7 +107,7 @@
             spaceOpacity:0.25,
             angle:-30
         }); stripes.addTo(map);
-        
+        //get bluff area file
         fetch("data/bluff_area.geojson")
             .then(res => res.json())
             .then(function(res){
@@ -151,14 +123,14 @@
                     }
                 }).addTo(map);
         })
-        
+        //get bluff toe data for setback line calculations
         fetch("data/OZ_BluffToe.geojson")
             .then(res => res.json())
             .then(function(res){
                 toe = L.geoJSON(res);
                 toeData = res;
             })
-        
+        //get bluff clrest data for setback line calculations
         fetch("data/OZ_BluffCrest.geojson")
             .then(res => res.json())
             .then(function(res){
@@ -166,10 +138,8 @@
                 crestData = res;
             })
     }
-
     //function to create the triangle
     function createTriangle(){     
-        
         //create the triangle interface    
         let svg = d3.select("#triangle")
             .append("svg")
@@ -238,9 +208,9 @@
                 })
                 //function to update position of triangle
                 function updatePos(posx, posy){
+                    //get current mouse position
                     let offsetx = parseInt(document.querySelector(".sidebar").clientWidth) - 10,
                         offsety = window.pageYOffset > document.querySelector("#triangle").offsetTop ? window.pageYOffset: document.querySelector("#triangle").offsetTop - window.pageYOffset;
-                    //FINISH
                     //subtract y position from height and padding (10) to get the position in relation to the svg 
                     posy = posy - offsety;
                     posx = posx - offsetx;
@@ -456,7 +426,7 @@
     document.addEventListener('DOMContentLoaded', function(){
         //adjust map width
         document.querySelector("#calc-map").style.width = document.querySelector(".map-container").clientWidth + "px";
-
+        //add triangle interface, map, and set listeners
         createTriangle();
         createMap();
         setListeners();
