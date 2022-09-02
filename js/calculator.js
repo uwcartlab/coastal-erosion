@@ -73,7 +73,9 @@
             maxZoom: 20
         }).addTo(map);
         //add bluff crest data
-        addData();
+        addBluff();
+        addCrest();
+        addToe();
         //create legend control
         let legendContainer = L.Control.extend({
             options:{
@@ -95,7 +97,7 @@
         map.addControl(new legendContainer());
     }
 
-    function addData(){
+    function addBluff(){
         let toe, crest;
         //dash fill pattern
         var stripes = new L.StripePattern({
@@ -123,19 +125,23 @@
                     }
                 }).addTo(map);
         })
-        //get bluff toe data for setback line calculations
-        fetch("data/OZ_BluffToe.geojson")
-            .then(res => res.json())
-            .then(function(res){
-                toe = L.geoJSON(res);
-                toeData = res;
-            })
-        //get bluff clrest data for setback line calculations
+    }
+    //get bluff clrest data for setback line calculations
+    function addCrest(){
         fetch("data/OZ_BluffCrest.geojson")
             .then(res => res.json())
             .then(function(res){
                 crest = L.geoJSON(res);
                 crestData = res;
+            })
+    }
+    //get bluff toe data for setback line calculations
+    function addToe(){
+        fetch("data/OZ_BluffToe.geojson")
+            .then(res => res.json())
+            .then(function(res){
+                toe = L.geoJSON(res);
+                toeData = res;
             })
     }
     //function to create the triangle
