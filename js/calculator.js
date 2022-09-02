@@ -137,7 +137,7 @@
     }
     //get bluff toe data for setback line calculations
     function addToe(){
-        fetch("data/Oz__BluffToe.geojson")
+        fetch("data/Oz_BluffToe.geojson")
             .then(res => res.json())
             .then(function(res){
                 toe = L.geoJSON(res);
