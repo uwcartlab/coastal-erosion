@@ -5,6 +5,7 @@
     //global variables
     let compareMap, //map container variable
         date = 1937, //currently selected date
+        shorelineData,
         shoreline; //shoreline layer variable 
     //function to create the map and populate it
     function createMap(){
@@ -117,7 +118,9 @@
             document.querySelector(".selected").innerHTML = date;
             document.querySelector(".selected").style.left = offset + "px";
 
-            shoreline.setStyle(toLayer)
+            compareMap.removeLayer(shoreline);
+            createLayer(shorelineData);
+
             document.querySelector("#year1-legend").innerHTML = date + " Shoreline";
         }
     }
@@ -129,29 +132,39 @@
                 return response.json();
             })
             .then(function(json){
-                shoreline = L.geoJson(json, {
-                    style: function(feature){
-                        return toLayer(feature);
-                    }
-                }).addTo(compareMap);
+                shorelineData = json; 
+                createLayer(shorelineData);
             })
     };
 
-    //style function to color only relevant years
+    //function to create shoreline layer
+    function createLayer(json){
+        shoreline = L.geoJson(json, {
+            style: function(feature){
+                return toLayer(feature);
+            }
+        }).addTo(compareMap);
+    }
+
+    //style function style relevant years
     function toLayer(feature){
-        //only color selected year
+        //color selected year
         if (feature.properties.Date_ === date.toString()){
             return {
                 color: '#FE2E2E',
                 weight: 5,
-                opacity: 0.7,
-                dashArray: "5 10"
+                opacity: 1,
+                dashArray: "5 10",
+                pane:"popupPane"
             }
         //unselected years are transparent
         }else {
             return {
-                color: '#000000',
-                opacity: 0,
+                color: '#ffffff',
+                opacity: 0.25,
+                weight:5,
+                dashArray: "5 10",
+                pane:"shadowPane"
         }}
     };
     //function to create popup indicators
