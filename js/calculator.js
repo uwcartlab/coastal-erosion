@@ -13,7 +13,7 @@
     //stable angle setback    
     var bluffHeight = 100, 
         currAngle = 30, 
-        stableAngle, 
+        stableAngle = 22, 
         bluffWidth,
         sas;
     //recession rate setback
@@ -27,6 +27,11 @@
         //reset inputs
         document.querySelectorAll("input").forEach(function(elem){
             elem.value = elem.defaultValue;
+        })
+        //set sas input value listeners
+        document.querySelector("#slope-angle").addEventListener("change",function(e){
+            let value = e.target.value >= stableAngle ? e.target.value : stableAngle;
+            e.target.value = value;
         })
         //set sas calculator listener
         document.getElementById("calc-sas").addEventListener("click", function(e){
@@ -60,20 +65,9 @@
         map = L.map('calc-map',{  
             attributionControl: false,
             scrollWheelZoom:false
-        }).setView([43.3102, -87.8956], 13);
-        //openstreetmap basemap
-        let imagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-            attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
-            opacity: 0.8
-        }).addTo(map);
-        //labels
-        var labels = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-            subdomains: 'abcd',
-            maxZoom: 20
-        }).addTo(map);
+        }).setView([39.5277, -87.8783], 14);
         //add bluff crest data
-        addBluff();
+        addLake();
         addCrest();
         addToe();
         //create legend control
@@ -85,7 +79,7 @@
                 // create the control container with a particular class name
                 var container = L.DomUtil.create('div', 'leaflet-legend');
 
-                let legend = '<div class="line-caption"><svg height="10" width="30"><rect width="35" height="8" style="stroke:#ffff99;fill:#ffff99;fill-opacity:0.6;stroke-width:2" /></svg>';
+                let legend = '<div class="line-caption"><svg height="10" width="30"><rect width="35" height="8" style="stroke:#666699;fill:#666699;fill-opacity:0.6;stroke-width:2" /></svg>';
                 legend += '<p>Bluff Area</p></div>';
 
                 container.insertAdjacentHTML("beforeend",legend)
@@ -103,20 +97,20 @@
         var stripes = new L.StripePattern({
             weight:2,
             spaceWeight:6,
-            color:"#ffff99",
+            color:"#666699",
             opacity:0.5,
-            spaceColor:"#ffff99",
+            spaceColor:"#d1d1e0",
             spaceOpacity:0.25,
             angle:-30
         }); stripes.addTo(map);
         //get bluff area file
-        fetch("data/bluff_area.geojson")
+        fetch("data/abstract_bluff.geojson")
             .then(res => res.json())
             .then(function(res){
                 L.geoJSON(res,{
                     style:function(feature){
                         return {
-                            color:"#ffff99",
+                            color:"#666699",
                             weight:2,
                             opacity:0.7,
                             fillOpacity:1,
@@ -126,9 +120,27 @@
                 }).addTo(map);
         })
     }
+    function addLake(){
+        fetch("data/abstract_lakeshore.geojson")
+            .then(res => res.json())
+            .then(function(res){
+                L.geoJSON(res,{
+                    style:function(feature){
+                        return {
+                            color:"#ccebff",
+                            fillColor:"#ccebff",
+                            weight:2,
+                            opacity:1,
+                            fillOpacity:1,
+                        }
+                    }
+                }).addTo(map);
+                addBluff();
+            })
+    }
     //get bluff clrest data for setback line calculations
     function addCrest(){
-        fetch("data/Oz_BluffCrest.geojson")
+        fetch("data/abstract_crest.geojson")
             .then(res => res.json())
             .then(function(res){
                 crest = L.geoJSON(res);
@@ -137,7 +149,7 @@
     }
     //get bluff toe data for setback line calculations
     function addToe(){
-        fetch("data/Oz_BluffToe.geojson")
+        fetch("data/abstract_toe.geojson")
             .then(res => res.json())
             .then(function(res){
                 toe = L.geoJSON(res);
@@ -151,7 +163,8 @@
             .append("svg")
             .attr("class","triangle-interface");
         //get current height and width of the triangle interface, based on the viewport w/h
-        let height = parseInt(svg.style("height"));
+        let height = parseInt(svg.style("height")),
+            width = document.querySelector("#triangle").getBoundingClientRect().right - 100; //x position of right side of triangle element
         //create bluff scales
         //scale for converting pixels to bluff height in ft.
         let yscale = d3.scaleLinear()
@@ -191,11 +204,15 @@
             .on("mousedown",function(){
                 //remove affordance
                 document.querySelector(".triangle-intro-container").style.display = "none";
+                //get stable angle to constrain triangle
+                stableAngle = parseInt(document.getElementById('stable-bluff-angle').value);
                 //activate dragging of triangle border
                 svg.on("mousemove",function(){
                     let posx = event.clientX - 50,
                         posy = event.clientY;
-                    updatePos(posx, posy)
+                    
+                    //if (posy >= height && posx < width)
+                        updatePos(posx, posy)
 
                     d3.select(".opp")
                         .style("stroke-width","10px")
@@ -220,43 +237,49 @@
                     //subtract y position from height and padding (10) to get the position in relation to the svg 
                     posy = posy - offsety;
                     posx = posx - offsetx;
-                    //set new position of opposite side
-                    d3.select(".opp")
-                        .attr("x1",posx)
-                        .attr("y1",posy)
-                        .attr("x2",posx);
                     //get new bluff width and height
                     bluffHeight = yscale(posy);
                     bluffWidth = xscale(posx);
-                    //update opposite labels
-                    d3.select(".label-height")
-                        .attr("x",parseInt(posx) + 45)
-                        .attr("y",function(){
-                            return posy + ((height - posy)/2 - 20);
-                        })
-                    d3.select(".label-opp")
-                        .attr("x",parseInt(posx) + 40)
-                        .attr("y",function(){
-                            return posy + ((height - posy)/2);
-                        })
-                        .text(Math.round(bluffHeight) + " ft.")
-                    //update adjacent width
-                    d3.select(".adj")
-                        .attr("x2",posx);
-                    //update adjacent label
-                    d3.select(".label-adj")
-                        .attr("x",parseInt(posx)/2 + 20)
-                        .text("Width: " + Math.round(bluffWidth) + " ft.")
-                    //update hypotenuese
-                    d3.select(".hyp")
-                        .attr("x2",posx)
-                        .attr("y2",posy)
                     //update angle based on new parameters
                     currAngle = Math.atan(bluffHeight/bluffWidth) * (180/Math.PI);
-                    //update hypotenuse angle
-                    d3.select(".label-angle")
-                        .attr("transform","translate(" + reverseScale(bluffWidth)/2 + "," + (posy + (height - posy)/2 - 20) +") rotate(-" + currAngle + ")")
-                        .text("Angle: " + Math.round(currAngle) + " deg.");
+
+                    if (currAngle >= stableAngle){
+                        //set new position of opposite side
+                        d3.select(".opp")
+                            .attr("x1",posx)
+                            .attr("y1",posy)
+                            .attr("x2",posx);
+                        //update opposite labels
+                        d3.select(".label-height")
+                            .attr("x",parseInt(posx) + 45)
+                            .attr("y",function(){
+                                return posy + ((height - posy)/2 - 20);
+                            })
+                        d3.select(".label-opp")
+                            .attr("x",parseInt(posx) + 40)
+                            .attr("y",function(){
+                                return posy + ((height - posy)/2);
+                            })
+                            .text(Math.round(bluffHeight) + " ft.")
+                        //update adjacent width
+                        d3.select(".adj")
+                            .attr("x2",posx);
+                        //update adjacent label
+                        d3.select(".label-adj")
+                            .attr("x",parseInt(posx)/2 + 20)
+                            .text("Width: " + Math.round(bluffWidth) + " ft.")
+                        //update hypotenuese
+                        d3.select(".hyp")
+                            .attr("x2",posx)
+                            .attr("y2",posy)
+                        //update hypotenuse angle
+                        d3.select(".label-angle")
+                            .attr("transform","translate(" + reverseScale(bluffWidth)/2 + "," + (posy + (height - posy)/2 - 20) +") rotate(-" + currAngle + ")")
+                            .text("Angle: " + Math.round(currAngle) + " deg.");
+                        //set input values to match triangle
+                        document.querySelector("#slope-height").value = Math.round(bluffHeight);
+                        document.querySelector("#slope-angle").value = Math.round(currAngle);
+                    }
                 }
             });  
         //create opposite side labels
@@ -322,8 +345,9 @@
     }
     //calculate stable angle setback
     function calcSas(){
-        
-        stableAngle = parseInt(document.getElementById('stable-bluff-angle').value);
+        //get input values and set the height and angle of the slope
+        bluffHeight = document.querySelector("#slope-height").value;
+        currAngle = document.querySelector("#slope-angle").value;
         //calculate bluff width based on current values
         bluffWidth = bluffHeight/Math.tan(currAngle * (Math.PI/180));
         //calculate stable angle setback based on current values
@@ -335,7 +359,7 @@
             map.removeLayer(sasLine);
         //draw line
         sasLine = addSetbackLine(sas, "orange","toe").addTo(map);
-        addSetbackLegend("orange", "Stable Slope Setback","legend-sas")
+            addSetbackLegend("orange", "Stable Slope Setback","legend-sas")
     }
     //calculate recession rate
     function calcRec(){
@@ -375,7 +399,7 @@
                 //conversion factor for 1 mile, 69.172 = length of a degree of longitude at equator
                 let cf = (Math.cos(latlng[1]) * 69.172) * 5280;                  
                 //displace line based on calculaed conversion factor
-                latlng[0] = latlng[0] - (buffer/cf);
+                latlng[0] = latlng[0] + (buffer/cf);
             })
         })
         //add setbackLine line to map

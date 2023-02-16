@@ -1,0 +1,45 @@
+{
+    "type": "FeatureCollection",
+    "name": "abstract_bluff",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "Date_": null,
+                "UNCERTAINT": null,
+                "SHAPE_Leng": null,
+                "layer": null,
+                "path": null
+            },
+            "geometry": {
+                "type": "MultiPolygon",
+                "coordinates": [
+                    [
+                        [
+                            [
+                                -87.874296971959652,
+                                39.422975081806598
+                            ],
+                            [
+                                -87.886943786541536,
+                                43.228356832380086
+                            ],
+                            [
+                                -87.887547568174639,
+                                43.228276566523299
+                            ],
+                            [
+                                -87.875066728787061,
+                                39.422976779649829
+                            ],
+                            [
+                                -87.874296971959652,
+                                39.422975081806598
+                            ]
+                        ]
+                    ]
+                ]
+            }
+        }
+    ]
+}

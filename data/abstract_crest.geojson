@@ -1,0 +1,31 @@
+{
+    "type": "FeatureCollection",
+    "name": "abstract_crest",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "Date_": null,
+                "UNCERTAINT": null,
+                "SHAPE_Leng": null,
+                "layer": null,
+                "path": null
+            },
+            "geometry": {
+                "type": "MultiLineString",
+                "coordinates": [
+                    [
+                        [
+                            -87.887547568174639,
+                            43.228276566523299
+                        ],
+                        [
+                            -87.875066728787061,
+                            39.422976779649829
+                        ]
+                    ]
+                ]
+            }
+        }
+    ]
+}
