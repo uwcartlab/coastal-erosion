@@ -2,6 +2,9 @@
 /* Created by the UW Cartgraphy Lab and Wisconsin Sea Grant, 
    Gareth Baldrica-Franklin */
 
+//to do
+//adjust width of bluff based on selected value in the calculator
+
 (function(){
     
     var map, //map container
@@ -22,6 +25,8 @@
         recSet;
     //local regulation setback
     var localReg;
+    //default bluff width in data
+    var defaultWidth = 42;
 
     function setListeners(){
         //reset inputs
@@ -385,6 +390,8 @@
     }
     //function to add a line to the map
     function addSetbackLine(buffer, color, type){
+        //calculate ratio of current width to default 
+        var tempBuffer = buffer * (defaultWidth/bluffWidth);
         //create temp variable to store setbackLine data
         let lineData;
         if (type == "toe")
@@ -399,7 +406,7 @@
                 //conversion factor for 1 mile, 69.172 = length of a degree of longitude at equator
                 let cf = (Math.cos(latlng[1]) * 69.172) * 5280;                  
                 //displace line based on calculaed conversion factor
-                latlng[0] = latlng[0] + (buffer/cf);
+                latlng[0] = latlng[0] + (tempBuffer/cf);
             })
         })
         //add setbackLine line to map
