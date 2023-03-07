@@ -70,7 +70,7 @@
         map = L.map('calc-map',{  
             attributionControl: false,
             scrollWheelZoom:false
-        }).setView([39.5277, -87.8783], 14);
+        }).setView([39.5277, -87.8750], 16);
         //add bluff crest data
         addLake();
         addCrest();
