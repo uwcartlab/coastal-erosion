@@ -71,6 +71,9 @@
             attributionControl: false,
             scrollWheelZoom:false
         }).setView([39.5277, -87.8750], 16);
+
+        L.control.scale().addTo(map);
+
         //add bluff crest data
         addLake();
         addCrest();
