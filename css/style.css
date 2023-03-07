@@ -168,7 +168,7 @@ hr{
     position: sticky !important;
     top:55px;
     display:block;
-    background:white;
+    background-color:#ecf9ec;
 }
 /***********CALCULATOR LEGEND********/
 .leaflet-legend{
