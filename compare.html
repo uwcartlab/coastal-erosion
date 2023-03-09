@@ -15,6 +15,7 @@
         <!--stylesheets-->
         <link rel="stylesheet" href="lib/bootstrap.min.css">
         <link rel="stylesheet" href="lib/leaflet/leaflet.css">
+        <link rel="stylesheet" href="lib/juxtapose.css">
         <link rel="stylesheet" href="css/style.css">
 
     </head>
@@ -28,7 +29,7 @@
             <!--shoreline comparison introduction-->
             <div class="row shore-row">
                 <div id="compare-content" class="col-md-6 col-12">
-                    <div id="comparison-text">
+                    <div class="comparison-text">
                         <h2><b>Shoreline Comparison</b></h2>
                         <hr>
                         <p>
@@ -53,7 +54,7 @@
                     </div>
                     <hr>
                     <!--description of coastal engineering in southern Kenosha-->
-                    <div id="comparison-text">
+                    <div class="comparison-text">
                         <p>This effect can also happen at a large scale. Coastal engineering to protect the urban areas of
                             Milwaukee, Racine and Kenosha have significantly accelerated
                             erosion of southern Kenosha County's shoreline, such as Carol Beach, in the village of Pleasant Prairie.
@@ -67,7 +68,7 @@
                     </div>
                     <hr>
                     <!--description of bluff failure-->
-                    <div id="comparison-text">
+                    <div class="comparison-text">
                         <p>The consequences of erosion on Lake Michgain's bluffs can be more dramatic—and more dangerous.
                             Years and even decades can pass without any major visible change, and then in one large event,
                             a section of blufftop 50-feet deep and 100-feet wide can fall into the lake. <a
@@ -118,7 +119,23 @@
                         <p class="img-caption">Impact of bluff erosion on a house in the Town of Grafton, Ozaukee County.</p>
                         <button data-lat="43.280506" data-lon="-87.903611" data-zoom="17" class="see-on-map">See on Map</button>
                     </div>
+                    <hr>
+                    <!--image comparison-->
+                    <div class="comparison-text">
+                        <p>Bluff erosion on the Lake Michigan coastline can be seen when comparing aerial imagery between years. 
+                            The below image compares two years on the Ozaukee County coast.
+                        </p>
+                    </div>
+                    <div class="compare-img-container">
+                        <div id="image-juxtapose" class="juxtapose">
+                            <img src="img/imagery/coast_1956.jpg" data-label="1956"/>
+                            <img src="img/imagery/coast_2022.jpg" data-label="2020" />
+                        </div>
+                        <p class="img-caption">Comparison between 1956 and 2020 on the Ozaukee County coast.</p>
+                        <button data-lat="43.33434" data-lon="-87.88524" data-zoom="17" class="see-on-map">See on Map</button>
+                    </div>
                 </div>
+
                 <!--calculator map sidebar-->
                 <div class="col-md-6 col-12">
                     <!--map element-->
@@ -133,6 +150,7 @@
         <!--scripts-->
         <script type="text/javascript" src="lib/bootstrap.min.js"></script>
         <script type="text/javascript" src="lib/leaflet/leaflet.js"></script>
+        <script type="text/javascript" src="lib/juxtapose.min.js"></script>
         <!--site components-->
         <script type="text/javascript" src="js/components/header.js"></script>
         <script type="text/javascript" src="js/components/footer.js"></script>

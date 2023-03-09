@@ -262,9 +262,6 @@ input{
 /****************************/
 /****MAP COMPARISON PAGE*****/
 /****************************/
-#comparison-text{
-    margin:15px 0;
-}
 .shore-row{
     height:100%;
 }
@@ -274,6 +271,14 @@ input{
     margin: auto;
     margin-bottom:15px !important;
     display:block;
+}
+#image-juxtapose{
+    width:100%;
+}
+.jx-label{
+    font-family:JosefinSans;
+    background-color:rgba(255,255,255,0.8) !important;
+    color:black !important;
 }
 /*********COMPARE MAP*********/
 .compare {
@@ -500,6 +505,9 @@ datalist {
         margin-top:50px;
         font-size:20px;
     }
+    #triangle{
+        height:60vh;
+    }
 }
 @media only screen and (min-width: 768px) {
     .sidebar{
@@ -527,6 +535,11 @@ datalist {
         display:block;
         margin:auto;
         margin-bottom:100px;
+    }
+    .comparison-text{
+        width:80%;
+        display:block;
+        margin:auto;
     }
     .slider{
         width:300px;

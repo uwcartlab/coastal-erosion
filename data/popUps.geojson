@@ -44,6 +44,21 @@
                     42.531643
                 ]
             }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "id": 4,
+                "image": "img/KEN_00265.JPG",
+                "text": "Some people are stubborn."
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -87.88524,
+                    43.33434
+                ]
+            }
         }
     ]
 }
