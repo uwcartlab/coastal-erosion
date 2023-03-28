@@ -69,8 +69,12 @@
         //map variable
         map = L.map('calc-map',{  
             attributionControl: false,
-            scrollWheelZoom:false
-        }).setView([39.5277, -87.8750], 16);
+            scrollWheelZoom:false,
+            maxBounds: [
+                [43.28034,  -87.904554],
+                [43.35121, -87.88206]
+            ]
+        }).setView([43.31903, -87.88665], 16);
 
         L.control.scale().addTo(map);
 
@@ -112,7 +116,7 @@
             angle:-30
         }); stripes.addTo(map);
         //get bluff area file
-        fetch("data/abstract_bluff.geojson")
+        fetch("data/bluff_area_abstract.geojson")
             .then(res => res.json())
             .then(function(res){
                 L.geoJSON(res,{
@@ -129,7 +133,7 @@
         })
     }
     function addLake(){
-        fetch("data/abstract_lakeshore.geojson")
+        fetch("data/lakeshore_abstract.geojson")
             .then(res => res.json())
             .then(function(res){
                 L.geoJSON(res,{
@@ -148,7 +152,7 @@
     }
     //get bluff clrest data for setback line calculations
     function addCrest(){
-        fetch("data/abstract_crest.geojson")
+        fetch("data/Oz_BluffCrest_abstract.geojson")
             .then(res => res.json())
             .then(function(res){
                 crest = L.geoJSON(res);
@@ -157,7 +161,7 @@
     }
     //get bluff toe data for setback line calculations
     function addToe(){
-        fetch("data/abstract_toe.geojson")
+        fetch("data/Oz_BluffToe_abstract.geojson")
             .then(res => res.json())
             .then(function(res){
                 toe = L.geoJSON(res);
@@ -394,13 +398,11 @@
     //function to add a line to the map
     function addSetbackLine(buffer, color, type){
         //calculate ratio of current width to default 
-        var tempBuffer = buffer * (defaultWidth/bluffWidth);
+        var tempBuffer = buffer; //* (defaultWidth/bluffWidth);
         //create temp variable to store setbackLine data
         let lineData;
-        if (type == "toe")
-            lineData = clone(toeData);
-        else
-            lineData = clone(crestData);
+        
+        lineData = clone(crestData);
         
         //create a setback line
         lineData.features[0].geometry.coordinates.forEach(function(coord){
@@ -409,7 +411,7 @@
                 //conversion factor for 1 mile, 69.172 = length of a degree of longitude at equator
                 let cf = (Math.cos(latlng[1]) * 69.172) * 5280;                  
                 //displace line based on calculaed conversion factor
-                latlng[0] = latlng[0] + (tempBuffer/cf);
+                latlng[0] = latlng[0] - (tempBuffer/cf);
             })
         })
         //add setbackLine line to map

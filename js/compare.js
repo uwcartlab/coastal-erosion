@@ -6,16 +6,18 @@
     let compareMap, //map container variable
         date = 1937, //currently selected date
         shorelineData,
-        shoreline; //shoreline layer variable 
+        shoreline,
+        crestData,
+        crest; //shoreline layer variable 
     //function to create the map and populate it
     function createMap(){
         compareMap = L.map('compare-map', {
-            center: [43.235, -87.91], 
+            center: [43.135, -87.91], 
             maxBounds: [
                 [43.7, -88.17],
                 [42.35, -87.09]
             ],
-            zoom: 17,
+            zoom: 12,
             minZoom: 11,
             maxZoom: 18,
             scrollWheelZoom:false,
@@ -35,11 +37,6 @@
         maxZoom: 20
         }).addTo(compareMap);
 
-
-        //svgs for the legend elements
-        let legSvg1 = '<svg id="leg-1937"><polyline points="10,10 40,40"style="fill:none;stroke:#FE2E2E;stroke-width:4;stroke-dasharray:5,10;stroke-linecap:round;stroke-opacity:0.8"/></svg>'
-        legSvg1 += '<p id="year1-legend">1937 shoreline</p>';
-
         // create legend control holding svg legend
         let legend = L.Control.extend({
             options: {
@@ -47,7 +44,14 @@
             },
             onAdd:function(){
                 var container = L.DomUtil.create('div','legend-control-container');
-                container.insertAdjacentHTML('beforeend',legSvg1);
+
+                //svgs for the legend elements
+                let toeLegend = '<svg id="leg-1937"><polyline points="10,10 40,40"style="fill:none;stroke:#ff8000;stroke-width:4;stroke-linecap:round;stroke-opacity:0.8"/></svg><p id="toe-legend">1937 Bluff Toe</p><br/>'
+                let crestLegend = '<svg id="leg-1937"><polyline points="10,10 40,40"style="fill:none;stroke:#000000;stroke-width:4;stroke-linecap:round;stroke-opacity:0.8"/></svg><p id="crest-legend">1937 Bluff Crest</p>'
+
+                container.insertAdjacentHTML('beforeend',toeLegend);
+                container.insertAdjacentHTML('beforeend',crestLegend);
+
                 return container;
             }
         });
@@ -119,42 +123,55 @@
             document.querySelector(".selected").style.left = offset + "px";
 
             compareMap.removeLayer(shoreline);
-            createLayer(shorelineData);
+            shoreline = createLayer(shorelineData, "toe");
 
-            document.querySelector("#year1-legend").innerHTML = date + " Shoreline";
+            compareMap.removeLayer(crest);
+            crest = createLayer(crestData, "crest");
+
+            document.querySelector("#toe-legend").innerHTML = date + " Bluff Toe";
+            document.querySelector("#crest-legend").innerHTML = date + " Bluff Crest";
+
         }
     }
 
     //function to retrieve the data and place it on the map
     function getData(){
-        fetch("./data/compare/totalShoreline.geojson")
+        fetch("./data/compare/total_blufftoe.geojson")
             .then(function(response){
                 return response.json();
             })
             .then(function(json){
                 shorelineData = json; 
-                createLayer(shorelineData);
+                shoreline = createLayer(shorelineData, "toe");
+            })
+        fetch("./data/compare/total_bluffcrest.geojson")
+            .then(function(response){
+                return response.json();
+            })
+            .then(function(json){
+                crestData = json; 
+                crest = createLayer(crestData, "crest");
             })
     };
 
     //function to create shoreline layer
-    function createLayer(json){
-        shoreline = L.geoJson(json, {
+    function createLayer(json, type){
+        let layer = L.geoJson(json, {
             style: function(feature){
-                return toLayer(feature);
+                return style(feature, type);
             }
         }).addTo(compareMap);
+        return layer; 
     }
 
     //style function style relevant years
-    function toLayer(feature){
+    function style(feature, type){
         //color selected year
-        if (feature.properties.Date_ === date.toString()){
+        if (feature.properties.date === date.toString()){
             return {
-                color: '#FE2E2E',
-                weight: 5,
+                color: type == 'toe' ? '#ff8000': '#0d0d0d', //color selected line based on type
+                weight: 2.5,
                 opacity: 1,
-                dashArray: "5 10",
                 pane:"popupPane"
             }
         //unselected years are transparent
@@ -162,7 +179,7 @@
             return {
                 color: '#ffffff',
                 opacity: 0.25,
-                weight:5,
+                weight:3.5,
                 dashArray: "5 10",
                 pane:"shadowPane"
         }}

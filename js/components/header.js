@@ -8,7 +8,7 @@ class TopHeader extends HTMLElement {
       this.innerHTML = `
         <nav class="navbar fixed-top navbar-expand-lg">
             <div class="container-fluid">
-                <a class="navbar-brand" href="./index.html"><b>Wisconsin Coast Erosion</b></a>
+                <a class="navbar-brand" href="./index.html"><b>Wisconsin Coastal Bluff Erosion</b></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                     &#9552;
                 </button>
