@@ -211,6 +211,7 @@ input{
     display:inline;
     padding-left:15px;
 }
+
 .caption-container{
     padding-bottom:50px;
 }
@@ -233,7 +234,7 @@ input{
 }
 .line{
     stroke-width:5px;
-    stroke:black;
+    stroke:lightgray;
 }
 .opp:hover{
     cursor:pointer;
@@ -400,7 +401,12 @@ datalist {
 .process-text{
     margin:40px 0;
 } 
-
+.process-carousel-container{
+    margin-bottom:0 !important;
+}
+.process-caption{
+    padding:15px;
+}
 /****PROCESSES GRAPHIC****/
 #g-erosion-graphic-box ,
 #g-erosion-graphic-box .g-artboard {
@@ -521,7 +527,7 @@ datalist {
     .process-img{
         margin:auto;
         display:block;
-        max-width:50%;
+        
     }
     #compare-map {
         height:calc(100vh - 60px);

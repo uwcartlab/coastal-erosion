@@ -170,6 +170,8 @@
     }
     //function to create the triangle
     function createTriangle(){     
+        //triangle origin point
+        let base = 50;
         //create the triangle interface    
         let svg = d3.select("#triangle")
             .append("svg")
@@ -185,7 +187,7 @@
         //scale for converting pixels to bluff width in ft.
         let xscale = d3.scaleLinear()
              .domain([0, height])
-             .range([0, 200]);
+             .range([200, 0]);
         //scale for converting ft. to pixels
         let reverseScale = d3.scaleLinear()
              .domain([0, 200])
@@ -195,8 +197,8 @@
         //create adjacent side and label
         let adj = svg.append("line")
             .attr("class","line adj")
-            .attr("x1",0)
-            .attr("x2",reverseScale(bluffWidth))
+            .attr("x1",base)
+            .attr("x2",reverseScale(bluffWidth) + base)
             .attr("y1",height)
             .attr("y2",height);  
         let adjLabel = svg.append("text")
@@ -208,10 +210,12 @@
         //create opposite and activate listeners for dragging
         let opp = svg.append("line")
             .attr("class","line opp")
-            .attr("x1",reverseScale(bluffWidth))
-            .attr("x2",reverseScale(bluffWidth))
+            .attr("x1",base)
+            .attr("x2",base)
             .attr("y1",reverseScale(bluffHeight))
             .attr("y2",height)
+            .style("stroke","black")
+            .style("stroke-dasharray","8, 4")
             //event triggers when opposite side is selected
             .on("mousedown",function(){
                 //remove affordance
@@ -263,22 +267,22 @@
                             .attr("x2",posx);
                         //update opposite labels
                         d3.select(".label-height")
-                            .attr("x",parseInt(posx) + 45)
+                            .attr("x",parseInt(posx) - base)
                             .attr("y",function(){
                                 return posy + ((height - posy)/2 - 20);
                             })
                         d3.select(".label-opp")
-                            .attr("x",parseInt(posx) + 40)
+                            .attr("x",parseInt(posx) - base)
                             .attr("y",function(){
                                 return posy + ((height - posy)/2);
                             })
                             .text(Math.round(bluffHeight) + " ft.")
                         //update adjacent width
                         d3.select(".adj")
-                            .attr("x2",posx);
+                            .attr("x1",posx);
                         //update adjacent label
                         d3.select(".label-adj")
-                            .attr("x",parseInt(posx)/2 + 20)
+                            .attr("x",posx + reverseScale(bluffWidth)/2 - 25)
                             .text("Width: " + Math.round(bluffWidth) + " ft.")
                         //update hypotenuese
                         d3.select(".hyp")
@@ -286,7 +290,8 @@
                             .attr("y2",posy)
                         //update hypotenuse angle
                         d3.select(".label-angle")
-                            .attr("transform","translate(" + reverseScale(bluffWidth)/2 + "," + (posy + (height - posy)/2 - 20) +") rotate(-" + currAngle + ")")
+                            .attr("transform","translate(" + (posx + reverseScale(bluffWidth)/3 + 15) + "," + (posy + (height - posy)/2 - 40) +") rotate(" + currAngle + ")")
+                            //.attr("transform","translate(" + reverseScale(bluffWidth)/2 + "," + (reverseScale(bluffHeight) + (height - reverseScale(bluffHeight))/2 - 40) +") rotate(" + currAngle + ")")
                             .text("Angle: " + Math.round(currAngle) + " deg.");
                         //set input values to match triangle
                         document.querySelector("#slope-height").value = Math.round(bluffHeight);
@@ -297,27 +302,27 @@
         //create opposite side labels
         let heightLabel = svg.append("text")
             .attr("class","label-height")
-            .attr("x",reverseScale(bluffWidth) + 45)
+            .attr("x",0)
             .attr("y",height - (reverseScale(bluffHeight)/2) - 20)
             .style("text-anchor","middle")
             .text("Height:");
         let oppLabel = svg.append("text")
             .attr("class","label-opp")
-            .attr("x",reverseScale(bluffWidth) + 40)
+            .attr("x",0)
             .attr("y",height - (reverseScale(bluffHeight)/2))
             .style("text-anchor","middle")
             .text(bluffHeight + " ft.");
         //create hypotenuse
         let hyp = svg.append("line")
             .attr("class","line hyp")
-            .attr("x1",0)
-            .attr("x2",reverseScale(bluffWidth))
+            .attr("x1",reverseScale(bluffWidth) + base)
+            .attr("x2",base)
             .attr("y1",height)
             .attr("y2",reverseScale(bluffHeight)); 
         //add label for angle
         let angleLabel = svg.append("text")
             .attr("class","label-angle")
-            .attr("transform","translate(" + reverseScale(bluffWidth)/2 + "," + (reverseScale(bluffHeight) + (height - reverseScale(bluffHeight))/2 - 20) +") rotate(-" + currAngle + ")")
+            .attr("transform","translate(" + reverseScale(bluffWidth)/2 + "," + (reverseScale(bluffHeight) + (height - reverseScale(bluffHeight))/2 - 40) +") rotate(" + currAngle + ")")
             .style("text-anchor","start")
             .text("Angle: " + currAngle + " deg.");
 
